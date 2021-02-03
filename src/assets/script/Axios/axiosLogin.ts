@@ -1,6 +1,11 @@
 import { apiClient } from '../index';
 
-export const login = (email, password, active, jumpFunc) => {
+export const login = (
+  email: string,
+  password: string,
+  active: boolean,
+  jumpFunc: { (): void; (): void },
+) => {
   apiClient.get('/sanctum/csrf-cookie').then(() => {
     apiClient
       .post('/api/auth/login', {
@@ -28,16 +33,14 @@ export const login = (email, password, active, jumpFunc) => {
   });
 };
 
-export const logout = func => {
-  apiClient.get('/sanctum/csrf-cookie').then(() => {
-    apiClient
-      .post('/api/auth/logout')
-      .then(response => {
-        console.log(response.status);
-        if (response.status === 200) {
-          func();
-        }
-      })
-      .catch(error => console.error(error));
-  });
+export const logout = (func: { (): void; (): void }) => {
+  apiClient
+    .post('/api/auth/logout')
+    .then(response => {
+      console.log(response.status);
+      if (response.status === 200) {
+        func();
+      }
+    })
+    .catch(error => console.error(error));
 };
