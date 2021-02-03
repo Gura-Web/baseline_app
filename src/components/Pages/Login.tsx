@@ -4,9 +4,9 @@ import { Primary } from '../Atoms/TextInput';
 import { CheckboxWithText } from '../Molecules/Input';
 import { PrimaryBtn } from '../Atoms/Btn/index';
 import { handleChange } from '../../assets/script/validation';
-import { login } from '../../assets/script/index';
+import { login } from '../../services/auth';
 
-const Login: React.FC = props => {
+const Login: React.FC = () => {
   useEffect(() => {
     const container = document.querySelector('.container');
     container?.classList.add('page-login');
@@ -15,10 +15,12 @@ const Login: React.FC = props => {
     info: {
       email: '',
       password: '',
+      checkbox: false,
     },
     message: {
       email: '',
       password: '',
+      checkbox: '',
     },
   });
 
@@ -28,16 +30,12 @@ const Login: React.FC = props => {
   };
 
   const loginCheck = () => {
-    const email = document.querySelector(
-      'input[name="email"]',
-    )! as HTMLInputElement;
-    const password = document.querySelector(
-      'input[name="password"]',
-    )! as HTMLInputElement;
     const isActive = document.querySelector(
       'input[type="checkbox"]',
     )! as HTMLInputElement;
-    login(email.value, password.value, isActive.checked, goHomePage);
+
+    // ログイン処理
+    login(state.info.email, state.info.password, isActive.checked, goHomePage);
   };
 
   const primayBtnClickHandler = () => {

@@ -1,43 +1,31 @@
-import React, { useState, useEffect } from "react";
-import { CheckIcon } from "../../../assets/images/index";
+import React, { useState, useEffect } from 'react';
+import { CheckIcon } from '../../../assets/images/index';
+import { CheckBoxProps } from './CheckboxProps';
 
-interface Props {
-  type: "checkbox" | "radio";
-  category?: string;
-  checkboxFunc?: any;
-  keyName?: string;
-  id?: string;
-  className?: string;
-  txt?: string;
-  checkedPref?: string[];
-  isChecked?: boolean;
-}
-
-const Checkbox: React.FC<Props> = (props) => {
+const Checkbox: React.FC<CheckBoxProps> = props => {
   let typeClass;
-  if (props.type === "checkbox") {
-    typeClass = "input-checkbox input-checkbox--normal";
+  if (props.type === 'checkbox') {
+    typeClass = 'input-checkbox input-checkbox--normal';
   }
-  useEffect(()=> {
-  },[]);
+  useEffect(() => {}, []);
   const checkHandler = (e: any) => {
     e.stopPropagation();
     // 卒業生の在籍
-    if (props.category == "enrollment_of_graduates" && props.checkboxFunc) {
+    if (props.category == 'enrollment_of_graduates' && props.checkboxFunc) {
       props.checkboxFunc(e.currentTarget.checked);
     }
     // 希望職種
-    if (props.category == "jobs" && props.checkboxFunc) {
+    if (props.category == 'jobs' && props.checkboxFunc) {
       if (e.currentTarget.checked) {
         props.checkboxFunc(e.currentTarget.name, true);
       } else {
         props.checkboxFunc(e.currentTarget.name, false);
       }
     }
-    
+
     // 都道府県
-    if (props.category == "prefectures" && props.checkboxFunc) {
-      console.log("B")
+    if (props.category == 'prefectures' && props.checkboxFunc) {
+      console.log('B');
       if (e.currentTarget.checked) {
         props.checkboxFunc(e.currentTarget.name, true);
       } else {
@@ -45,7 +33,7 @@ const Checkbox: React.FC<Props> = (props) => {
       }
     }
     // 地域選択(企業登録)
-    if (props.category == "prefSelect" && props.checkboxFunc) {
+    if (props.category == 'prefSelect' && props.checkboxFunc) {
       if (e.currentTarget.checked) {
         props.checkboxFunc();
       }
@@ -60,15 +48,15 @@ const Checkbox: React.FC<Props> = (props) => {
       }
     });
   };
-  const onDefaultCheckedFunc = ()=> {
-    if(props.checkedPref){
+  const onDefaultCheckedFunc = () => {
+    if (props.checkedPref) {
       return isCheckedPref();
     }
-    if(props.isChecked){
+    if (props.isChecked) {
       return true;
     }
-  }
-  
+  };
+
   return (
     <>
       <input
