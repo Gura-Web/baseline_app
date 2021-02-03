@@ -1,41 +1,41 @@
-import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { Primary } from "../Atoms/TextInput";
-import { CheckboxWithText } from "../Molecules/Input";
-import { PrimaryBtn } from "../Atoms/Btn/index";
-import { handleChange } from "../../assets/script/validation";
-import { login } from "../../assets/script/index";
+import React, { useEffect, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { Primary } from '../Atoms/TextInput';
+import { CheckboxWithText } from '../Molecules/Input';
+import { PrimaryBtn } from '../Atoms/Btn/index';
+import { handleChange } from '../../assets/script/validation';
+import { login } from '../../assets/script/index';
 
-const Login: React.FC = (props) => {
+const Login: React.FC = props => {
   useEffect(() => {
-    const container = document.querySelector(".container");
-    container?.classList.add("page-login");
+    const container = document.querySelector('.container');
+    container?.classList.add('page-login');
   }, []);
   const [state, setState] = useState({
     info: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
     message: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
   });
 
-  let history = useHistory();
+  const history = useHistory();
   const goHomePage = () => {
-    history.push("/");
+    history.push('/');
   };
 
   const loginCheck = () => {
     const email = document.querySelector(
-      'input[name="email"]'
+      'input[name="email"]',
     )! as HTMLInputElement;
     const password = document.querySelector(
-      'input[name="password"]'
+      'input[name="password"]',
     )! as HTMLInputElement;
     const isActive = document.querySelector(
-      'input[type="checkbox"]'
+      'input[type="checkbox"]',
     )! as HTMLInputElement;
     login(email.value, password.value, isActive.checked, goHomePage);
   };
@@ -47,10 +47,11 @@ const Login: React.FC = (props) => {
     handleChange(state, setState, e);
   };
   const inputEnterKeyHandler = (e: any) => {
-    if (e.key == "Enter") {
+    if (e.key === 'Enter') {
       loginCheck();
     }
   };
+
   return (
     <div className="login">
       <form method="POST" action="#" className="contentBox contentBox--big">
@@ -60,8 +61,8 @@ const Login: React.FC = (props) => {
           type="email"
           ttl="メールアドレス"
           placeholder="example@gmail.com"
-          isRequired={true}
-          isError={true}
+          isRequired
+          isError
           errorMessage={state.message.email}
           defaultValue={state.info.email}
           onChange={inputChangeHandler}
@@ -72,8 +73,8 @@ const Login: React.FC = (props) => {
           type="password"
           ttl="パスワード"
           placeholder="パスワードを入力してください"
-          isRequired={true}
-          isError={true}
+          isRequired
+          isError
           errorMessage={state.message.password}
           onChange={inputChangeHandler}
           onKeyPress={inputEnterKeyHandler}
