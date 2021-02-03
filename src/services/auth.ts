@@ -1,4 +1,4 @@
-import { apiClient } from '../index';
+import api from './api';
 
 export const login = (
   email: string,
@@ -6,8 +6,8 @@ export const login = (
   active: boolean,
   jumpFunc: { (): void; (): void },
 ) => {
-  apiClient.get('/sanctum/csrf-cookie').then(() => {
-    apiClient
+  api.get('/sanctum/csrf-cookie').then(() => {
+    api
       .post('/api/auth/login', {
         // laravel-a@example.com, "password",
         email,
@@ -34,7 +34,7 @@ export const login = (
 };
 
 export const logout = (func: { (): void; (): void }) => {
-  apiClient
+  api
     .post('/api/auth/logout')
     .then(response => {
       console.log(response.status);
