@@ -10,8 +10,6 @@ const DEFAULT_API_CONFIG: AxiosRequestConfig = {
   responseType: 'json',
 };
 
-const api = axios.create({
+export const api = axios.create({
   ...DEFAULT_API_CONFIG,
 });
-
-export default api;

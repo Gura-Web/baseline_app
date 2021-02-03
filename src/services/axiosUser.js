@@ -1,7 +1,7 @@
-import { apiClient } from '../index';
+import { api } from './api';
 
 export const getMyData = notLoginFunc => {
-  return apiClient
+  return api
     .get('/api/auth/user')
     .then(response => {
       if (response.status !== 200) {
@@ -23,7 +23,7 @@ export const getMyData = notLoginFunc => {
 
 export const editProfile = (user_id, postData) => {
   console.log(user_id, postData);
-  return apiClient
+  return api
     .post(`/api/user/edit/${user_id}`, postData)
     .then(response => {
       if (response.status !== 200) {
@@ -44,8 +44,8 @@ export const editProfile = (user_id, postData) => {
 };
 
 export const deleteAccount = user_id => {
-  return apiClient.get('/sanctum/csrf-cookie').then(response => {
-    return apiClient
+  return api.get('/sanctum/csrf-cookie').then(response => {
+    return api
       .post(`/api/user/delete/${user_id}`)
       .then(response => {
         if (response.status !== 200) {
@@ -67,8 +67,8 @@ export const deleteAccount = user_id => {
 };
 
 export const passwordResetMail = postData => {
-  return apiClient.get('/sanctum/csrf-cookie').then(response => {
-    return apiClient
+  return api.get('/sanctum/csrf-cookie').then(response => {
+    return api
       .post(`/api/auth/password_reset_mail`, postData)
       .then(response => {
         if (response.status !== 200) {
@@ -90,7 +90,7 @@ export const passwordResetMail = postData => {
 };
 
 export const passwordReset = postData => {
-  return apiClient
+  return api
     .post(`/api/auth/password_reset`, postData)
     .then(response => {
       if (response.status !== 200) {
@@ -111,7 +111,7 @@ export const passwordReset = postData => {
 };
 
 export const passwordChange = postData => {
-  return apiClient
+  return api
     .post(`/api/auth/password_change`, postData)
     .then(response => {
       if (response.status !== 200) {
