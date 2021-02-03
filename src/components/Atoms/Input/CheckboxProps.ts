@@ -1,3 +1,5 @@
+import { ChangeEventHandler } from 'react';
+
 export interface CheckBoxProps {
   type: 'checkbox' | 'radio';
   txt: string;
@@ -8,4 +10,6 @@ export interface CheckBoxProps {
   className?: string;
   category?: string;
   isChecked?: boolean;
+  onChange?: ChangeEventHandler;
+  value?: string;
 }

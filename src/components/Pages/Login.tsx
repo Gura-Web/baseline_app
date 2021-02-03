@@ -15,12 +15,11 @@ const Login: React.FC = () => {
     info: {
       email: '',
       password: '',
-      checkbox: false,
+      isActive: '',
     },
     message: {
       email: '',
       password: '',
-      checkbox: '',
     },
   });
 
@@ -30,12 +29,13 @@ const Login: React.FC = () => {
   };
 
   const loginCheck = () => {
-    const isActive = document.querySelector(
-      'input[type="checkbox"]',
-    )! as HTMLInputElement;
-
     // ログイン処理
-    login(state.info.email, state.info.password, isActive.checked, goHomePage);
+    login(
+      state.info.email,
+      state.info.password,
+      state.info.isActive === '1',
+      goHomePage,
+    );
   };
 
   const primayBtnClickHandler = () => {
@@ -43,6 +43,9 @@ const Login: React.FC = () => {
   };
   const inputChangeHandler = (e: any) => {
     handleChange(state, setState, e);
+
+    // console.log(state.info.isActive);
+    console.log(state);
   };
   const inputEnterKeyHandler = (e: any) => {
     if (e.key === 'Enter') {
@@ -81,9 +84,12 @@ const Login: React.FC = () => {
           <Link to="/password/forget">パスワードを忘れた</Link>
         </p>
         <CheckboxWithText
+          keyName="isActive"
           id="isActive"
           type="checkbox"
           txt="ログイン状態を保持"
+          value="1"
+          onChange={inputChangeHandler}
         />
         <PrimaryBtn
           type="button"

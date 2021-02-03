@@ -12,7 +12,7 @@ export const login = (
         // laravel-a@example.com, "password",
         email,
         password,
-        active,
+        active: active ? 1 : 0,
       })
       .then(response => {
         console.log(response);
