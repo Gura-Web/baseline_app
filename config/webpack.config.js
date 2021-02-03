@@ -332,6 +332,8 @@ module.exports = function(webpackEnv) {
           use: [
             {
               options: {
+                // TODO emitWarning 直す
+                emitWarning: true,
                 cache: true,
                 formatter: require.resolve('react-dev-utils/eslintFormatter'),
                 eslintPath: require.resolve('eslint'),
