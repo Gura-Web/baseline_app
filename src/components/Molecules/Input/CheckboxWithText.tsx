@@ -1,22 +1,15 @@
-import React, { ChangeEventHandler } from 'react';
+import React from 'react';
 import { Checkbox } from '../../Atoms/Input/index';
 import { CheckBoxProps } from '../../Atoms/Input/CheckboxProps';
 
 const CheckboxWithText: React.FC<CheckBoxProps> = props => {
+  const { keyName, txt } = props;
+
   return (
-    <label key={props.keyName} className={`input-component`}>
-      <Checkbox
-        keyName={props.keyName}
-        className={props.keyName}
-        category={props.category}
-        type={props.type}
-        id={props.id}
-        checkboxFunc={props.checkboxFunc ? props.checkboxFunc : ''}
-        txt={props.txt}
-        checkedPref={props.checkedPref}
-        isChecked={props.isChecked}
-      />
-      <span>{props.txt}</span>
+    <label key={keyName} className="input-component">
+      {/* propsを親から持ってきてる */}
+      <Checkbox {...props} />
+      <span>{txt}</span>
     </label>
   );
 };
