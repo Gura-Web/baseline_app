@@ -59,17 +59,15 @@ const Modal2Container: FC<EnhancedMyProfileProps> = ({
   }, []);
 
   return (
-    <Modal visible={false}>
-      <CommentWindow2
-        title="アクティビティを投稿"
-        registerButtonHandle={test => {
-          console.log('登録');
-          console.log(test);
-        }}
-        user={user}
-        isLoading={isLoading}
-      />
-    </Modal>
+    <CommentWindow2
+      title="アクティビティを投稿"
+      registerButtonHandle={test => {
+        console.log('登録');
+        console.log(test);
+      }}
+      user={user}
+      isLoading={isLoading}
+    />
   );
 };
 

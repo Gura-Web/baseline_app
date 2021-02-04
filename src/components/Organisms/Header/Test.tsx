@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { User } from '../../../services/models';
 import { MyAvatar } from '../../Molecules/Info';
 import { PrimaryBtn } from '../../Atoms/Btn';
+import { ShowMyActivityButton } from '../../../containers/MyActivity';
 
 export interface SideMenuProps {
   user: User;
@@ -35,7 +36,8 @@ const SideMenu: FC<SideMenuProps> = ({ user, isLoading, isError }) => {
     <>
       <header className="header">
         <div className="header__wrap">
-          <PrimaryBtn type="button" txt="活動を追加" />
+          {/* 活動を追加ボタン */}
+          <ShowMyActivityButton />
         </div>
         <MyAvatar
           iconPath={user.iconImageUrl}

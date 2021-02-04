@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { SideMenu, Header } from './Organisms/Header/index';
-import { Modal } from './Organisms/Modal/Modal2';
+import { Modal } from './Organisms/Modal';
 import * as Page from './Pages';
 import '../assets/styles/App.scss';
 import { mypage } from '../assets/script';
 import MyProfile, { Modal2ContainerWithRouter } from '../containers/MyProfile';
 import Login from '../containers/Login';
+import { MyActivityWindow } from '../containers/MyActivity';
 
 const App: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -236,15 +237,15 @@ const App: React.FC = () => {
           {/* <Popup type="activityError" /> */}
         </Router>
 
-        <Modal2ContainerWithRouter />
+        <MyActivityWindow />
 
-        {/*<Modal*/}
-        {/*  type="activity-post"*/}
-        {/*  showModal={showModal}*/}
-        {/*  // showModal*/}
-        {/*  setShowModal={setShowModal}*/}
-        {/*  getMyData={getMyData}*/}
-        {/*/>*/}
+        <Modal
+          type="activity-post"
+          showModal={showModal}
+          // showModal
+          setShowModal={setShowModal}
+          getMyData={getMyData}
+        />
         <footer className="footer">
           <p className="copyright">
             <small>©︎ 2020 Baseline Team</small>
