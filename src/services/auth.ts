@@ -1,4 +1,27 @@
-import { api } from './api';
+import axios, { AxiosRequestConfig } from 'axios';
+import { api, DEFAULT_API_CONFIG } from './api';
+
+export const doLoginFactory = (optionConfig?: AxiosRequestConfig) => {
+  const config = {
+    ...DEFAULT_API_CONFIG,
+    ...optionConfig,
+  };
+
+  const instance = axios.create(config);
+
+  const doLogin = async () => {
+    // cookieの入手
+    await instance.get('/sanctum/csrf-cookie');
+
+    const response = await instance.get('/api/auth/login');
+
+    if (response.status !== 200) {
+      throw new Error('Server Error');
+    }
+  };
+
+  return doLogin;
+};
 
 export const login = (
   email: string,

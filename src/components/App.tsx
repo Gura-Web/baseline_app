@@ -6,6 +6,7 @@ import { Modal } from './Organisms/Modal';
 import * as Page from './Pages';
 import '../assets/styles/App.scss';
 import { mypage } from '../assets/script';
+import MyProfile from '../containers/MyProfile';
 
 const App: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -45,14 +46,15 @@ const App: React.FC = () => {
             />
             <Route
               path="/"
-              render={() => (
-                <SideMenu
-                  setShowModal={setShowModal}
-                  setMyData={setMyData}
-                  myData={myData}
-                  setIsLogin={setIsLogin}
-                />
-              )}
+              component={MyProfile}
+              // render={() => (
+              //   <SideMenu
+              //     setShowModal={setShowModal}
+              //     setMyData={setMyData}
+              //     myData={myData}
+              //     setIsLogin={setIsLogin}
+              //   />
+              // )}
             />
           </Switch>
 

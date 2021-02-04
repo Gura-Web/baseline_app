@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
-import { useLocation, useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { Logo } from "../../../assets/images/index";
-import { PrimaryBtn } from "../../Atoms/Btn/index";
-import { MyAvatar } from "../../Molecules/Info/index";
-import { getMyData, logout } from "../../../assets/script/index";
-import { rikuma } from "../../../assets/images/index";
+import React, { useEffect, useState, useRef } from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Logo } from '../../../assets/images/index';
+import { PrimaryBtn } from '../../Atoms/Btn/index';
+import { MyAvatar } from '../../Molecules/Info/index';
+import { getMyData, logout } from '../../../assets/script/index';
+import { rikuma } from '../../../assets/images/index';
 
 interface Props {
   setShowModal: any;
@@ -14,17 +14,17 @@ interface Props {
   setIsLogin: any;
 }
 
-const Header: React.FC<Props> = (props) => {
+const Header: React.FC<Props> = props => {
   const location = useLocation();
   const [loading, setLoading] = useState<boolean>(false);
   const history = useHistory();
   const [myData, setMyData] = useState<any>();
 
   const logoutFunc = () => {
-    history.push("/login");
+    history.push('/login');
   };
   const notLoginFunc = () => {
-    history.push("/login");
+    history.push('/login');
   };
   useEffect(() => {
     // props.setIsLogin(true);
@@ -57,22 +57,22 @@ const Header: React.FC<Props> = (props) => {
   });
 
   const isCurrentPage = () => {
-    const gNavs = document.querySelectorAll(".g-navi__item");
-    gNavs.forEach((li) => {
-      li.classList.remove("current");
+    const gNavs = document.querySelectorAll('.g-navi__item');
+    gNavs.forEach(li => {
+      li.classList.remove('current');
     });
     switch (location.pathname) {
-      case "/":
-        gNavs[0].classList.add("current");
+      case '/':
+        gNavs[0].classList.add('current');
         break;
-      case "/search-company":
-        gNavs[1].classList.add("current");
+      case '/search-company':
+        gNavs[1].classList.add('current');
         break;
-      case "/search-student":
-        gNavs[2].classList.add("current");
+      case '/search-student':
+        gNavs[2].classList.add('current');
         break;
-      case "/mypage":
-        gNavs[3].classList.add("current");
+      case '/mypage':
+        gNavs[3].classList.add('current');
         break;
     }
   };
@@ -117,7 +117,7 @@ const Header: React.FC<Props> = (props) => {
         </div>
         <MyAvatar
           iconPath={myData.profile.icon_image_url}
-          name={myData.profile.first_name + " " + myData.profile.last_name}
+          name={myData.profile.first_name + ' ' + myData.profile.last_name}
           student_number={myData.profile.student_number}
           ml=""
           isArrow={true}
@@ -126,7 +126,7 @@ const Header: React.FC<Props> = (props) => {
 
         <div
           ref={myAvatarMenu}
-          className={`myAvatar-menu ${viewMenu && "view"}`}
+          className={`myAvatar-menu ${viewMenu && 'view'}`}
         >
           <ul className="myAvatar-menu__wrap">
             {/* <li className="myAvatar-menu__item">

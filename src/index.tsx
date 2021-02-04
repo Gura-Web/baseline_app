@@ -1,14 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
+import { applyMiddleware, createStore } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import { Provider } from 'react-redux';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
+import configureStore from './configureStore';
+
+// const sagaMiddleWare = createSagaMiddleware();
+const store = configureStore();
 
 document.title = 'Baseline';
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </Provider>,
   document.getElementById('root'),
 );
 
