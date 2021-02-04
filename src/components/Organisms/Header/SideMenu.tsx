@@ -14,7 +14,7 @@ interface Props {
   setIsLogin: any;
 }
 
-const Header: React.FC<Props> = props => {
+const Header: React.FC<Props> = ({ setShowModal }) => {
   const location = useLocation();
   const [loading, setLoading] = useState<boolean>(false);
   const history = useHistory();
@@ -112,7 +112,7 @@ const Header: React.FC<Props> = props => {
           <PrimaryBtn
             type="button"
             txt="活動を追加"
-            setShowModal={props.setShowModal}
+            setShowModal={setShowModal}
           />
         </div>
         <MyAvatar
