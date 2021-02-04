@@ -1,13 +1,15 @@
 import { Reducer } from 'redux';
-import * as ActionLoginType from '../actions/auth/login';
+import * as ActionType from '../actions/auth/login';
 import { LoginAction } from '../actions/auth/doLogin';
 
 export interface LoginState {
   isError: boolean;
+  isSuccess: boolean;
 }
 
 export const initialLoginState: LoginState = {
   isError: false,
+  isSuccess: false,
 };
 
 export const loginReducer: Reducer<LoginState, LoginAction> = (
@@ -15,17 +17,18 @@ export const loginReducer: Reducer<LoginState, LoginAction> = (
   action: LoginAction,
 ) => {
   switch (action.type) {
-    case ActionLoginType.DO_LOGIN_START:
+    case ActionType.DO_LOGIN_START:
       return {
         ...state,
       };
-    case ActionLoginType.DO_LOGIN_SUCCEED:
+    case ActionType.DO_LOGIN_SUCCEED:
       return {
         ...state,
         isLoading: false,
+        isSuccess: true,
       };
 
-    case ActionLoginType.DO_LOGIN_FAILED:
+    case ActionType.DO_LOGIN_FAILED:
       return {
         ...state,
         isError: true,

@@ -1,18 +1,26 @@
 import { AxiosError } from 'axios';
 import * as ActionType from './login';
 
+export interface LoginParams {
+  email: string;
+  password: string;
+  active: '0' | '1';
+}
+
 export const doLogin = {
-  start: () => ({
+  start: (params: LoginParams) => ({
     type: ActionType.DO_LOGIN_START as typeof ActionType.DO_LOGIN_START,
+    payload: { params },
   }),
 
-  succeed: () => ({
+  succeed: (params: LoginParams) => ({
     type: ActionType.DO_LOGIN_SUCCEED as typeof ActionType.DO_LOGIN_SUCCEED,
+    payload: { params },
   }),
 
-  failed: (error: AxiosError) => ({
+  failed: (params: LoginParams, error: AxiosError) => ({
     type: ActionType.DO_LOGIN_FAILED as typeof ActionType.DO_LOGIN_FAILED,
-    payload: { error },
+    payload: { params, error },
     error: true,
   }),
 };

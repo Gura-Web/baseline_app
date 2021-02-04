@@ -1,14 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, FC } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Primary } from '../Atoms/TextInput';
 import { CheckboxWithText } from '../Molecules/Input';
 import { PrimaryBtn } from '../Atoms/Btn/index';
 import { handleChange } from '../../assets/script/validation';
-import { login } from '../../services/auth';
+import { LoginParams } from '../../actions/auth/doLogin';
 
-const Login: React.FC = () => {
+interface Props {
+  isError: boolean;
+  isSuccess: boolean;
+  loginFunction: null | ((params: LoginParams) => void);
+}
+
+const Login: FC<Props> = (
+  { isError, isSuccess, loginFunction }: Props = {
+    isError: false,
+    isSuccess: false,
+    loginFunction: null,
+  },
+) => {
   useEffect(() => {
     const container = document.querySelector('.container');
+    // eslint-disable-next-line no-unused-expressions
     container?.classList.add('page-login');
   }, []);
   const [state, setState] = useState({
@@ -24,29 +37,34 @@ const Login: React.FC = () => {
   });
 
   const history = useHistory();
-  const goHomePage = () => {
+
+  if (isSuccess) {
+    // ログインに成功した
     history.push('/');
-  };
+  }
+
+  if (isError) {
+    // ログインに失敗
+    console.log('失敗');
+  }
 
   const loginCheck = () => {
-    // ログイン処理
-    login(
-      state.info.email,
-      state.info.password,
-      state.info.isActive === '1',
-      goHomePage,
-    );
+    // ログイン処理実行
+
+    if (loginFunction !== null)
+      loginFunction({
+        email: state.info.email,
+        password: state.info.password,
+        active: state.info.isActive === '1' ? '1' : '0',
+      });
   };
 
-  const primayBtnClickHandler = () => {
-    loginCheck();
-  };
+  // inputの情報を受け取るハンドラ
   const inputChangeHandler = (e: any) => {
     handleChange(state, setState, e);
-
-    // console.log(state.info.isActive);
-    console.log(state);
   };
+
+  // キーボード（決定処理））
   const inputEnterKeyHandler = (e: any) => {
     if (e.key === 'Enter') {
       loginCheck();
@@ -94,7 +112,7 @@ const Login: React.FC = () => {
         <PrimaryBtn
           type="button"
           txt="ログインする"
-          Func={primayBtnClickHandler}
+          Func={loginCheck}
           disabledRule={
             !state.info.email ||
             !state.info.password ||
