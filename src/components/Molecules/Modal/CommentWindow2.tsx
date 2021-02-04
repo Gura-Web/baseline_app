@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { RoundedBtn } from '../../Atoms/Btn';
-import { Avatar } from '../../../assets/images/index';
+import { Avatar, rikuma } from '../../../assets/images/index';
 import { mypage } from '../../../assets/script/';
 import axios from 'axios';
+import { User } from '../../../services/models';
 
 const modal = {
   hidden: {
@@ -19,6 +20,8 @@ const modal = {
 };
 
 interface Props {
+  isLoading: boolean;
+  user: User;
   title: string;
   // showModal: any;
   // setShowModal: any;
@@ -28,36 +31,20 @@ interface Props {
   // btnClickFunc?: any;
   // editId?: number;
   // type?: string;
-  registerButtonHandle: () => void;
+  registerButtonHandle: (currentContent: string) => void;
 }
 
-export const CommentWindow2: React.FC<Props> = ({ title, content }) => {
+export const CommentWindow2: React.FC<Props> = ({
+  title,
+  content,
+  user,
+  isLoading,
+  registerButtonHandle,
+}) => {
   const [inputText, setInputText] = useState({
     count: 0,
-    textValue: 'initial value',
+    textValue: '',
   });
-  // const [draft, setDraft] = useState<any>();
-  // const [myData, setMyData] = useState<any>();
-  // const [loading, setLoading] = useState<boolean>(false);
-  // useEffect(() => {
-  //   const url = './draft.json';
-  //   axios.get(url).then(res => {
-  //     const output = res.data;
-  //     setDraft(output);
-  //   });
-  //   if (props.content) {
-  //     setInputText({
-  //       count: props.content.length,
-  //       textValue: props.content,
-  //     });
-  //   }
-  //   mypage().then((getData: any) => {
-  //     setMyData(getData.data);
-  //     setLoading(true);
-  //   });
-  // }, []);
-  // // console.log(myData);
-  //
   const handleTextChange = (textValue: string) => {
     setInputText({
       count: inputText.count,
@@ -99,15 +86,12 @@ export const CommentWindow2: React.FC<Props> = ({ title, content }) => {
   //
   //   props.setShowModal(false);
   // };
-  //
-  // const renderDOM = () => {
-  //   return (
-  //     <img
-  //       src={myData.icon_image_url ? myData.icon_image_url : Avatar}
-  //       alt=""
-  //     />
-  //   );
-  // };
+
+  // 登録ボタンの高階関数
+  const register = () => {
+    console.log('押された');
+    registerButtonHandle(inputText.textValue);
+  };
 
   return (
     <>
@@ -121,16 +105,21 @@ export const CommentWindow2: React.FC<Props> = ({ title, content }) => {
         <div className="modal__header modal__header--normal">
           <p className="heading4">{title}</p>
         </div>
+        {/* ×ボタン */}
+        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
         <div
           className="btn closeIcon-btn"
-          // ×ボタン
           onClick={() => {
             // props.setShowModal(false)
           }}
         />
-        {/* コンテンツのテキストエリア */}
         <div className="modal__input-area">
-          {/*{loading && renderDOM()}*/}
+          {/* アイコン */}
+          {!isLoading && (
+            <img src={user.iconImageUrl ?? rikuma} alt="user_icon" />
+          )}
+
+          {/* コンテンツのテキストエリア */}
           <textarea
             name="content"
             className="modal__textarea"
@@ -151,13 +140,17 @@ export const CommentWindow2: React.FC<Props> = ({ title, content }) => {
             &nbsp;/ 200
           </p>
           <div>
-            {/*下描きボタン*/}
+            {/* 下描きボタン */}
             <p onClick={() => {}}>下書き</p>
+
+            {/* 投稿ボタン */}
             <RoundedBtn
               txt="投稿"
-              className={inputText.count > 200 ? 'invalid' : ''}
+              className={
+                inputText.count > 200 || inputText.count <= 0 ? 'invalid' : ''
+              }
               isType="button"
-              // Func={onClickHandler}
+              Func={register}
             />
           </div>
         </div>

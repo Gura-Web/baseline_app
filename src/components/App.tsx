@@ -6,7 +6,7 @@ import { Modal } from './Organisms/Modal/Modal2';
 import * as Page from './Pages';
 import '../assets/styles/App.scss';
 import { mypage } from '../assets/script';
-import MyProfile from '../containers/MyProfile';
+import MyProfile, { Modal2ContainerWithRouter } from '../containers/MyProfile';
 import Login from '../containers/Login';
 
 const App: React.FC = () => {
@@ -236,7 +236,7 @@ const App: React.FC = () => {
           {/* <Popup type="activityError" /> */}
         </Router>
 
-        <Modal></Modal>
+        <Modal2ContainerWithRouter />
 
         {/*<Modal*/}
         {/*  type="activity-post"*/}

@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { RoundedBtn } from "../../Atoms/Btn";
-import { Avatar } from "../../../assets/images/index";
-import { mypage } from "../../../assets/script/";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { RoundedBtn } from '../../Atoms/Btn';
+import { Avatar } from '../../../assets/images/index';
+import { mypage } from '../../../assets/script/';
+import axios from 'axios';
 const modal = {
   hidden: {
-    left: "50vw",
-    top: "80vh",
+    left: '50vw',
+    top: '80vh',
     opacity: 0,
   },
   visible: {
-    top: "45vh",
+    top: '45vh',
     opacity: 1,
     transition: { delay: 0.5 },
   },
@@ -29,17 +29,17 @@ interface Props {
   type?: string;
 }
 
-const CommentWindow: React.FC<Props> = (props) => {
+const CommentWindow: React.FC<Props> = props => {
   const [inputText, setInputText] = useState({
     count: 0,
-    textValue: "initial value",
+    textValue: 'initial value',
   });
   const [draft, setDraft] = useState<any>();
   const [myData, setMyData] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
-    const url = "./draft.json";
-    axios.get(url).then((res) => {
+    const url = './draft.json';
+    axios.get(url).then(res => {
       const output = res.data;
       setDraft(output);
     });
@@ -72,26 +72,26 @@ const CommentWindow: React.FC<Props> = (props) => {
   const draftClickHandler = () => {
     props.setSaveTextModal(true);
     const currentText = document.querySelector(
-      ".modal__textarea"
+      '.modal__textarea',
     )! as HTMLTextAreaElement;
     props.setCurrentText(currentText.value);
   };
 
   const onClickHandler = () => {
     const currentText = document.querySelector(
-      ".modal__textarea"
+      '.modal__textarea',
     )! as HTMLTextAreaElement;
     props.setCurrentText(currentText.value);
-    if (props.type === "regist") {
+    if (props.type === 'regist') {
       props.btnClickFunc(currentText.value);
     }
-    if (props.type === "edit") {
+    if (props.type === 'edit') {
       props.btnClickFunc(props.editId, currentText.value);
     }
-    if (props.type === "company-comment") {
+    if (props.type === 'company-comment') {
       props.btnClickFunc(currentText.value);
     }
-    if (props.type === "company-comment-edit") {
+    if (props.type === 'company-comment-edit') {
       props.btnClickFunc(currentText.value);
     }
 
@@ -114,7 +114,7 @@ const CommentWindow: React.FC<Props> = (props) => {
         method="POST"
         className="modal modal--normal"
         variants={modal}
-        onClick={(event) => event.stopPropagation()}
+        onClick={event => event.stopPropagation()}
       >
         <div className="modal__header modal__header--normal">
           <p className="heading4">{props.ttl}</p>
@@ -130,16 +130,15 @@ const CommentWindow: React.FC<Props> = (props) => {
             className="modal__textarea"
             required
             defaultValue={props.content}
-            onChange={(e) => handleTextChange(e.target.value)}
-            onKeyUp={(e) => handleCountChange(e.currentTarget.value.length)}
+            onChange={e => handleTextChange(e.target.value)}
+            onKeyUp={e => handleCountChange(e.currentTarget.value.length)}
           ></textarea>
         </div>
         <div className="modal__bottom">
           <p className="text-count">
             <span
-              className={`text-count__current-num ${
-                inputText.count > 200 && "cAttention"
-              }`}
+              className={`text-count__current-num ${inputText.count > 200 &&
+                'cAttention'}`}
             >
               {inputText.count}
             </span>
@@ -149,7 +148,7 @@ const CommentWindow: React.FC<Props> = (props) => {
             <p onClick={draftClickHandler}>下書き</p>
             <RoundedBtn
               txt="投稿"
-              className={inputText.count > 200 ? "invalid" : ""}
+              className={inputText.count > 200 ? 'invalid' : ''}
               isType="button"
               Func={onClickHandler}
             />

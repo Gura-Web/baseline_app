@@ -26,6 +26,8 @@ export const getMyProfileFactory = (optionConfig?: AxiosRequestConfig) => {
   const getMyProfile = async () => {
     const response = await instance.get('/api/auth/user');
 
+    console.log('取った来た');
+
     if (response.status !== 200) {
       throw new Error('Server Error');
     }

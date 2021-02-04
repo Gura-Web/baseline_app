@@ -6,6 +6,7 @@ import { User } from '../services/models';
 import { MyProfileState } from '../reducers/myProfile';
 import { getMyProfile } from '../actions/baseline';
 import Test from '../components/Organisms/Header/Test';
+import { Modal } from '../components/Organisms/Modal/Modal2';
 
 interface StateProps {
   user: User;
@@ -45,6 +46,24 @@ const MyProfileContainer: FC<EnhancedMyProfileProps> = ({
 
   return <Test user={user} isLoading={isLoading} isError={isError} />;
 };
+
+// TODO 仮置き
+const Modal2Container: FC<EnhancedMyProfileProps> = ({
+  user,
+  getMyProfileStart,
+  isLoading,
+}) => {
+  useEffect(() => {
+    getMyProfileStart();
+  }, []);
+
+  return <Modal user={user} isLoading={isLoading} />;
+};
+
+export const Modal2ContainerWithRouter = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Modal2Container);
 
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(MyProfileContainer),

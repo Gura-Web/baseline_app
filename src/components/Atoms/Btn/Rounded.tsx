@@ -1,19 +1,19 @@
-import React from "react";
+import React from 'react';
 interface Props {
   txt: string;
   isDelete?: string;
   className?: any;
   Func?: any;
-  isType?: "button";
+  isType?: 'button';
 }
 
-const Rounded: React.FC<Props> = (props) => {
+const Rounded: React.FC<Props> = props => {
   return (
     <button
-      className={` btn--rounded ${props.isDelete && "delete"} ${
+      className={` btn--rounded ${props.isDelete && 'delete'} ${
         props.className
       }`}
-      type={props.isType ? props.isType : "submit"}
+      type={props.isType ? props.isType : 'submit'}
       onClick={() => {
         if (props.Func) {
           props.Func();
