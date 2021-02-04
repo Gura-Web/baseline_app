@@ -6,6 +6,8 @@ import { Modal } from './Organisms/Modal';
 import * as Page from './Pages';
 import '../assets/styles/App.scss';
 import { mypage } from '../assets/script';
+import MyProfile from '../containers/MyProfile';
+import Login from '../containers/Login';
 
 const App: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -38,13 +40,19 @@ const App: React.FC = () => {
           <Switch>
             <Route path="/register" render={() => <Header needBtn={false} />} />
             <Route path="/password" render={() => <Header needBtn={false} />} />
-            <Route path="/login" render={() => <Header needBtn={false} />} />
+            <Route
+              path="/login"
+              // component={Login}
+              render={() => <Header needBtn={false} />}
+            />
             <Route
               path="/company-info/:id/edit"
               render={props => <Header needBtn {...props} />}
             />
             <Route
               path="/"
+              // TODO SideBar直す
+              // component={MyProfile}
               render={() => (
                 <SideMenu
                   setShowModal={setShowModal}
@@ -85,7 +93,7 @@ const App: React.FC = () => {
                   component={Page.RegisterComplete}
                 />
 
-                <Route exact path="/login" component={Page.Login} />
+                <Route exact path="/login" component={Login} />
                 <Route
                   exact
                   path="/password/forget"

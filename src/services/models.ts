@@ -4,7 +4,7 @@ export interface User {
   lastName: string;
   studentNumber: number;
   yearOfGraduation: number;
-  iconImageUrl: string;
+  iconImageUrl: string | null;
   sex: number;
   email: string;
   desiredOccupations: number;
