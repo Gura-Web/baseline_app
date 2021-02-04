@@ -7,6 +7,7 @@ import { MyProfileState } from '../reducers/myProfile';
 import { getMyProfile } from '../actions/baseline';
 import Test from '../components/Organisms/Header/Test';
 import { Modal } from '../components/Organisms/Modal/Modal2';
+import { CommentWindow2 } from '../components/Molecules/Modal/CommentWindow2';
 
 interface StateProps {
   user: User;
@@ -57,7 +58,19 @@ const Modal2Container: FC<EnhancedMyProfileProps> = ({
     getMyProfileStart();
   }, []);
 
-  return <Modal user={user} isLoading={isLoading} />;
+  return (
+    <Modal visible={true}>
+      <CommentWindow2
+        title="アクティビティを投稿"
+        registerButtonHandle={test => {
+          console.log('登録');
+          console.log(test);
+        }}
+        user={user}
+        isLoading={isLoading}
+      />
+    </Modal>
+  );
 };
 
 export const Modal2ContainerWithRouter = connect(
