@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { SideMenu, Header } from './Organisms/Header/index';
-import { Modal } from './Organisms/Modal';
+import { Modal } from './Organisms/Modal/Modal2';
 import * as Page from './Pages';
 import '../assets/styles/App.scss';
 import { mypage } from '../assets/script';
@@ -236,12 +236,15 @@ const App: React.FC = () => {
           {/* <Popup type="activityError" /> */}
         </Router>
 
-        <Modal
-          type="activity-post"
-          showModal={showModal}
-          setShowModal={setShowModal}
-          getMyData={getMyData}
-        />
+        <Modal></Modal>
+
+        {/*<Modal*/}
+        {/*  type="activity-post"*/}
+        {/*  showModal={showModal}*/}
+        {/*  // showModal*/}
+        {/*  setShowModal={setShowModal}*/}
+        {/*  getMyData={getMyData}*/}
+        {/*/>*/}
         <footer className="footer">
           <p className="copyright">
             <small>©︎ 2020 Baseline Team</small>

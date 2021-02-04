@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import React, { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
   registMyActivity,
   editMyActivity,
   deleteMyActivity,
   insertComment,
   editComment,
-} from "../../../assets/script/";
+} from '../../../assets/script';
 import {
   CommentWindow,
   LevelDesc,
@@ -14,12 +14,13 @@ import {
   AccountDelete,
   ActivityDelete,
   SaveText,
-} from "../../Molecules/Modal";
+} from '../../Molecules/Modal';
 
 const backdrop = {
   visible: { opacity: 1 },
   hidden: { opacity: 0 },
 };
+
 interface Props {
   showModal: any;
   setShowModal: any;
@@ -33,7 +34,7 @@ interface Props {
   getComment?: any;
 }
 
-const Modal: React.FC<Props> = (props) => {
+const Modal: React.FC<Props> = props => {
   const [saveTextModal, setSaveTextModal] = useState<boolean>(false);
 
   const [currentText, setCurrentText] = useState<string>();
@@ -74,7 +75,7 @@ const Modal: React.FC<Props> = (props) => {
   };
 
   const rootingModalRender = () => {
-    if (props.type === "activity-post") {
+    if (props.type === 'activity-post') {
       return (
         <CommentWindow
           ttl="アクティビティを投稿"
@@ -87,14 +88,14 @@ const Modal: React.FC<Props> = (props) => {
           type="regist"
         />
       );
-    } else if (props.type === "select-post-category") {
+    } else if (props.type === 'select-post-category') {
       return (
         <SelectCategory
           setShowModal={props.setShowModal}
           companyId={props.companyId}
         />
       );
-    } else if (props.type === "company-comment") {
+    } else if (props.type === 'company-comment') {
       return (
         <CommentWindow
           ttl="会社に対するコメントを書く"
@@ -107,7 +108,7 @@ const Modal: React.FC<Props> = (props) => {
           type="company-comment"
         />
       );
-    } else if (props.type === "company-comment-edit") {
+    } else if (props.type === 'company-comment-edit') {
       return (
         <CommentWindow
           ttl="会社に対するコメントを書く"
@@ -121,7 +122,7 @@ const Modal: React.FC<Props> = (props) => {
           type="edit"
         />
       );
-    } else if (props.type === "company-comment-delete") {
+    } else if (props.type === 'company-comment-delete') {
       return (
         <ActivityDelete
           ttl="このコメントを削除しますか？"
@@ -131,7 +132,7 @@ const Modal: React.FC<Props> = (props) => {
           btnClickFunc={onDeleteComment}
         />
       );
-    } else if (props.type === "activity-edit") {
+    } else if (props.type === 'activity-edit') {
       return (
         <CommentWindow
           ttl="アクティビティを編集"
@@ -145,7 +146,7 @@ const Modal: React.FC<Props> = (props) => {
           type="edit"
         />
       );
-    } else if (props.type === "activity-delete") {
+    } else if (props.type === 'activity-delete') {
       return (
         <ActivityDelete
           ttl="この活動履歴を削除しますか？"
@@ -155,9 +156,9 @@ const Modal: React.FC<Props> = (props) => {
           btnClickFunc={deleteActivity}
         />
       );
-    } else if (props.type === "company-level") {
+    } else if (props.type === 'company-level') {
       return <LevelDesc setShowModal={props.setShowModal} />;
-    } else if ("account-delete") {
+    } else if ('account-delete') {
       return <AccountDelete setShowModal={props.setShowModal} />;
     }
   };
