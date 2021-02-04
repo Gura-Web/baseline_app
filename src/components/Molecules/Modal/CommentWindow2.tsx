@@ -41,6 +41,7 @@ export const CommentWindow2: React.FC<Props> = ({
   isLoading,
   registerButtonHandle,
 }) => {
+  // コンテンツのテキストを管理するローカルステート
   const [inputText, setInputText] = useState({
     count: 0,
     textValue: '',
@@ -57,39 +58,9 @@ export const CommentWindow2: React.FC<Props> = ({
       textValue: inputText.textValue,
     });
   };
-  //
-  // const draftClickHandler = () => {
-  //   props.setSaveTextModal(true);
-  //   const currentText = document.querySelector(
-  //     '.modal__textarea',
-  //   )! as HTMLTextAreaElement;
-  //   props.setCurrentText(currentText.value);
-  // };
-  //
-  // const onClickHandler = () => {
-  //   const currentText = document.querySelector(
-  //     '.modal__textarea',
-  //   )! as HTMLTextAreaElement;
-  //   props.setCurrentText(currentText.value);
-  //   if (props.type === 'regist') {
-  //     props.btnClickFunc(currentText.value);
-  //   }
-  //   if (props.type === 'edit') {
-  //     props.btnClickFunc(props.editId, currentText.value);
-  //   }
-  //   if (props.type === 'company-comment') {
-  //     props.btnClickFunc(currentText.value);
-  //   }
-  //   if (props.type === 'company-comment-edit') {
-  //     props.btnClickFunc(currentText.value);
-  //   }
-  //
-  //   props.setShowModal(false);
-  // };
 
   // 登録ボタンの高階関数
   const register = () => {
-    console.log('押された');
     registerButtonHandle(inputText.textValue);
   };
 
@@ -141,6 +112,7 @@ export const CommentWindow2: React.FC<Props> = ({
           </p>
           <div>
             {/* 下描きボタン */}
+            {/* TODO 下描きの処理 */}
             <p onClick={() => {}}>下書き</p>
 
             {/* 投稿ボタン */}

@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { motion } from "framer-motion";
-import { RoundedBtn } from "../../Atoms/Btn";
-import { Avatar } from "../../../assets/images/index";
-import { getMyData, deleteAccount } from "../../../assets/script/";
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { RoundedBtn } from '../../Atoms/Btn';
+import { Avatar } from '../../../assets/images/index';
+import { getMyData, deleteAccount } from '../../../assets/script/';
 const modal = {
   hidden: {
-    left: "50vw",
-    top: "80vh",
+    left: '50vw',
+    top: '80vh',
     opacity: 0,
   },
   visible: {
-    top: "45vh",
+    top: '45vh',
     opacity: 1,
     transition: { delay: 0.5 },
   },
@@ -21,7 +21,7 @@ interface Props {
   setShowModal: any;
 }
 
-const AccountDelete: React.FC<Props> = (props) => {
+const AccountDelete: React.FC<Props> = props => {
   const [myData, setMyData] = useState<any>({});
   const history = useHistory();
   useEffect(() => {
@@ -32,7 +32,7 @@ const AccountDelete: React.FC<Props> = (props) => {
   }, []);
 
   const deleteAccout = () => {
-    deleteAccount(myData.id).then((boolean) => {
+    deleteAccount(myData.id).then(boolean => {
       if (boolean) {
         history.push(`/login`);
       }
@@ -43,7 +43,7 @@ const AccountDelete: React.FC<Props> = (props) => {
     <motion.div
       className="modal modal--normal modal--accountDelete"
       variants={modal}
-      onClick={(event) => event.stopPropagation()}
+      onClick={event => event.stopPropagation()}
     >
       <div className="accountDelete-user">
         <img className="accountDelete-user__avatar" src={Avatar} alt="" />
@@ -60,7 +60,7 @@ const AccountDelete: React.FC<Props> = (props) => {
         <p onClick={() => props.setShowModal(false)}>キャンセル</p>
         <RoundedBtn
           txt="アカウントを削除"
-          isDelete={"true"}
+          isDelete={'true'}
           Func={deleteAccout}
         />
       </div>
