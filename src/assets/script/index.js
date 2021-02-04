@@ -1,4 +1,4 @@
-export { default as apiClient } from '../../services/api';
+export { api as apiClient } from '../../services/api';
 export { login, logout } from '../../services/auth';
 export {
   getMyData,
@@ -7,7 +7,7 @@ export {
   passwordReset,
   passwordChange,
   deleteAccount,
-} from './Axios/axiosUser';
+} from '../../services/axiosUser';
 export { getHomeData } from './Axios/getHomeData';
 export { searchCompany } from './Axios/seachCompany';
 export { searchUser } from './Axios/searchUser';

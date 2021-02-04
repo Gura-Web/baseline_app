@@ -2,7 +2,7 @@ import React, {
   ChangeEvent,
   ChangeEventHandler,
   KeyboardEventHandler,
-} from "react";
+} from 'react';
 
 interface Props {
   type: string;
@@ -21,7 +21,7 @@ interface Props {
   ref?: any;
 }
 
-const Primary: React.FC<Props> = (props) => {
+const Primary: React.FC<Props> = props => {
   return (
     <>
       <label className="free-word">

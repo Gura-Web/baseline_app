@@ -1,33 +1,15 @@
-import React from "react";
-import { Checkbox } from "../../Atoms/Input/index";
+import React from 'react';
+import { Checkbox } from '../../Atoms/Input/index';
+import { CheckBoxProps } from '../../Atoms/Input/CheckboxProps';
 
-interface Props {
-  type: "checkbox" | "radio";
-  txt: string;
-  checkboxFunc?: any;
-  checkedPref?: string[];
-  id?: string | undefined;
-  keyName?: string;
-  className?: string;
-  category?: string;
-  isChecked?: boolean;
-}
+const CheckboxWithText: React.FC<CheckBoxProps> = props => {
+  const { keyName, txt } = props;
 
-const CheckboxWithText: React.FC<Props> = (props) => {
   return (
-    <label key={props.keyName} className={`input-component`}>
-      <Checkbox
-        keyName={props.keyName}
-        className={props.keyName}
-        category={props.category}
-        type={props.type}
-        id={props.id}
-        checkboxFunc={props.checkboxFunc ? props.checkboxFunc : ""}
-        txt={props.txt}
-        checkedPref={props.checkedPref}
-        isChecked={props.isChecked}
-      />
-      <span>{props.txt}</span>
+    <label key={keyName} className="input-component">
+      {/* propsを親から持ってきてる */}
+      <Checkbox {...props} />
+      <span>{txt}</span>
     </label>
   );
 };

@@ -1,87 +1,85 @@
-import React, { useState, useEffect } from "react";
-import { CheckIcon } from "../../../assets/images/index";
+import React, { useState, useEffect } from 'react';
+import { CheckIcon } from '../../../assets/images/index';
+import { CheckBoxProps } from './CheckboxProps';
 
-interface Props {
-  type: "checkbox" | "radio";
-  category?: string;
-  checkboxFunc?: any;
-  keyName?: string;
-  id?: string;
-  className?: string;
-  txt?: string;
-  checkedPref?: string[];
-  isChecked?: boolean;
-}
-
-const Checkbox: React.FC<Props> = (props) => {
+const Checkbox: React.FC<CheckBoxProps> = ({
+  category,
+  checkboxFunc,
+  checkedPref,
+  id,
+  isChecked,
+  keyName,
+  onChange,
+  type,
+  value,
+}) => {
   let typeClass;
-  if (props.type === "checkbox") {
-    typeClass = "input-checkbox input-checkbox--normal";
+  if (type === 'checkbox') {
+    typeClass = 'input-checkbox input-checkbox--normal';
   }
-  useEffect(()=> {
-  },[]);
+  useEffect(() => {}, []);
   const checkHandler = (e: any) => {
     e.stopPropagation();
     // 卒業生の在籍
-    if (props.category == "enrollment_of_graduates" && props.checkboxFunc) {
-      props.checkboxFunc(e.currentTarget.checked);
+    if (category == 'enrollment_of_graduates' && checkboxFunc) {
+      checkboxFunc(e.currentTarget.checked);
     }
     // 希望職種
-    if (props.category == "jobs" && props.checkboxFunc) {
+    if (category == 'jobs' && checkboxFunc) {
       if (e.currentTarget.checked) {
-        props.checkboxFunc(e.currentTarget.name, true);
+        checkboxFunc(e.currentTarget.name, true);
       } else {
-        props.checkboxFunc(e.currentTarget.name, false);
+        checkboxFunc(e.currentTarget.name, false);
       }
     }
-    
+
     // 都道府県
-    if (props.category == "prefectures" && props.checkboxFunc) {
-      console.log("B")
+    if (category == 'prefectures' && checkboxFunc) {
+      console.log('B');
       if (e.currentTarget.checked) {
-        props.checkboxFunc(e.currentTarget.name, true);
+        checkboxFunc(e.currentTarget.name, true);
       } else {
-        props.checkboxFunc(e.currentTarget.name, false);
+        checkboxFunc(e.currentTarget.name, false);
       }
     }
     // 地域選択(企業登録)
-    if (props.category == "prefSelect" && props.checkboxFunc) {
+    if (category == 'prefSelect' && checkboxFunc) {
       if (e.currentTarget.checked) {
-        props.checkboxFunc();
+        checkboxFunc();
       }
     }
   };
   const isCheckedPref = () => {
-    return props.checkedPref?.some((pref: any) => {
-      if (props.id == pref.id) {
+    return checkedPref?.some((pref: any) => {
+      if (id == pref.id) {
         return true;
       } else {
         return false;
       }
     });
   };
-  const onDefaultCheckedFunc = ()=> {
-    if(props.checkedPref){
+  const onDefaultCheckedFunc = () => {
+    if (checkedPref) {
       return isCheckedPref();
     }
-    if(props.isChecked){
+    if (isChecked) {
       return true;
     }
-  }
-  
+  };
+
   return (
     <>
       <input
-        onChange={checkHandler}
-        id={`input-${props.id}`}
-        data-key={props.id}
+        onChange={onChange}
+        id={`input-${id}`}
+        data-key={id}
         className="check-radio-input"
-        type={props.type}
-        value={props.txt}
-        name={props.keyName}
+        type={type}
+        value={value}
+        name={keyName}
         defaultChecked={onDefaultCheckedFunc()}
       />
-      <label htmlFor={`input-${props.id}`} className={`${typeClass}`}>
+      <label htmlFor={`input-${id}`} className={`${typeClass}`}>
         <img src={CheckIcon} alt="" />
       </label>
     </>
