@@ -17,6 +17,12 @@ export const loginReducer: Reducer<LoginState, LoginAction> = (
   action: LoginAction,
 ) => {
   switch (action.type) {
+    case ActionType.DO_LOGIN_INIT:
+      return {
+        ...state,
+        isSuccess: false,
+      };
+
     case ActionType.DO_LOGIN_START:
       return {
         ...state,

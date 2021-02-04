@@ -1,3 +1,4 @@
+export const DO_LOGIN_INIT = 'DO_LOGIN_INIT';
 export const DO_LOGIN_START = 'DO_LOGIN_START';
 export const DO_LOGIN_SUCCEED = 'DO_LOGIN_SUCCEED';
 export const DO_LOGIN_FAILED = 'DO_LOGIN_FAILED';

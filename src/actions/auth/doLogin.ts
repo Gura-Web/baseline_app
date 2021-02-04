@@ -8,6 +8,10 @@ export interface LoginParams {
 }
 
 export const doLogin = {
+  init: () => ({
+    type: ActionType.DO_LOGIN_INIT as typeof ActionType.DO_LOGIN_INIT,
+  }),
+
   start: (params: LoginParams) => ({
     type: ActionType.DO_LOGIN_START as typeof ActionType.DO_LOGIN_START,
     payload: { params },
@@ -26,6 +30,7 @@ export const doLogin = {
 };
 
 export type LoginAction =
+  | ReturnType<typeof doLogin.init>
   | ReturnType<typeof doLogin.start>
   | ReturnType<typeof doLogin.succeed>
   | ReturnType<typeof doLogin.failed>;

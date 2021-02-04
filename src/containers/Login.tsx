@@ -13,6 +13,7 @@ interface StateProps {
 
 interface DispatchProps {
   doLoginStart: (params: LoginParams) => void;
+  loginPageRead: () => void;
 }
 
 type EnhancedLoginProps = StateProps & DispatchProps;
@@ -26,6 +27,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
       doLoginStart: params => doLogin.start(params),
+      loginPageRead: () => doLogin.init(),
     },
     dispatch,
   );
@@ -34,8 +36,11 @@ const LoginContainer: FC<EnhancedLoginProps> = ({
   isError,
   isSuccess,
   doLoginStart,
+  loginPageRead,
 }) => {
-  // useEffect(() => {}, []);
+  useEffect(() => {
+    loginPageRead();
+  }, []);
 
   return (
     <Login

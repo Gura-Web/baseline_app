@@ -19,4 +19,4 @@ export function* watchGetMyProfile() {
   yield takeLatest(Action.GET_MY_PROFILE_START, runGetMyProfile);
 }
 
-export default fork(watchGetMyProfile);
+export default [fork(watchGetMyProfile)];
