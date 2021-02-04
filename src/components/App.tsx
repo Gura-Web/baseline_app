@@ -52,15 +52,15 @@ const App: React.FC = () => {
             <Route
               path="/"
               // TODO SideBar直す
-              // component={MyProfile}
-              render={() => (
-                <SideMenu
-                  setShowModal={setShowModal}
-                  setMyData={setMyData}
-                  myData={myData}
-                  setIsLogin={setIsLogin}
-                />
-              )}
+              component={MyProfile}
+              // render={() => (
+              //   <SideMenu
+              //     setShowModal={setShowModal}
+              //     setMyData={setMyData}
+              //     myData={myData}
+              //     setIsLogin={setIsLogin}
+              //   />
+              // )}
             />
           </Switch>
 

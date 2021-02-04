@@ -2,6 +2,7 @@ import React, { FC, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { User } from '../../../services/models';
 import { MyAvatar } from '../../Molecules/Info';
+import { PrimaryBtn } from '../../Atoms/Btn';
 
 export interface SideMenuProps {
   user: User;
@@ -32,24 +33,32 @@ const SideMenu: FC<SideMenuProps> = ({ user, isLoading, isError }) => {
 
   return (
     <>
-      <MyAvatar
-        iconPath={user.iconImageUrl}
-        // 10文字まで表示
-        // eslint-disable-next-line no-irregular-whitespace
-        name={`${user.firstName}　${user.lastName}`}
-        student_number={`${user.studentNumber}`}
-        ml=""
-        isArrow
-        clickFunc={toggleUserMenu}
-      />
-
-      <div ref={myAvatarMenu} className={`myAvatar-menu ${viewMenu && 'view'}`}>
-        <div>
-          <ul className="myAvatar__wrap">
-            <li className="myAvatar-menu__item cAttention">ログアウト</li>
-          </ul>
+      <header className="header">
+        <div className="header__wrap">
+          <PrimaryBtn type="button" txt="活動を追加" />
         </div>
-      </div>
+        <MyAvatar
+          iconPath={user.iconImageUrl}
+          // 10文字まで表示
+          // eslint-disable-next-line no-irregular-whitespace
+          name={`${user.firstName}　${user.lastName}`}
+          student_number={`${user.studentNumber}`}
+          ml=""
+          isArrow
+          clickFunc={toggleUserMenu}
+        />
+
+        <div
+          ref={myAvatarMenu}
+          className={`myAvatar-menu ${viewMenu && 'view'}`}
+        >
+          <div>
+            <ul className="myAvatar__wrap">
+              <li className="myAvatar-menu__item cAttention">ログアウト</li>
+            </ul>
+          </div>
+        </div>
+      </header>
     </>
   );
 };

@@ -59,7 +59,7 @@ const Modal2Container: FC<EnhancedMyProfileProps> = ({
   }, []);
 
   return (
-    <Modal visible={true}>
+    <Modal visible={false}>
       <CommentWindow2
         title="アクティビティを投稿"
         registerButtonHandle={test => {
