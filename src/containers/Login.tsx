@@ -40,6 +40,7 @@ const LoginContainer: FC<EnhancedLoginProps> = ({
 }) => {
   useEffect(() => {
     loginPageRead();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
