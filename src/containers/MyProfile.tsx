@@ -5,9 +5,7 @@ import { connect } from 'react-redux';
 import { User } from '../services/models';
 import { MyProfileState } from '../reducers/myProfile';
 import { getMyProfile } from '../actions/baseline';
-import Test from '../components/Organisms/Header/Test';
-import { Modal } from '../components/Organisms/Modal/Modal2';
-import { CommentWindow2 } from '../components/Molecules/Modal/CommentWindow2';
+import { MyProfile as MyProfileComponent } from '../components/Organisms/MyProfile';
 
 interface StateProps {
   user: User;
@@ -45,36 +43,15 @@ const MyProfileContainer: FC<EnhancedMyProfileProps> = ({
     getMyProfileStart();
   }, []);
 
-  return <Test user={user} isLoading={isLoading} isError={isError} />;
-};
-
-// TODO 仮置き
-const Modal2Container: FC<EnhancedMyProfileProps> = ({
-  user,
-  getMyProfileStart,
-  isLoading,
-}) => {
-  useEffect(() => {
-    getMyProfileStart();
-  }, []);
-
   return (
-    <CommentWindow2
-      title="アクティビティを投稿"
-      registerButtonHandle={test => {
-        console.log('登録');
-        console.log(test);
-      }}
-      user={user}
-      isLoading={isLoading}
-    />
+    <MyProfileComponent user={user} isLoading={isLoading} isError={isError} />
   );
 };
 
-export const Modal2ContainerWithRouter = connect(
+export const MyProfile = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Modal2Container);
+)(MyProfileContainer);
 
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(MyProfileContainer),

@@ -32,6 +32,7 @@ interface Props {
   // editId?: number;
   // type?: string;
   registerButtonHandle: (currentContent: string) => void;
+  closeButtonHandle: () => void;
 }
 
 export const CommentWindow2: React.FC<Props> = ({
@@ -40,6 +41,7 @@ export const CommentWindow2: React.FC<Props> = ({
   user,
   isLoading,
   registerButtonHandle,
+  closeButtonHandle,
 }) => {
   // コンテンツのテキストを管理するローカルステート
   const [inputText, setInputText] = useState({
@@ -78,12 +80,7 @@ export const CommentWindow2: React.FC<Props> = ({
         </div>
         {/* ×ボタン */}
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-        <div
-          className="btn closeIcon-btn"
-          onClick={() => {
-            // props.setShowModal(false)
-          }}
-        />
+        <div className="btn closeIcon-btn" onClick={closeButtonHandle} />
         <div className="modal__input-area">
           {/* アイコン */}
           {!isLoading && (

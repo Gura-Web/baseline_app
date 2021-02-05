@@ -1,1 +1,3 @@
 export const MY_ACTIVITY_WINDOW_OPEN = 'MY_ACTIVITY_WINDOW_OPEN';
+
+// export const MY_ACTIVITY_POST;

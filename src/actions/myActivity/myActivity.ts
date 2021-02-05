@@ -1,8 +1,7 @@
 import * as ActionType from './myActivityActionType';
 
-// 使われなくなる予定
-
 export const myActivity = {
+  // 使われなくなる予定
   open: () => ({
     type: ActionType.MY_ACTIVITY_WINDOW_OPEN as typeof ActionType.MY_ACTIVITY_WINDOW_OPEN,
   }),

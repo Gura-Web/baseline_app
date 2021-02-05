@@ -1,48 +1,58 @@
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import React, { FC } from 'react';
 import { myActivity } from '../actions/myActivity/myActivity';
-import React, { FC, useEffect } from 'react';
-import { Modal } from '../components/Organisms/Modal/Modal2';
-import { MyActivityState } from '../reducers/myActivity';
-import { Modal2ContainerWithRouter } from './MyProfile';
-import { PrimaryBtn } from '../components/Atoms/Btn';
+import { CommentWindow2 } from '../components/Molecules/Modal/CommentWindow2';
+import { User } from '../services/models';
+import { MyProfileState } from '../reducers/myProfile';
+import { modal } from '../actions/modal/modal';
 
 interface StateProps {
-  open: boolean;
+  user: User;
 }
 
 interface DispatchProps {
   openMyActivityWindow: () => void;
+  closeModal: () => void;
 }
 
 type EnhancedMyProfileProps = StateProps & DispatchProps;
 
-const mapStateToProps = (state: {
-  myActivity: MyActivityState;
-}): StateProps => ({
-  open: state.myActivity.visible,
+const mapStateToProps = (state: { myProfile: MyProfileState }): StateProps => ({
+  user: state.myProfile.user,
 });
 
-const mapDispathToProps = (dispatch: Dispatch) =>
+const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
       openMyActivityWindow: () => myActivity.open(),
+      closeModal: () => modal.close(),
     },
     dispatch,
   );
 
-const MyActivityContainer: FC<EnhancedMyProfileProps> = ({ open }) => {
+const MyActivityContainer: FC<EnhancedMyProfileProps> = ({
+  user,
+  closeModal,
+}) => {
   // useEffect(() => {}, []);
 
   return (
-    <Modal visible={open}>
-      {/* TODO モーダルと機能を切り離す機能 */}
-      <Modal2ContainerWithRouter></Modal2ContainerWithRouter>
-    </Modal>
+    <CommentWindow2
+      title="アクティビティを投稿"
+      isLoading={false}
+      user={user}
+      // TODO 登録の動作
+      registerButtonHandle={test => {
+        console.log('登録');
+        console.log(test);
+      }}
+      closeButtonHandle={closeModal}
+    />
   );
 };
 
 export const MyActivityWindow = connect(
   mapStateToProps,
-  mapDispathToProps,
+  mapDispatchToProps,
 )(MyActivityContainer);

@@ -2,15 +2,15 @@ import React, { useState, useEffect, FC } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { SideMenu, Header } from './Organisms/Header/index';
+import { SideMenu as Sidemenu2 } from './Organisms/Header/Test';
 import { Modal } from './Organisms/Modal';
 import { Modal as Modal2 } from '../containers/Modal';
 import * as Page from './Pages';
 import '../assets/styles/App.scss';
 import { mypage } from '../assets/script';
-import MyProfile, { Modal2ContainerWithRouter } from '../containers/MyProfile';
+import MyProfile from '../containers/MyProfile';
 import Login from '../containers/Login';
 import { MyActivityWindow } from '../containers/MyActivity';
-import { useDispatch } from 'react-redux';
 
 interface StateProps {
   isModal?: boolean;
@@ -59,7 +59,7 @@ const App: FC<StateProps> = ({ isModal = false }) => {
             <Route
               path="/"
               // TODO SideBar直す
-              component={MyProfile}
+              component={Sidemenu2}
               // render={() => (
               //   <SideMenu
               //     setShowModal={setShowModal}
@@ -243,7 +243,7 @@ const App: FC<StateProps> = ({ isModal = false }) => {
             {/* モーダルのルート */}
             <Switch>
               {/*<Route/>*/}
-              <Modal2ContainerWithRouter />
+              <MyActivityWindow></MyActivityWindow>
             </Switch>
           </Modal2>
           {/* <Popup type="activityError" /> */}

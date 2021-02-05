@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { log } from 'util';
 
 interface Props {
   visible: boolean;
