@@ -1,5 +1,5 @@
 export { api as apiClient } from '../../services/api';
-export { login, logout } from '../../services/auth';
+export { logout } from '../../services/auth';
 export {
   getMyData,
   editProfile,
