@@ -36,23 +36,11 @@ const MyActivityContainer: FC<EnhancedMyProfileProps> = ({ open }) => {
 
   return (
     <Modal visible={open}>
+      {/* TODO モーダルと機能を切り離す機能 */}
       <Modal2ContainerWithRouter></Modal2ContainerWithRouter>
     </Modal>
   );
 };
-
-const ShowMyActivityButtonContainer: FC<EnhancedMyProfileProps> = ({
-  openMyActivityWindow,
-}) => {
-  return (
-    <PrimaryBtn type="button" txt="活動を追加" Func={openMyActivityWindow} />
-  );
-};
-
-export const ShowMyActivityButton = connect(
-  mapStateToProps,
-  mapDispathToProps,
-)(ShowMyActivityButtonContainer);
 
 export const MyActivityWindow = connect(
   mapStateToProps,

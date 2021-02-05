@@ -1,16 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FC } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { SideMenu, Header } from './Organisms/Header/index';
 import { Modal } from './Organisms/Modal';
+import { Modal as Modal2 } from '../containers/Modal';
 import * as Page from './Pages';
 import '../assets/styles/App.scss';
 import { mypage } from '../assets/script';
 import MyProfile, { Modal2ContainerWithRouter } from '../containers/MyProfile';
 import Login from '../containers/Login';
 import { MyActivityWindow } from '../containers/MyActivity';
+import { useDispatch } from 'react-redux';
 
-const App: React.FC = () => {
+interface StateProps {
+  isModal?: boolean;
+}
+
+const App: FC<StateProps> = ({ isModal = false }) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [isLogin, setIsLogin] = useState<boolean>(false);
@@ -64,7 +70,6 @@ const App: React.FC = () => {
               // )}
             />
           </Switch>
-
           <AnimatePresence exitBeforeEnter />
           <Switch>
             <Route path="/company-info/:id/edit/step" component={Page.Step} />
@@ -234,18 +239,23 @@ const App: React.FC = () => {
           </Switch>
           <AnimatePresence />
 
+          <Modal2>
+            {/* モーダルのルート */}
+            <Switch>
+              {/*<Route/>*/}
+              <Modal2ContainerWithRouter />
+            </Switch>
+          </Modal2>
           {/* <Popup type="activityError" /> */}
         </Router>
 
-        <MyActivityWindow />
-
-        <Modal
-          type="activity-post"
-          showModal={showModal}
-          // showModal
-          setShowModal={setShowModal}
-          getMyData={getMyData}
-        />
+        {/*<Modal*/}
+        {/*  type="activity-post"*/}
+        {/*  showModal={showModal}*/}
+        {/*  // showModal*/}
+        {/*  setShowModal={setShowModal}*/}
+        {/*  getMyData={getMyData}*/}
+        {/*/>*/}
         <footer className="footer">
           <p className="copyright">
             <small>©︎ 2020 Baseline Team</small>
