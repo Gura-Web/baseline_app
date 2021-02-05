@@ -11,6 +11,7 @@ import { mypage } from '../assets/script';
 import MyProfile from '../containers/MyProfile';
 import Login from '../containers/Login';
 import { MyActivityWindow } from '../containers/MyActivity';
+import { MyActivityPage } from '../containers/MyPage';
 
 interface StateProps {
   isModal?: boolean;
@@ -140,14 +141,15 @@ const App: FC<StateProps> = ({ isModal = false }) => {
                 />
                 <Route
                   path="/mypage"
-                  render={() => (
-                    <Page.MyPage
-                      getMyData={getMyData}
-                      myData={myData}
-                      loading={loading}
-                      setMyData={setMyData}
-                    />
-                  )}
+                  component={MyActivityPage}
+                  // render={() => (
+                  //   <Page.MyPage
+                  //     getMyData={getMyData}
+                  //     myData={myData}
+                  //     loading={loading}
+                  //     setMyData={setMyData}
+                  //   />
+                  // )}
                 />
 
                 <Route

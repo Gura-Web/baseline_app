@@ -24,11 +24,11 @@ export {
 } from './Axios/company';
 export { mypage, getUserData } from './Axios/mypage';
 export {
-  getMyActivity,
+  getOldMyActivity,
   registMyActivity,
   editMyActivity,
   deleteMyActivity,
-} from './Axios/myActivity';
+} from '../../services/myActivity';
 export { showEntry } from './Axios/categories';
 export { indexEntry, registEntry } from './Axios/entry';
 export {

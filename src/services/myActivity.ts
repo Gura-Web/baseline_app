@@ -1,11 +1,48 @@
-import { apiClient } from '../index';
-export const getMyActivity = id => {
-  return apiClient
+import axios, { AxiosRequestConfig } from 'axios';
+import { normalize, schema } from 'normalizr';
+import { api, DEFAULT_API_CONFIG } from './api';
+
+export const getMyActivityFactory = (
+  id?: number,
+  optionConfig?: AxiosRequestConfig,
+) => {
+  const config = {
+    ...DEFAULT_API_CONFIG,
+    ...optionConfig,
+  };
+
+  const instance = axios.create(config);
+
+  const getMyActivity = async () => {
+    const response = await instance.get(`/api/mypage/${id}`);
+
+    console.log('getMyActivity');
+    console.log(response);
+
+    const user = new schema.Entity('user');
+
+    // const companyInformation = new schema.Entity('company_comment', {
+    //   companyInformation: user,
+    // });
+
+    console.log(normalize(response.data, user));
+
+    if (response.status !== 200) {
+      throw new Error('Server Error');
+    }
+  };
+
+  return getMyActivity;
+};
+
+export const getOldMyActivity = (id: number) => {
+  return api
     .get(`/api/my_activity/show/1`)
     .then(response => {
       if (response.status !== 200) {
         return false;
       }
+
       return response;
     })
     .catch(error => {
@@ -19,8 +56,8 @@ export const getMyActivity = id => {
       }
     });
 };
-export const registMyActivity = content => {
-  apiClient
+export const registMyActivity = (content: any) => {
+  api
     .post(`/api/my_activity`, content)
     .then(response => {
       console.log(response);
@@ -39,9 +76,9 @@ export const registMyActivity = content => {
       }
     });
 };
-export const editMyActivity = (id, content) => {
-  apiClient
-    .post(`/api/my_activity/edit/${id}`, { content: content })
+export const editMyActivity = (id: number, content: any) => {
+  api
+    .post(`/api/my_activity/edit/${id}`, { content })
     .then(response => {
       console.log(response);
       if (response.status === 200) {
@@ -59,8 +96,8 @@ export const editMyActivity = (id, content) => {
       }
     });
 };
-export const deleteMyActivity = id => {
-  apiClient
+export const deleteMyActivity = (id: number) => {
+  api
     .post(`/api/post/delete/${id}`)
     .then(response => {
       console.log(response);
