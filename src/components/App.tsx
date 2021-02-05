@@ -143,7 +143,7 @@ const App: FC<StateProps> = ({ isModal = false }) => {
                   path="/mypage"
                   component={MyActivityPage}
                   // render={() => (
-                  //   <Page.MyPage
+                  //   <Page.OldMyPage
                   //     getMyData={getMyData}
                   //     myData={myData}
                   //     loading={loading}

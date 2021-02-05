@@ -8,6 +8,21 @@ export interface User {
   sex: number;
   email: string;
   desiredOccupations: number;
+  companyInformation?: CompanyInformation[];
+}
+
+export interface CompanyInformation {
+  id: number;
+  companyId: number;
+
+  myActivities?: MyActivity[];
+}
+
+export interface MyActivity {
+  id: number;
+  companyInformationId: number;
+  content: string;
+  postedYear: number;
 }
 
 export const userInit: User = {

@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { UserData } from "../Molecules/Bar/index";
-import { Comment } from "../Molecules/Card/index";
-import { Modal } from "../Organisms/Modal";
-import { motion } from "framer-motion";
-import { pageTransitionNormal } from "../../assets/script/pageTransition";
-import { getUserData } from "../../assets/script";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { OldUserData } from '../Molecules/Bar';
+import { Comment } from '../Molecules/Card/index';
+import { Modal } from '../Organisms/Modal';
+import { motion } from 'framer-motion';
+import { pageTransitionNormal } from '../../assets/script/pageTransition';
+import { getUserData } from '../../assets/script';
+import axios from 'axios';
 interface Props {
   match?: any;
 }
 
-const UserPage: React.FC<Props> = (props) => {
+const UserPage: React.FC<Props> = props => {
   const history = useHistory();
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showModal2, setShowModal2] = useState<boolean>(false);
@@ -23,14 +23,14 @@ const UserPage: React.FC<Props> = (props) => {
   const userId = props.match.params.id;
 
   useEffect(() => {
-    const url = "./activity.json";
-    axios.get(url).then((res) => {
+    const url = './activity.json';
+    axios.get(url).then(res => {
       const output = res.data;
       setActivity(output);
     });
 
-    const url2 = "./database/account.json";
-    axios.get(url2).then((res) => {
+    const url2 = './database/account.json';
+    axios.get(url2).then(res => {
       const output = res.data;
       setAccount(output);
     });
@@ -55,12 +55,12 @@ const UserPage: React.FC<Props> = (props) => {
       return activitiesArrray.map((data: any) => (
         <Comment
           id={data.id}
-          name={userData.first_name + " " + userData.last_name}
+          name={userData.first_name + ' ' + userData.last_name}
           year={data.activity.posted_year}
           txt={data.activity.content}
           updateTime={data.updated_at}
           isArrow={false}
-          type={"user"}
+          type={'user'}
           icon={userData.icon_image_url}
         />
       ));
@@ -95,7 +95,7 @@ const UserPage: React.FC<Props> = (props) => {
             : "マイページ"} */}
           </h2>
 
-          <UserData
+          <OldUserData
             isPage="userpage"
             userData={userData}
             userId={userData.id}

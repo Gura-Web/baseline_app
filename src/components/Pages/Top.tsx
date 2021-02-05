@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { Search } from "../Atoms/TextInput";
-import { ActionBtn } from "../Atoms/Btn/index";
-import { Modal } from "../Organisms/Modal";
-import { motion } from "framer-motion";
-import { Company, Activity } from "../Molecules/Card/index";
-import { News } from "../Molecules/Bar/index";
-import { pageTransitionNormal } from "../../assets/script/pageTransition";
-import { getHomeData } from "../../assets/script/index";
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Search } from '../Atoms/TextInput';
+import { ActionBtn } from '../Atoms/Btn/index';
+import { Modal } from '../Organisms/Modal';
+import { motion } from 'framer-motion';
+import { Company, Activity } from '../Molecules/Card/index';
+import { News } from '../Molecules/Bar';
+import { pageTransitionNormal } from '../../assets/script/pageTransition';
+import { getHomeData } from '../../assets/script/index';
 
 interface Props {
   setFreeWord: any;
@@ -16,7 +16,7 @@ interface Props {
   setIsLogin: any;
 }
 
-const Top: React.FC<Props> = (props) => {
+const Top: React.FC<Props> = props => {
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const [homeData, setHomeData] = useState<any>([]);
@@ -24,12 +24,12 @@ const Top: React.FC<Props> = (props) => {
   const [myData, setMyData] = useState<any>();
   const history = useHistory();
   const notLoginFunc = () => {
-    history.push("/login");
+    history.push('/login');
   };
 
   useEffect(() => {
-    const container = document.querySelector(".container");
-    container?.classList.remove("page-login");
+    const container = document.querySelector('.container');
+    container?.classList.remove('page-login');
     props.setIsLogin(true);
 
     getHomeData(notLoginFunc).then((getData: any) => {
@@ -65,7 +65,7 @@ const Top: React.FC<Props> = (props) => {
   };
   const checkTextLength = (el: string, MAX_LENGTH: number) => {
     if (el && el.length > MAX_LENGTH) {
-      return el.substr(0, MAX_LENGTH) + "...";
+      return el.substr(0, MAX_LENGTH) + '...';
     }
     return el;
   };
@@ -83,11 +83,11 @@ const Top: React.FC<Props> = (props) => {
           <h2 className="heading1">新着の企業情報</h2>
           <div className="action-sheet">
             <Search
-              width={"316px"}
+              width={'316px'}
               isIcon={true}
-              placeholder={"企業名で検索"}
+              placeholder={'企業名で検索'}
               searchFunc={searchFunc}
-              types={"top_company_search"}
+              types={'top_company_search'}
             />
             <ActionBtn
               type="button"
@@ -101,7 +101,7 @@ const Top: React.FC<Props> = (props) => {
             {homeData.companies.map((data: any) => (
               <Company
                 companyId={data.id}
-                class={"item"}
+                class={'item'}
                 name={data.company_name}
                 business={data.business_description}
                 pref={data.prefectures}
@@ -120,7 +120,7 @@ const Top: React.FC<Props> = (props) => {
                   {homeData.other_activities.map((data: any) => (
                     <Activity
                       id={data.user.id}
-                      name={data.user.first_name + " " + data.user.last_name}
+                      name={data.user.first_name + ' ' + data.user.last_name}
                       textLengthCheckFunc={checkTextLength}
                       content={data.my_activities[0].content}
                       updated_at={data.updated_at}
@@ -138,7 +138,7 @@ const Top: React.FC<Props> = (props) => {
               {homeData.my_activities.map((data: any) => (
                 <Activity
                   id={data.user.id}
-                  name={data.user.first_name + " " + data.user.last_name}
+                  name={data.user.first_name + ' ' + data.user.last_name}
                   textLengthCheckFunc={checkTextLength}
                   content={
                     data.my_activities[0] && data.my_activities[0].content

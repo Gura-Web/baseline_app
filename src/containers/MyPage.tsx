@@ -8,6 +8,7 @@ import {
   GetMyActivityParams,
   myActivity,
 } from '../actions/myActivity/myActivity';
+import { MyPage } from '../components/Pages/MyPage';
 
 interface StateProps {
   user: User;
@@ -38,11 +39,10 @@ const MyActivityContainer: FC<EnhancedMyProfileProps> = ({
   user = userInit,
 }) => {
   useEffect(() => {
-    getMyActivity({ id: 2 });
+    getMyActivity({ id: user.id });
   }, []);
-  console.log(user);
 
-  return <p>dsfikjasklfjasl;k</p>;
+  return <MyPage user={user} />;
 };
 
 export const MyActivityPage = connect(

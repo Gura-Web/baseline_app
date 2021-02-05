@@ -21,7 +21,7 @@ export const getMyActivityFactory = (
       throw new Error('Server Error');
     }
 
-    const user: User = camelcaseKeys(response.data);
+    const user: User = camelcaseKeys(response.data, { deep: true });
 
     return user;
   };

@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { useHistory, Link } from "react-router-dom";
-import { Contents } from "../../Organisms/CompanyDetail";
-import { UnofficialOffer } from "../../Molecules/Bar/index";
-import { motion } from "framer-motion";
-import { pageTransitionNormal } from "../../../assets/script/pageTransition";
-import { getUserData } from "../../../assets/script";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import { useHistory, Link } from 'react-router-dom';
+import { Contents } from '../../Organisms/CompanyDetail';
+import { UnofficialOffer } from '../../Molecules/Bar';
+import { motion } from 'framer-motion';
+import { pageTransitionNormal } from '../../../assets/script/pageTransition';
+import { getUserData } from '../../../assets/script';
+import axios from 'axios';
 
 interface Props {
   match?: any;
 }
 
-const DetailContents: React.FC<Props> = (props) => {
+const DetailContents: React.FC<Props> = props => {
   const thisPage = props.match.params.category;
   const params = props.match.params;
   const history = useHistory();
