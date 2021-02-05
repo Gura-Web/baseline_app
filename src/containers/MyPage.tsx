@@ -2,13 +2,12 @@ import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { bindActionCreators, Dispatch } from 'redux';
-import { User } from '../services/models';
+import { User, userInit } from '../services/models';
 import { MyActivityState } from '../reducers/myActivity';
 import {
   GetMyActivityParams,
   myActivity,
 } from '../actions/myActivity/myActivity';
-import { modal } from '../actions/modal/modal';
 
 interface StateProps {
   user: User;
@@ -34,10 +33,14 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
     dispatch,
   );
 
-const MyActivityContainer: FC<EnhancedMyProfileProps> = ({ getMyActivity }) => {
+const MyActivityContainer: FC<EnhancedMyProfileProps> = ({
+  getMyActivity,
+  user = userInit,
+}) => {
   useEffect(() => {
     getMyActivity({ id: 2 });
   }, []);
+  console.log(user);
 
   return <p>dsfikjasklfjasl;k</p>;
 };

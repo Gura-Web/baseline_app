@@ -20,9 +20,9 @@ export const myActivity = {
     type: ActionType.GET_MY_ACTIVITY_START as typeof ActionType.GET_MY_ACTIVITY_START,
     payload: { params },
   }),
-  succeed: (params: GetMyActivityParams, result: GetMyActivityResult) => ({
+  succeed: (result: GetMyActivityResult) => ({
     type: ActionType.GET_MY_ACTIVITY_SUCCEED as typeof ActionType.GET_MY_ACTIVITY_SUCCEED,
-    payload: { params, result },
+    payload: { result },
   }),
   failed: (params: GetMyActivityParams, error: AxiosError) => ({
     type: ActionType.GET_MY_ACTIVITY_FAILED as typeof ActionType.GET_MY_ACTIVITY_FAILED,

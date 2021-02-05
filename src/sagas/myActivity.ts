@@ -2,7 +2,6 @@ import * as Action from '../actions/myActivity/myActivityActionType';
 import { myActivity } from '../actions/myActivity/myActivity';
 import { fork, takeLatest, put, call } from 'redux-saga/effects';
 import { getMyActivityFactory } from '../services/myActivity';
-import { getMyProfile } from '../actions/baseline';
 
 function* openMyActivityWindow(action: ReturnType<typeof myActivity.open>) {}
 
@@ -11,9 +10,9 @@ export function* runGetMyActivity(action: ReturnType<typeof myActivity.start>) {
 
   try {
     const api = getMyActivityFactory(params.id);
-    const response = yield call(api);
+    const user = yield call(api);
 
-    yield put(getMyProfile.succeed(response.user));
+    yield put(myActivity.succeed({ user }));
   } catch (error) {
     yield put(myActivity.failed(params, error));
   }

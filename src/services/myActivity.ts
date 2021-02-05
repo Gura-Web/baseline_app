@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { normalize, schema } from 'normalizr';
+import camelcaseKeys from 'camelcase-keys';
 import { api, DEFAULT_API_CONFIG } from './api';
+import { User } from './models';
 
 export const getMyActivityFactory = (
   id?: number,
@@ -16,20 +17,13 @@ export const getMyActivityFactory = (
   const getMyActivity = async () => {
     const response = await instance.get(`/api/mypage/${id}`);
 
-    console.log('getMyActivity');
-    console.log(response);
-
-    const user = new schema.Entity('user');
-
-    // const companyInformation = new schema.Entity('company_comment', {
-    //   companyInformation: user,
-    // });
-
-    console.log(normalize(response.data, user));
-
     if (response.status !== 200) {
       throw new Error('Server Error');
     }
+
+    const user: User = camelcaseKeys(response.data);
+
+    return user;
   };
 
   return getMyActivity;
