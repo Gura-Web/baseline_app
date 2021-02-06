@@ -93,7 +93,7 @@ const About: React.FC<Props> = props => {
                     <OldComment
                       id={data.id}
                       name={data.name}
-                      year={data.annual + '年次'}
+                      year={data.annual}
                       txt={comment.comment_content}
                       updateTime={data.updated_at}
                       isArrow={true}

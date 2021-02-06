@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { pageTransitionNormal } from '../../assets/script';
 import { UserData } from '../Molecules/Bar';
 import { MyActivity, User } from '../../services/models';
-import { GearIcon } from '../../assets/images';
-import { Link } from 'react-router-dom';
-import myActivity from '../../sagas/myActivity';
+import { GearIcon, PencilIcon, TrashIcon } from '../../assets/images';
+import { Comment } from '../Molecules/Card';
 
 interface StateProps {
   user: User;
@@ -38,8 +38,37 @@ export const MyPage: FC<StateProps> = ({ user }) => {
         </Link>
         <div className="activity-list">
           {/* TODO 記事のリスト */}
-          {/*{myActivityList &&*/}
-          {/*  myActivityList.map(myActivity => <OldComment id={}></OldComment>)}*/}
+          {myActivityList &&
+            myActivityList.map(myActivity => (
+              <Comment
+                author={user}
+                contents={'aaaa http://localhost:8080'}
+                updateTime={'2020/01/01'}
+                isArrow={true}
+                menu={
+                  <>
+                    <li
+                      className="activity-item-menu__item"
+                      // onClick={() => clickFunc(id, true, txt)}
+                    >
+                      <img src={PencilIcon} alt="" />
+                      <span>編集</span>
+                    </li>
+                    {/* 削除ボタン */}
+                    <li
+                      className="activity-item-menu__item cAttention"
+                      onClick={() => {
+                        console.log('aaa');
+                      }}
+                    >
+                      <img src={TrashIcon} alt="" />
+                      <span>削除</span>
+                    </li>
+                  </>
+                }
+                postedYear={'4'}
+              />
+            ))}
         </div>
       </motion.section>
     </>

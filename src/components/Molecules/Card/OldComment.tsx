@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { motion } from 'framer-motion';
 import { pageTransitionNormal } from '../../../assets/script/pageTransition';
 import {
   ArrowIcon,
@@ -6,7 +7,7 @@ import {
   TrashIcon,
   rikuma,
 } from '../../../assets/images/index';
-import { motion } from 'framer-motion';
+
 interface Props {
   name: string;
   year: string;
@@ -30,7 +31,7 @@ const OldComment: React.FC<Props> = props => {
     if (searchUrlTxt) {
       activityTxtEl.current!.innerHTML = txtEl.replace(
         reg,
-        `<a href="${searchUrlTxt![0]}">${searchUrlTxt![0]}</a>`,
+        `<a href="${searchUrlTxt[0]}">${searchUrlTxt[0]}</a>`,
       );
     }
   };
@@ -45,13 +46,14 @@ const OldComment: React.FC<Props> = props => {
       dateTime,
       timeText,
     };
+
     return texts;
   };
   useEffect((): void => {
     setUrlText();
   }, []);
 
-  let [toggleMenu, setToggleMenu] = useState(false);
+  const [toggleMenu, setToggleMenu] = useState(false);
   const arrowClickHandler = (): void => {
     setToggleMenu(!toggleMenu);
   };
@@ -59,7 +61,7 @@ const OldComment: React.FC<Props> = props => {
   const isArrowRender = () => {
     if (props.isArrow) {
       return (
-        <div className={`activity-item__arrow`} onClick={arrowClickHandler}>
+        <div className="activity-item__arrow" onClick={arrowClickHandler}>
           <img src={ArrowIcon} alt="" />
         </div>
       );
