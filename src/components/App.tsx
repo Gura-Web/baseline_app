@@ -18,7 +18,7 @@ interface StateProps {
 }
 
 const App: FC<StateProps> = ({ isModal = false }) => {
-  const [showModal, setShowModal] = useState<boolean>(false);
+  // const [showModal, setShowModal] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [isLogin, setIsLogin] = useState<boolean>(false);
 
