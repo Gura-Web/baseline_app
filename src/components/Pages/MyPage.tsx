@@ -47,7 +47,11 @@ export const MyPage: FC<StateProps> = ({ user, isLoading = true }) => {
             {/* TODO 記事のリスト */}
             {companyInformationList &&
               companyInformationList.map(myActivity => (
-                <MyActivity author={user} companyInformation={myActivity} />
+                <MyActivity
+                  author={user}
+                  companyInformation={myActivity}
+                  key={myActivity.id}
+                />
               ))}
           </div>
         </motion.section>
