@@ -18,6 +18,7 @@ export const Modal: FC<Props> = ({
 }) => {
   return (
     <AnimatePresence exitBeforeEnter>
+      {/*<>*/}
       {visible && (
         <motion.div
           className="modal-background"
@@ -31,6 +32,7 @@ export const Modal: FC<Props> = ({
           {children}
         </motion.div>
       )}
+      {/*</>*/}
     </AnimatePresence>
   );
 };

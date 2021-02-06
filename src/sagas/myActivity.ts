@@ -13,6 +13,13 @@ export function* openMyActivityWindow(
   yield put(modal.open());
 }
 
+export function* closeMyActivityWindow(
+  action: ReturnType<typeof myActivity.close>,
+) {
+  // TODO アニメーション問題
+  yield put(modal.close());
+}
+
 export function* runGetMyActivity(action: ReturnType<typeof myActivity.start>) {
   const { params } = action.payload;
 
@@ -34,4 +41,12 @@ export function* watchOpenMyActivityWindow() {
   yield takeLatest(Action.MY_ACTIVITY_POST_WINDOW_OPEN, openMyActivityWindow);
 }
 
-export default [fork(watchOpenMyActivityWindow), fork(watchRunGetMyActivity)];
+export function* watchCloseMyActivityWindow() {
+  yield takeLatest(Action.MY_ACTIVITY_POST_WINDOW_CLOSE, closeMyActivityWindow);
+}
+
+export default [
+  fork(watchOpenMyActivityWindow),
+  fork(watchRunGetMyActivity),
+  fork(watchCloseMyActivityWindow),
+];

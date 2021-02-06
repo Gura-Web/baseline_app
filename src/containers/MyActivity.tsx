@@ -10,6 +10,7 @@ import { MyActivityState } from '../reducers/myActivity';
 import { PrimaryBtn } from '../components/Atoms/Btn';
 import { draft } from '../actions/draft/draft';
 import { DraftState } from '../reducers/draft';
+import { AnimatePresence } from 'framer-motion';
 
 interface StateProps {
   user: User;
@@ -56,23 +57,26 @@ const MyActivityContainer: FC<EnhancedMyProfileProps> = ({
     getDraft();
   }, []);
 
-  console.log(isOpen);
-
-  if (!isOpen) return <></>;
-
   return (
-    <CommentWindow2
-      title="アクティビティを投稿"
-      isLoading={false}
-      user={user}
-      // TODO 登録の動作
-      registerButtonHandle={test => {
-        console.log('登録');
-        console.log(test);
-      }}
-      closeButtonHandle={closeMyActivityWindow}
-      drafts={drafts}
-    />
+    <>
+      <AnimatePresence exitBeforeEnter>
+        {isOpen && (
+          <CommentWindow2
+            title="アクティビティを投稿"
+            isLoading={false}
+            user={user}
+            // TODO 登録の動作
+            registerButtonHandle={test => {
+              console.log('登録');
+              console.log(test);
+            }}
+            // TODO 直す
+            closeButtonHandle={closeMyActivityWindow}
+            drafts={drafts}
+          />
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
