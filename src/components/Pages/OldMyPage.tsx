@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { GearIcon } from '../../assets/images/index';
 import { Link, useLocation } from 'react-router-dom';
 import { OldUserData } from '../Molecules/Bar';
-import { ActivityMeter } from '../Organisms/Activity/index';
+import { ActivityMeter } from '../Organisms/Activity';
 import { OldComment } from '../Molecules/Card';
 import { Modal } from '../Organisms/Modal';
 import { motion } from 'framer-motion';
