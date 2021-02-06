@@ -5,7 +5,7 @@ import { Search } from '../Atoms/TextInput';
 import { ActionBtn } from '../Atoms/Btn/index';
 import { Modal } from '../Organisms/Modal';
 import { motion } from 'framer-motion';
-import { Company, Activity } from '../Molecules/Card/index';
+import { Company, Activity } from '../Molecules/Card';
 import { News } from '../Molecules/Bar';
 import { pageTransitionNormal } from '../../assets/script/pageTransition';
 import { getHomeData } from '../../assets/script/index';

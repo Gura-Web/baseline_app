@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { PostStudent } from "../../../Molecules/Card/index";
-import { Pagenation } from "../../Header/index";
-import { showEntry } from "../../../../assets/script/index";
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { PostStudent } from '../../../Molecules/Card';
+import { Pagenation } from '../../Header/index';
+import { showEntry } from '../../../../assets/script/index';
 interface Props {
   thisPage: string;
   companyId: any;
   companyData: any;
 }
 
-const Entry: React.FC<Props> = (props) => {
+const Entry: React.FC<Props> = props => {
   const pageTransition = {
     in: {
       opacity: 1,
@@ -35,7 +35,7 @@ const Entry: React.FC<Props> = (props) => {
           entryCard = {
             id: entry.company_information_id,
             user_id: data.user.id,
-            userName: data.user.last_name + " " + data.user.first_name,
+            userName: data.user.last_name + ' ' + data.user.first_name,
             iconImagePath: data.user.icon_image_path,
             job: data.occupational_category.name,
             icon: data.user.icon_image_path,
@@ -87,7 +87,7 @@ const Entry: React.FC<Props> = (props) => {
         if (entries) {
           if (entries.length !== 0) {
             return (
-              <Pagenation searchFunc={() => console.log("a")} lastPage={1} />
+              <Pagenation searchFunc={() => console.log('a')} lastPage={1} />
             );
           }
         }

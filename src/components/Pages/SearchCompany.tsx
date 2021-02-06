@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
-import { CompanySearch } from "../Organisms/Window";
-import { Sort } from "../Atoms/Input";
-import { Pagenation } from "../Organisms/Header/index";
-import { ActionBtn } from "../Atoms/Btn/index";
-import { motion } from "framer-motion";
-import { Company } from "../Molecules/Card/index";
-import { pageTransitionNormal } from "../../assets/script/pageTransition";
-import axios from "axios";
-import { searchCompany } from "../../assets/script/index";
+import { CompanySearch } from '../Organisms/Window';
+import { Sort } from '../Atoms/Input';
+import { Pagenation } from '../Organisms/Header/index';
+import { ActionBtn } from '../Atoms/Btn/index';
+import { motion } from 'framer-motion';
+import { Company } from '../Molecules/Card';
+import { pageTransitionNormal } from '../../assets/script/pageTransition';
+import axios from 'axios';
+import { searchCompany } from '../../assets/script/index';
 
 interface Props {
   homeFreeWord: string | undefined;
@@ -56,8 +56,8 @@ class SearchCompany extends React.Component<Props, any> {
   };
 
   componentDidMount() {
-    const url = "./database/companies.json";
-    axios.get(url).then((res) => {
+    const url = './database/companies.json';
+    axios.get(url).then(res => {
       this.setState({
         data: res.data,
         companiesLength: res.data.length,
@@ -79,7 +79,7 @@ class SearchCompany extends React.Component<Props, any> {
 
         <div className="app-main__container">
           <CompanySearch
-            className={"left-col"}
+            className={'left-col'}
             searchFunc={this.searchCompanyWithParam}
             homeFreeWord={this.state.homeFreeWord}
           />
@@ -97,7 +97,7 @@ class SearchCompany extends React.Component<Props, any> {
               {this.state.companies.map((data: any) => (
                 <Company
                   companyId={data.id}
-                  class={"item"}
+                  class={'item'}
                   name={data.company_name}
                   business={data.business_description}
                   pref={data.prefectures}
@@ -114,7 +114,7 @@ class SearchCompany extends React.Component<Props, any> {
             lastPage={this.state.data.last_page}
           />
         ) : (
-          ""
+          ''
         )}
       </motion.section>
     );

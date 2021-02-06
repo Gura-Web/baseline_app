@@ -1,19 +1,19 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { InterviewPage } from "../../Organisms/Window";
-import { CompanyInfo } from "../../Molecules/Card/index";
-import { motion } from "framer-motion";
+import React, { useState, useRef, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { InterviewPage } from '../../Organisms/Window';
+import { CompanyInfo } from '../../Molecules/Card';
+import { motion } from 'framer-motion';
 import {
   indexJob,
   indexInternship,
   detailCompany,
   showCompany,
-} from "../../../assets/script";
+} from '../../../assets/script';
 
 interface Props {
   match?: any;
 }
-const Interview: React.FC<Props> = (props) => {
+const Interview: React.FC<Props> = props => {
   let [loading, setLoading] = useState<boolean>(false);
   const companyId = props.match.params.id;
   const history = useHistory();
@@ -72,26 +72,26 @@ const Interview: React.FC<Props> = (props) => {
 
   const createTabMenu = () => {
     if (pagesLength < 6) {
-      const nowCurrentEl = document.querySelector(".insert-tab__item.current")!;
-      nowCurrentEl.classList.remove("current");
+      const nowCurrentEl = document.querySelector('.insert-tab__item.current')!;
+      nowCurrentEl.classList.remove('current');
 
       // タブを増やす処理
-      const li = document.createElement("li");
-      const span = document.createElement("span");
-      li.classList.add("insert-tab__item");
+      const li = document.createElement('li');
+      const span = document.createElement('span');
+      li.classList.add('insert-tab__item');
       li.id = `insertTab-${pagesLength}`;
       li.dataset.id = pagesLength.toString();
-      li.classList.add("current");
+      li.classList.add('current');
       li.appendChild(span);
       span.textContent = `${pagesLength + 1}次面接`;
       insertTab.current?.append(li);
 
       // ⭐️ページ切り替えのスタイルをつける
       const AllInputWindow = document.querySelectorAll(
-        ".company-info-edit__left-col"
+        '.company-info-edit__left-col',
       );
-      AllInputWindow.forEach((el) => {
-        el.classList.add("none");
+      AllInputWindow.forEach(el => {
+        el.classList.add('none');
       });
 
       // 新しいページを作成
@@ -112,12 +112,12 @@ const Interview: React.FC<Props> = (props) => {
       ]);
 
       // タブをクリックでスタイルを変えるイベントを設定
-      const tabsEl = document.querySelectorAll(".insert-tab__item")!;
+      const tabsEl = document.querySelectorAll('.insert-tab__item')!;
 
       tabsEl.forEach((tab: any) => {
-        tab.addEventListener("click", () => {
+        tab.addEventListener('click', () => {
           tabsEl.forEach((el: any) => {
-            el.classList.remove("current");
+            el.classList.remove('current');
           });
           // やること
           // ① 一旦作成したinterview-数字　の要素を全てnoneにする
@@ -125,27 +125,27 @@ const Interview: React.FC<Props> = (props) => {
 
           // ⭐️作ったばかりのタブ要素にもページ切り替えのスタイルをつける
           const AllInputWindow = document.querySelectorAll(
-            ".company-info-edit__left-col"
+            '.company-info-edit__left-col',
           );
-          AllInputWindow.forEach((el) => {
-            el.classList.add("none");
+          AllInputWindow.forEach(el => {
+            el.classList.add('none');
           });
 
-          tab.classList.add("current");
+          tab.classList.add('current');
           document
             .getElementById(`interview-${tab.dataset.id}`)
-            ?.classList.remove("none");
+            ?.classList.remove('none');
         });
       });
 
       if (isFirstClick) {
-        document.getElementById("interview-0")!.classList.add("none");
+        document.getElementById('interview-0')!.classList.add('none');
         isFirstClick = false;
       } else {
         const interviewEl = document.getElementById(
-          `interview-${pagesLength - 1}`
+          `interview-${pagesLength - 1}`,
         );
-        interviewEl!.classList.add("none");
+        interviewEl!.classList.add('none');
       }
     }
   };
@@ -191,7 +191,7 @@ const Interview: React.FC<Props> = (props) => {
                 jobs={jobs}
                 internship={internship}
               />
-              {inputPages.map((data) => {
+              {inputPages.map(data => {
                 return data.page;
               })}
               <CompanyInfo data={company} />

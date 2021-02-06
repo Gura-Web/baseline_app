@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Comment } from "../../../Molecules/Card/index";
-import { Modal } from "../../Modal";
-import { Pagenation } from "../../Header/index";
-import { WriteIcon } from "../../../../assets/images/index";
-import { motion } from "framer-motion";
-import { pageTransitionNormal } from "../../../../assets/script/pageTransition";
+import React, { useState, useEffect } from 'react';
+import { OldComment } from '../../../Molecules/Card';
+import { Modal } from '../../Modal';
+import { Pagenation } from '../../Header/index';
+import { WriteIcon } from '../../../../assets/images/index';
+import { motion } from 'framer-motion';
+import { pageTransitionNormal } from '../../../../assets/script/pageTransition';
 interface Props {
   thisPage: string;
   companyId: any;
@@ -12,7 +12,7 @@ interface Props {
   getCompanyData: any;
 }
 
-const About: React.FC<Props> = (props) => {
+const About: React.FC<Props> = props => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showModal2, setShowModal2] = useState<boolean>(false);
   const [showModal3, setShowModal3] = useState<boolean>(false);
@@ -30,7 +30,7 @@ const About: React.FC<Props> = (props) => {
     companyData.company_information.forEach((data: any) => {
       const user = {
         id: data.id,
-        name: data.user.first_name + " " + data.user.last_name,
+        name: data.user.first_name + ' ' + data.user.last_name,
         annual: data.user.annual,
         comments: [] as any,
         updated_at: data.updated_at,
@@ -72,7 +72,7 @@ const About: React.FC<Props> = (props) => {
         <section className="companyDetail-contents__section">
           <h2 className="heading6">従業員数</h2>
           {console.log(props.companyData)}
-          <p>{props.companyData.number_of_employees + "人以上"}</p>
+          <p>{props.companyData.number_of_employees + '人以上'}</p>
         </section>
         <section className="companyDetail-contents__section">
           <div>
@@ -90,10 +90,10 @@ const About: React.FC<Props> = (props) => {
               return companyComments.map((data: any) =>
                 data.comments.map((comment: any) => {
                   return (
-                    <Comment
+                    <OldComment
                       id={data.id}
                       name={data.name}
-                      year={data.annual + "年次"}
+                      year={data.annual + '年次'}
                       txt={comment.comment_content}
                       updateTime={data.updated_at}
                       isArrow={true}
@@ -101,11 +101,11 @@ const About: React.FC<Props> = (props) => {
                       clickFunc2={commentDelete}
                     />
                   );
-                })
+                }),
               );
             }
           })()}
-          <Pagenation searchFunc={() => console.log("a")} lastPage={1} />
+          <Pagenation searchFunc={() => console.log('a')} lastPage={1} />
         </section>
       </motion.div>
       <Modal

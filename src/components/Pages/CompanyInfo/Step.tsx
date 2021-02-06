@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
-import { SelectPrimary } from "../../Atoms/Input";
-import { InsertAddBtn } from "../../Atoms/Btn";
-import { CompanyInfo } from "../../Molecules/Card/index";
-import { StepSheet } from "../../Organisms/Window";
+import { SelectPrimary } from '../../Atoms/Input';
+import { InsertAddBtn } from '../../Atoms/Btn';
+import { CompanyInfo } from '../../Molecules/Card';
+import { StepSheet } from '../../Organisms/Window';
 import {
   indexJob,
   detailCompany,
   indexInternship,
-} from "../../../assets/script";
+} from '../../../assets/script';
 interface Props {
   match?: any;
 }
 
-const Step: React.FC<Props> = (props) => {
+const Step: React.FC<Props> = props => {
   const companyId = props.match.params.id;
   let [inputWindow, setInputWindow] = useState([{ id: 1 }]);
   let inputLength = inputWindow.length;
@@ -80,7 +80,7 @@ const Step: React.FC<Props> = (props) => {
               </article>
 
               {/* <InputWindowListStep obj={inputWindow} /> */}
-              {inputWindow.map((box) => {
+              {inputWindow.map(box => {
                 return <StepSheet id={box.id} />;
               })}
 

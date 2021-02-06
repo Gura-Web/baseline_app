@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { OldUserData } from '../Molecules/Bar';
-import { Comment } from '../Molecules/Card/index';
+import { OldComment } from '../Molecules/Card';
 import { Modal } from '../Organisms/Modal';
 import { motion } from 'framer-motion';
 import { pageTransitionNormal } from '../../assets/script/pageTransition';
@@ -53,7 +53,7 @@ const UserPage: React.FC<Props> = props => {
           });
       });
       return activitiesArrray.map((data: any) => (
-        <Comment
+        <OldComment
           id={data.id}
           name={userData.first_name + ' ' + userData.last_name}
           year={data.activity.posted_year}
@@ -105,7 +105,7 @@ const UserPage: React.FC<Props> = props => {
             {(() => {
               if (activity) {
                 return activity.map((data: any) => (
-                  <Comment
+                  <OldComment
                     name={data.name}
                     year={data.year}
                     txt={data.txt}

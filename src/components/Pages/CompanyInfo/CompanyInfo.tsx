@@ -1,27 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useHistory } from "react-router-dom";
-import { AboutBar } from "../../Organisms/CompanyDetail";
-import { PostStudent } from "../../Molecules/Card/index";
-import { Primary } from "../../Atoms/TextInput/index";
-import { CheckboxWithText } from "../../Molecules/Input";
-import { ActionBtn, RoundedBtn } from "../../Atoms/Btn";
-import { Modal } from "../../Organisms/Modal";
-import { motion } from "framer-motion";
-import { pageTransitionNormal } from "../../../assets/script/pageTransition";
-import { rikuma } from "../../../assets/images";
+import React, { useEffect, useState } from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
+import { AboutBar } from '../../Organisms/CompanyDetail';
+import { PostStudent } from '../../Molecules/Card';
+import { Primary } from '../../Atoms/TextInput/index';
+import { CheckboxWithText } from '../../Molecules/Input';
+import { ActionBtn, RoundedBtn } from '../../Atoms/Btn';
+import { Modal } from '../../Organisms/Modal';
+import { motion } from 'framer-motion';
+import { pageTransitionNormal } from '../../../assets/script/pageTransition';
+import { rikuma } from '../../../assets/images';
 import {
   detailCompany,
   companyDetailUser,
   getMyData,
   employmentstatusEdit,
-  showEmploymentStatus
-} from "../../../assets/script";
+  showEmploymentStatus,
+} from '../../../assets/script';
 interface Props {
   myData: any;
   match?: any;
 }
 
-const CompanyInfo: React.FC<Props> = (props) => {
+const CompanyInfo: React.FC<Props> = props => {
   const history = useHistory();
   const companyId = Number(props.match.params.id);
   const [companyData, setCompanyData] = useState<any>();
@@ -33,15 +33,14 @@ const CompanyInfo: React.FC<Props> = (props) => {
   const [isOfferd, setIsOfferd] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log(companyId)
-    showEmploymentStatus(companyId).then((getData:any) => {
-      if(getData) {
-        if(getData.data.decision_offer) {
+    console.log(companyId);
+    showEmploymentStatus(companyId).then((getData: any) => {
+      if (getData) {
+        if (getData.data.decision_offer) {
           setIsOfferd(true);
         }
       }
-      
-    })
+    });
     detailCompany(companyId).then((getData: any) => {
       if (getData.data) {
         setCompanyData({
@@ -69,14 +68,14 @@ const CompanyInfo: React.FC<Props> = (props) => {
           return mydata.data;
         }
       })
-      .then((userData) => {
+      .then(userData => {
         companyDetailUser(companyId, userData.id).then((getData: any) => {
           console.log(getData.data);
           setOccupationalCategoryId(getData.data.user.desired_occupations);
           const myCompanyData = getData.data.user.company_information.filter(
             (item: any) => {
               return item.company_id == companyId;
-            }
+            },
           );
           setMyCompanyInfo(myCompanyData);
           setLoading(true);
@@ -89,30 +88,32 @@ const CompanyInfo: React.FC<Props> = (props) => {
     return text.substr(2, 2);
   };
 
-  const onEmploymentsEdit = ((content:any)=> {
+  const onEmploymentsEdit = (content: any) => {
     console.log(occupationalCategoryId);
-    const decisionOffer = document.querySelector('input[name="decision_offer"]')! as HTMLInputElement;
-    
+    const decisionOffer = document.querySelector(
+      'input[name="decision_offer"]',
+    )! as HTMLInputElement;
+
     let decisionOfferNum = 0;
-    if(decisionOffer.checked) decisionOfferNum = 1;
+    if (decisionOffer.checked) decisionOfferNum = 1;
     const sendObj = {
       company_id: companyData.id,
       decision_offer: decisionOfferNum,
-      occupational_category_id: Number(occupationalCategoryId)
-    }
-    console.log(sendObj)
+      occupational_category_id: Number(occupationalCategoryId),
+    };
+    console.log(sendObj);
     employmentstatusEdit(sendObj).then(boolean => {
       history.push(`/company-detail/${companyData.id}/about`);
     });
-  });
+  };
 
   const isType = (item: any) => {
     if (item.interviews.length != 0) {
-      return "interview";
+      return 'interview';
     } else if (item.selections.length != 0) {
-      return "step";
+      return 'step';
     } else {
-      return "entry";
+      return 'entry';
     }
   };
   const renderDOM = () => {
@@ -145,7 +146,7 @@ const CompanyInfo: React.FC<Props> = (props) => {
                   name="graduation_year"
                   type="number"
                   ttl="卒業年次"
-                  placeholder={""}
+                  placeholder={''}
                   defaultValue={myData.profile.year_of_graduation}
                   unit="卒"
                   isRequired={false}
@@ -159,7 +160,11 @@ const CompanyInfo: React.FC<Props> = (props) => {
                     txt="あなたはこの企業に入社予定ですか？"
                     isChecked={isOfferd}
                   />
-                  <RoundedBtn Func={onEmploymentsEdit} txt="保存" isType="button" />
+                  <RoundedBtn
+                    Func={onEmploymentsEdit}
+                    txt="保存"
+                    isType="button"
+                  />
                 </div>
               </form>
             </div>
@@ -186,7 +191,7 @@ const CompanyInfo: React.FC<Props> = (props) => {
                         category_id={1}
                         company_id={companyId}
                         student_id={myData.profile.id}
-                        ttl={item.internship ? item.internship.name : "未入力"}
+                        ttl={item.internship ? item.internship.name : '未入力'}
                         isPass={false}
                         job={myData.profile.desired_occupations}
                         icon={
@@ -196,7 +201,7 @@ const CompanyInfo: React.FC<Props> = (props) => {
                         }
                         userName={
                           myData.profile.first_name +
-                          " " +
+                          ' ' +
                           myData.profile.last_name
                         }
                       />

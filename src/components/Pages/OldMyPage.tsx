@@ -3,7 +3,7 @@ import { GearIcon } from '../../assets/images/index';
 import { Link, useLocation } from 'react-router-dom';
 import { OldUserData } from '../Molecules/Bar';
 import { ActivityMeter } from '../Organisms/Activity/index';
-import { Comment } from '../Molecules/Card/index';
+import { OldComment } from '../Molecules/Card';
 import { Modal } from '../Organisms/Modal';
 import { motion } from 'framer-motion';
 import { mypage } from '../../assets/script';
@@ -61,7 +61,7 @@ const OldMyPage: React.FC<Props> = props => {
           });
       });
       return activitiesArrray.map((data: any) => (
-        <Comment
+        <OldComment
           id={data.id}
           name={
             props.myData.data.first_name + ' ' + props.myData.data.last_name

@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { PostStudent } from "../../../Molecules/Card/index";
-import { Pagenation } from "../../Header/index";
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { PostStudent } from '../../../Molecules/Card';
+import { Pagenation } from '../../Header/index';
 interface Props {
   thisPage: string;
   companyId: any;
   companyData: any;
 }
 
-const Interview: React.FC<Props> = (props) => {
+const Interview: React.FC<Props> = props => {
   const pageTransition = {
     in: {
       opacity: 1,
@@ -23,7 +23,7 @@ const Interview: React.FC<Props> = (props) => {
     },
   };
   const [interviews, setInterviews] = useState<any>(null);
-  
+
   useEffect(() => {
     const interviewArray: any = [];
     props.companyData.company_information.forEach((data: any) => {
@@ -35,14 +35,12 @@ const Interview: React.FC<Props> = (props) => {
             interviewCard = {
               id: interview.id,
               user_id: data.user.id,
-              userName: data.user.last_name + " " + data.user.first_name,
+              userName: data.user.last_name + ' ' + data.user.first_name,
               iconImagePath: data.user.icon_image_path,
               job: data.occupational_category.name,
               icon: data.user.icon_image_path,
               internship: data.internship.name,
-              graduationYear:
-                data.user.year_of_graduation
-              ,
+              graduationYear: data.user.year_of_graduation,
             };
           }
         });
@@ -83,7 +81,7 @@ const Interview: React.FC<Props> = (props) => {
         if (interviews) {
           if (interviews.length !== 0) {
             return (
-              <Pagenation searchFunc={() => console.log("a")} lastPage={1} />
+              <Pagenation searchFunc={() => console.log('a')} lastPage={1} />
             );
           }
         }

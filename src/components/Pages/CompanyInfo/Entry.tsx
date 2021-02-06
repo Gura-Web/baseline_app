@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { SelectPrimary } from "../../Atoms/Input";
-import { InsertAddBtn } from "../../Atoms/Btn";
-import { CompanyInfo } from "../../Molecules/Card/index";
-import { motion } from "framer-motion";
-import { EntrySheet } from "../../Organisms/Window";
+import React, { useEffect, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { SelectPrimary } from '../../Atoms/Input';
+import { InsertAddBtn } from '../../Atoms/Btn';
+import { CompanyInfo } from '../../Molecules/Card';
+import { motion } from 'framer-motion';
+import { EntrySheet } from '../../Organisms/Window';
 import {
   indexJob,
   detailCompany,
   indexInternship,
-} from "../../../assets/script";
+} from '../../../assets/script';
 
 interface Props {
   match?: any;
 }
-const Entry: React.FC<Props> = (props) => {
+const Entry: React.FC<Props> = props => {
   const companyId = props.match.params.id;
   const history = useHistory();
   const pageTransition = {
@@ -106,7 +106,7 @@ const Entry: React.FC<Props> = (props) => {
               </article>
 
               {/* <InputWindowListEntry obj={inputWindow} /> */}
-              {inputWindow.map((box) => {
+              {inputWindow.map(box => {
                 return <EntrySheet id={box.id} />;
               })}
 
