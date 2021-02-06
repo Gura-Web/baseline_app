@@ -244,8 +244,7 @@ const App: FC<StateProps> = ({ isModal = false }) => {
           <Modal2>
             {/* モーダルのルート */}
             <Switch>
-              {/*<Route/>*/}
-              <MyActivityWindow></MyActivityWindow>
+              <Route path="/" component={MyActivityWindow} />
             </Switch>
           </Modal2>
           {/* <Popup type="activityError" /> */}

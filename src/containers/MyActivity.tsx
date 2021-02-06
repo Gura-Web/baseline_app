@@ -6,6 +6,7 @@ import { CommentWindow2 } from '../components/Molecules/Modal/CommentWindow2';
 import { User } from '../services/models';
 import { MyProfileState } from '../reducers/myProfile';
 import { modal } from '../actions/modal/modal';
+import { withRouter } from 'react-router-dom';
 
 interface StateProps {
   user: User;
@@ -52,7 +53,6 @@ const MyActivityContainer: FC<EnhancedMyProfileProps> = ({
   );
 };
 
-export const MyActivityWindow = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(MyActivityContainer);
+export const MyActivityWindow = withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(MyActivityContainer),
+);
