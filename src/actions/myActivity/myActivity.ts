@@ -1,6 +1,6 @@
+import { AxiosError } from 'axios';
 import * as ActionType from './myActivityActionType';
 import { User } from '../../services/models';
-import { AxiosError } from 'axios';
 
 interface GetMyActivityResult {
   user: User;
