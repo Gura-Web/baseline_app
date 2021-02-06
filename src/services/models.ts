@@ -25,6 +25,14 @@ export interface MyActivity {
   postedYear: number;
 }
 
+export interface Draft {
+  id: number;
+  content: string;
+  postedBy: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export const userInit: User = {
   id: 1,
   firstName: '＜＞',

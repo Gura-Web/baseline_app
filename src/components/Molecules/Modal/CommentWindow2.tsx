@@ -48,6 +48,8 @@ export const CommentWindow2: React.FC<Props> = ({
     count: 0,
     textValue: '',
   });
+  const [isEditMode, setIsEditMode] = useState<boolean>(false);
+
   const handleTextChange = (textValue: string) => {
     setInputText({
       count: inputText.count,
@@ -68,62 +70,73 @@ export const CommentWindow2: React.FC<Props> = ({
 
   return (
     <>
-      <motion.form
-        action="#"
-        method="POST"
-        className="modal modal--normal"
-        variants={modal}
-        onClick={event => event.stopPropagation()}
-      >
-        <div className="modal__header modal__header--normal">
-          <p className="heading4">{title}</p>
-        </div>
-        {/* ×ボタン */}
-        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-        <div className="btn closeIcon-btn" onClick={closeButtonHandle} />
-        <div className="modal__input-area">
-          {/* アイコン */}
-          {!isLoading && (
-            <img src={user.iconImageUrl ?? rikuma} alt="user_icon" />
-          )}
+      {!isEditMode ? (
+        <motion.form
+          action="#"
+          method="POST"
+          className="modal modal--normal"
+          variants={modal}
+          onClick={event => event.stopPropagation()}
+        >
+          <div className="modal__header modal__header--normal">
+            <p className="heading4">{title}</p>
+          </div>
+          {/* ×ボタン */}
+          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
+          <div className="btn closeIcon-btn" onClick={closeButtonHandle} />
+          <div className="modal__input-area">
+            {/* アイコン */}
+            {!isLoading && (
+              <img src={user.iconImageUrl ?? rikuma} alt="user_icon" />
+            )}
 
-          {/* コンテンツのテキストエリア */}
-          <textarea
-            name="content"
-            className="modal__textarea"
-            required
-            defaultValue={content ?? ''}
-            onChange={e => handleTextChange(e.target.value)}
-            onKeyUp={e => handleCountChange(e.currentTarget.value.length)}
-          />
-        </div>
-        <div className="modal__bottom">
-          <p className="text-count">
-            <span
-              className={`text-count__current-num ${inputText.count > 200 &&
-                'cAttention'}`}
-            >
-              {inputText.count}
-            </span>
-            &nbsp;/ 200
-          </p>
-          <div>
-            {/* 下描きボタン */}
-            {/* TODO 下描きの処理 */}
-            <p onClick={() => {}}>下書き</p>
-
-            {/* 投稿ボタン */}
-            <RoundedBtn
-              txt="投稿"
-              className={
-                inputText.count > 200 || inputText.count <= 0 ? 'invalid' : ''
-              }
-              isType="button"
-              Func={register}
+            {/* コンテンツのテキストエリア */}
+            <textarea
+              name="content"
+              className="modal__textarea"
+              required
+              defaultValue={content ?? ''}
+              onChange={e => handleTextChange(e.target.value)}
+              onKeyUp={e => handleCountChange(e.currentTarget.value.length)}
             />
           </div>
-        </div>
-      </motion.form>
+          <div className="modal__bottom">
+            <p className="text-count">
+              <span
+                className={`text-count__current-num ${inputText.count > 200 &&
+                  'cAttention'}`}
+              >
+                {inputText.count}
+              </span>
+              &nbsp;/ 200
+            </p>
+            <div>
+              {/* 下描きボタン */}
+              {/* TODO 下描きの処理 */}
+              <p
+                onClick={() => {
+                  setIsEditMode(true);
+                }}
+              >
+                下書き
+              </p>
+
+              {/* 投稿ボタン */}
+              <RoundedBtn
+                txt="投稿"
+                className={
+                  inputText.count > 200 || inputText.count <= 0 ? 'invalid' : ''
+                }
+                isType="button"
+                Func={register}
+              />
+            </div>
+          </div>
+        </motion.form>
+      ) : (
+        // TODO draftに置き換える
+        <p></p>
+      )}
     </>
   );
 };

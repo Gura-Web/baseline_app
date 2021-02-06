@@ -10,7 +10,7 @@ import '../assets/styles/App.scss';
 import { mypage } from '../assets/script';
 import MyProfile from '../containers/MyProfile';
 import Login from '../containers/Login';
-import { MyActivityWindow } from '../containers/MyActivity';
+import { MyActivityPostWindow } from '../containers/MyActivity';
 import { MyActivityPage } from '../containers/MyPage';
 
 interface StateProps {
@@ -244,7 +244,10 @@ const App: FC<StateProps> = ({ isModal = false }) => {
           <Modal2>
             {/* モーダルのルート */}
             <Switch>
-              <Route path="/" component={MyActivityWindow} />
+              <Route path="/mypage/edit/:id">
+                <p>sdfkjal;dfj;lj</p>
+              </Route>
+              <Route path="/" component={MyActivityPostWindow} />
             </Switch>
           </Modal2>
           {/* <Popup type="activityError" /> */}

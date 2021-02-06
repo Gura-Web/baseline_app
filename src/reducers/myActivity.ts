@@ -20,10 +20,15 @@ export const myActivityReducer: Reducer<MyActivityState, MyActivityAction> = (
   action: MyActivityAction,
 ) => {
   switch (action.type) {
-    case ActionType.MY_ACTIVITY_WINDOW_OPEN:
+    case ActionType.MY_ACTIVITY_POST_WINDOW_OPEN:
       return {
         ...state,
         visible: true,
+      };
+    case ActionType.MY_ACTIVITY_POST_WINDOW_CLOSE:
+      return {
+        ...state,
+        visible: false,
       };
 
     // アクティビティの取得処理

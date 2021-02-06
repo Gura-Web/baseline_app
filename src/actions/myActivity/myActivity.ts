@@ -11,9 +11,11 @@ export interface GetMyActivityParams {
 }
 
 export const myActivity = {
-  // 使われなくなる予定
   open: () => ({
-    type: ActionType.MY_ACTIVITY_WINDOW_OPEN as typeof ActionType.MY_ACTIVITY_WINDOW_OPEN,
+    type: ActionType.MY_ACTIVITY_POST_WINDOW_OPEN as typeof ActionType.MY_ACTIVITY_POST_WINDOW_OPEN,
+  }),
+  close: () => ({
+    type: ActionType.MY_ACTIVITY_POST_WINDOW_CLOSE as typeof ActionType.MY_ACTIVITY_POST_WINDOW_CLOSE,
   }),
 
   start: (params: GetMyActivityParams) => ({
@@ -33,6 +35,7 @@ export const myActivity = {
 
 export type MyActivityAction =
   | ReturnType<typeof myActivity.open>
+  | ReturnType<typeof myActivity.close>
   | ReturnType<typeof myActivity.start>
   | ReturnType<typeof myActivity.succeed>
   | ReturnType<typeof myActivity.failed>;
