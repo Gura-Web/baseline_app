@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { OldComment } from '../../../Molecules/Card';
-import { Modal } from '../../Modal';
-import { Pagenation } from '../../Header/index';
-import { WriteIcon } from '../../../../assets/images/index';
 import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { WriteIcon } from '../../../../assets/images/index';
 import { pageTransitionNormal } from '../../../../assets/script/pageTransition';
+import { OldComment } from '../../../Molecules/Card';
+import { Pagenation } from '../../Header';
+import { Modal } from '../../Modal';
+
 interface Props {
   thisPage: string;
   companyId: any;

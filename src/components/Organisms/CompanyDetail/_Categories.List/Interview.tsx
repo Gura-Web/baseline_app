@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
 import { PostStudent } from '../../../Molecules/Card';
-import { Pagenation } from '../../Header/index';
+import { Pagenation } from '../../Header';
+
 interface Props {
   thisPage: string;
   companyId: any;

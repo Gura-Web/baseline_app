@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
+import axios from 'axios';
+import { motion } from 'framer-motion';
+import React from 'react';
+import { searchCompany } from '../../assets/script/index';
+import { pageTransitionNormal } from '../../assets/script/pageTransition';
+import { ActionBtn } from '../Atoms/Btn/index';
+import { Sort } from '../Atoms/Input';
+import { Company } from '../Molecules/Card';
+import { Pagenation } from '../Organisms/Header';
 
 import { CompanySearch } from '../Organisms/Window';
-import { Sort } from '../Atoms/Input';
-import { Pagenation } from '../Organisms/Header/index';
-import { ActionBtn } from '../Atoms/Btn/index';
-import { motion } from 'framer-motion';
-import { Company } from '../Molecules/Card';
-import { pageTransitionNormal } from '../../assets/script/pageTransition';
-import axios from 'axios';
-import { searchCompany } from '../../assets/script/index';
 
 interface Props {
   homeFreeWord: string | undefined;
