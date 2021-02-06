@@ -1,22 +1,26 @@
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { myActivity } from '../actions/myActivity/myActivity';
 import { CommentWindow2 } from '../components/Molecules/Modal/CommentWindow2';
-import { User } from '../services/models';
+import { User, Draft } from '../services/models';
 import { MyProfileState } from '../reducers/myProfile';
 import { MyActivityState } from '../reducers/myActivity';
 import { PrimaryBtn } from '../components/Atoms/Btn';
+import { draft } from '../actions/draft/draft';
+import { DraftState } from '../reducers/draft';
 
 interface StateProps {
   user: User;
   isOpen: boolean;
+  drafts: Draft[];
 }
 
 interface DispatchProps {
   openMyActivityWindow: () => void;
   closeMyActivityWindow: () => void;
+  getDraft: () => void;
 }
 
 type EnhancedMyProfileProps = StateProps & DispatchProps;
@@ -24,9 +28,11 @@ type EnhancedMyProfileProps = StateProps & DispatchProps;
 const mapStateToProps = (state: {
   myProfile: MyProfileState;
   myActivity: MyActivityState;
+  draft: DraftState;
 }): StateProps => ({
   user: state.myProfile.user,
   isOpen: state.myActivity.visible,
+  drafts: state.draft.drafts,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
@@ -34,6 +40,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
     {
       openMyActivityWindow: () => myActivity.open(),
       closeMyActivityWindow: () => myActivity.close(),
+      getDraft: () => draft.start(),
     },
     dispatch,
   );
@@ -42,7 +49,13 @@ const MyActivityContainer: FC<EnhancedMyProfileProps> = ({
   user,
   closeMyActivityWindow,
   isOpen,
+  getDraft,
+  drafts,
 }) => {
+  useEffect(() => {
+    getDraft();
+  }, []);
+
   console.log(isOpen);
 
   if (!isOpen) return <></>;
@@ -58,6 +71,7 @@ const MyActivityContainer: FC<EnhancedMyProfileProps> = ({
         console.log(test);
       }}
       closeButtonHandle={closeMyActivityWindow}
+      drafts={drafts}
     />
   );
 };

@@ -1,6 +1,35 @@
-import { apiClient } from '../index';
+import { api, DEFAULT_API_CONFIG } from './api';
+import axios, { AxiosRequestConfig } from 'axios';
+import { Draft, User } from './models';
+import camelcaseKeys from 'camelcase-keys';
+
+export const getDraftFactory = (optionConfig?: AxiosRequestConfig) => {
+  const config = {
+    ...DEFAULT_API_CONFIG,
+    ...optionConfig,
+  };
+
+  const instance = axios.create(config);
+
+  const getDraft = async () => {
+    const response = await instance.get(`/api/draft`);
+
+    console.log(response);
+
+    if (response.status !== 200) {
+      throw new Error('Server Error');
+    }
+
+    const drafts: Draft[] = camelcaseKeys(response.data, { deep: true });
+
+    return drafts;
+  };
+
+  return getDraft;
+};
+
 export const indexDraft = () => {
-  return apiClient
+  return api
     .get(`/api/draft`)
     .then(response => {
       if (response.status !== 200) {
@@ -20,8 +49,8 @@ export const indexDraft = () => {
     });
 };
 
-export const registDraft = postData => {
-  apiClient
+export const registDraft = (postData: any) => {
+  api
     .post(`/api/draft`, postData)
     .then(response => {
       console.log(response);
@@ -40,8 +69,8 @@ export const registDraft = postData => {
       }
     });
 };
-export const deleteDraft = id => {
-  apiClient
+export const deleteDraft = (id: number) => {
+  api
     .post(`/api/draft/delete/${id}`)
     .then(response => {
       console.log(response);

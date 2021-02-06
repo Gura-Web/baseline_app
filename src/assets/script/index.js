@@ -41,7 +41,7 @@ export {
   editSelection,
   showSelection,
 } from './Axios/selection';
-export { indexDraft, registDraft, deleteDraft } from './Axios/draft';
+export { indexDraft, registDraft, deleteDraft } from '../../services/draft';
 export {
   indexJob,
   indexYearGraduation,

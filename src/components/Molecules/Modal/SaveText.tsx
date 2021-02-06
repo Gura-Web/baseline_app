@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useReducer } from "react";
-import { motion } from "framer-motion";
-import { RoundedBtn } from "../../Atoms/Btn";
+import React, { useState, useEffect, useReducer } from 'react';
+import { motion } from 'framer-motion';
+import { RoundedBtn } from '../../Atoms/Btn';
 import {
   TrashIcon,
-  CheckIcon_Green,
+  CheckIconGreen,
   MenuDownIcon,
-} from "../../../assets/images/index";
-import { indexDraft, registDraft, deleteDraft } from "../../../assets/script";
+} from '../../../assets/images/index';
+import { indexDraft, registDraft, deleteDraft } from '../../../assets/script';
 
 interface Props {
   setSaveTextModal: any;
@@ -14,10 +14,10 @@ interface Props {
   currentText?: string;
 }
 
-const SaveText: React.FC<Props> = (props) => {
+const SaveText: React.FC<Props> = props => {
   const [draft, setDraft] = useState<any>();
   const [postedById, setPostedById] = useState<number>();
-  const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
+  const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
 
   useEffect(() => {
     getDraft();
@@ -70,7 +70,7 @@ const SaveText: React.FC<Props> = (props) => {
             onClick={useDraftHandler.bind(null, data)}
             className="btn saveText-item__useBtn"
           >
-            <img src={CheckIcon_Green} alt="" />
+            <img src={CheckIconGreen} alt="" />
           </button>
         </div>
       </article>
@@ -79,7 +79,7 @@ const SaveText: React.FC<Props> = (props) => {
 
   const timeTextConversion = (txt: string) => {
     const dateTime: string = String(txt).slice(0, 10);
-    const timeText: string = dateTime.replace(/-/g, ".");
+    const timeText: string = dateTime.replace(/-/g, '.');
     const texts: {
       dateTime: string;
       timeText: string;
@@ -93,7 +93,7 @@ const SaveText: React.FC<Props> = (props) => {
   return (
     <motion.div
       className="modal modal--normal scroll"
-      onClick={(event) => event.stopPropagation()}
+      onClick={event => event.stopPropagation()}
     >
       <div className="modal__header modal__header--side">
         <div onClick={() => props.setSaveTextModal(false)}>

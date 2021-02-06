@@ -1,9 +1,9 @@
 import { AxiosError } from 'axios';
-import { User } from '../../services/models';
+import { Draft, User } from '../../services/models';
 import * as ActionType from './actions';
 
 interface GetDraftResult {
-  user: User;
+  drafts: Draft[];
 }
 
 export const draft = {
