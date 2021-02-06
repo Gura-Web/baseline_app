@@ -12,6 +12,7 @@ import { MyPage } from '../components/Pages/MyPage';
 
 interface StateProps {
   user: User;
+  isLoading: boolean;
 }
 
 interface DispatchProps {
@@ -24,6 +25,7 @@ const mapStateToProps = (state: {
   myActivity: MyActivityState;
 }): StateProps => ({
   user: state.myActivity.user,
+  isLoading: state.myActivity.isLoading,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
@@ -37,12 +39,13 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 const MyActivityContainer: FC<EnhancedMyProfileProps> = ({
   getMyActivity,
   user = userInit,
+  isLoading = false,
 }) => {
   useEffect(() => {
     getMyActivity({ id: user.id });
   }, []);
 
-  return <MyPage user={user} />;
+  return <MyPage user={user} isLoading={isLoading} />;
 };
 
 export const MyActivityPage = connect(
