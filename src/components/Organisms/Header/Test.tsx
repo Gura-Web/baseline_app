@@ -1,23 +1,69 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { OpenModalButton } from '../../../containers/Modal';
 import { MyProfile } from '../../../containers/MyProfile';
 import { OpenPostMyActivityButton } from '../../../containers/MyActivity';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Logo } from '../../../assets/images';
 
 // export interface StateProps {
 // }
 
 export const SideMenu: FC = () => {
+  const location = useLocation();
+
+  // メニューの移動させるやつ
+  const isCurrentPage = () => {
+    const gNavs = document.querySelectorAll('.g-navi__item');
+    gNavs.forEach(li => {
+      li.classList.remove('current');
+    });
+    switch (location.pathname) {
+      case '/':
+        gNavs[0].classList.add('current');
+        break;
+      case '/search-company':
+        gNavs[1].classList.add('current');
+        break;
+      case '/search-student':
+        gNavs[2].classList.add('current');
+        break;
+      case '/mypage':
+        gNavs[3].classList.add('current');
+        break;
+      default:
+        break;
+    }
+  };
+
+  useEffect(() => {
+    isCurrentPage();
+  });
+
   return (
     <>
       <header className="header">
         <div className="header__wrap">
+          {/* ロゴ */}
           <h1 className="logo">
             <Link to="/">
               <img src={Logo} alt="" />
             </Link>
           </h1>
+
+          <ul className="g-navi">
+            <li className="g-navi__item current">
+              <Link to="/">ホーム</Link>
+            </li>
+            <li className="g-navi__item">
+              <Link to="/search-company">企業を探す</Link>
+            </li>
+            <li className="g-navi__item">
+              <Link to="/search-student">学生の就活を見る</Link>
+            </li>
+            <li className="g-navi__item">
+              <Link to="/mypage">マイページ</Link>
+            </li>
+          </ul>
 
           {/* 活動を追加ボタン */}
           <OpenPostMyActivityButton />
