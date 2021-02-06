@@ -7,7 +7,7 @@ import { User } from '../../../services/models';
 interface Props {
   // 表示名
   author: User;
-  postedYear: string;
+  postedYear: number;
   contents: string;
   updateTime: string;
   isArrow: boolean;
