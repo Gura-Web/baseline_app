@@ -16,7 +16,6 @@ const CompanySearch: React.FC<Props> = props => {
 
   const prefSearchHandler = (value: any, isChecked: boolean) => {
     // チェックボックスつけた
-    console.log('動かない');
     if (isChecked) {
       setPrefNumbers([...prefNumbers, value]);
       const prefArray = [...prefNumbers, value];
@@ -69,18 +68,18 @@ const CompanySearch: React.FC<Props> = props => {
 
   const showList = () => {
     const isListBtn = document.getElementById(
-      'isShow-ListBtn,
+      'isShow-ListBtn',
     ) as HTMLButtonElement;
     if (!isShow) {
       const prefecturesList = document.querySelector(
-        '.prefectures-list__wrap'
+        '.prefectures-list__wrap',
       ) as HTMLElement;
       prefecturesList.style.height = '100%';
       prefecturesList.style.overflowY = 'visible';
       isListBtn.innerText = '閉じる';
     } else {
       const prefecturesList = document.querySelector(
-        '.prefectures-list__wrap'
+        '.prefectures-list__wrap',
       ) as HTMLElement;
       isListBtn.innerText = 'すべての項目を表示';
       prefecturesList.style.height = '149px';
