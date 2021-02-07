@@ -234,15 +234,11 @@ const App: FC = () => {
           </Switch>
           <AnimatePresence />
 
-          {/* モーダルのルート */}
-          <Switch>
-            <Route path="/mypage/edit/:id">
-              <p>sdfkjal;dfj;lj</p>
-            </Route>
-            <Route path="/" component={MyActivityPostWindow} />
-          </Switch>
           {/* <Popup type="activityError" /> */}
         </Router>
+
+        {/* マイアクティビティ投稿ウィンドウ */}
+        <MyActivityPostWindow />
 
         {/* <Modal */}
         {/*  type="activity-post"*/}

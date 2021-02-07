@@ -1,7 +1,6 @@
 import { AnimatePresence } from 'framer-motion';
 import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { bindActionCreators, Dispatch } from 'redux';
 import { draft } from '../actions/draft/draft';
 import { myActivity } from '../actions/myActivity/myActivity';
@@ -94,6 +93,7 @@ export const OpenPostMyActivityButton = connect(
   mapDispatchToProps,
 )(OpenMyActivityButtonContainer);
 
-export const MyActivityPostWindow = withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(MyActivityContainer),
-);
+export const MyActivityPostWindow = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(MyActivityContainer);
