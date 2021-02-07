@@ -15,7 +15,9 @@ export const getMyActivityFactory = (
   const instance = axios.create(config);
 
   const getMyActivity = async () => {
-    const response = await instance.get(`/api/mypage/${id}`);
+    const response = await instance.get(
+      id ? `/api/mypage/${id}` : `/api/mypage`,
+    );
 
     if (response.status !== 200) {
       throw new Error('Server Error');

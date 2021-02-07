@@ -7,7 +7,7 @@ interface GetMyActivityResult {
 }
 
 export interface GetMyActivityParams {
-  id: number;
+  id?: number;
 }
 
 export const myActivity = {

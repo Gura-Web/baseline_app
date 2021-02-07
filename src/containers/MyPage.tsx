@@ -42,7 +42,7 @@ const MyActivityContainer: FC<EnhancedMyProfileProps> = ({
   isLoading = false,
 }) => {
   useEffect(() => {
-    getMyActivity({ id: user.id });
+    getMyActivity({});
   }, []);
 
   return <MyPage user={user} isLoading={isLoading} />;
