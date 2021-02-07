@@ -1,4 +1,5 @@
 import { apiClient } from '../index';
+
 export const searchCompany = param => {
   return apiClient
     .get(`/api/company/search`, {
