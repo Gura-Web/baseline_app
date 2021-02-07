@@ -68,6 +68,9 @@ const SideMenu: FC<StateProps> = ({ isLoading = true }) => {
           {/* 活動を追加ボタン */}
           <OpenPostMyActivityButton />
         </div>
+
+        {/* TODO ページ単位で管理するように変更 */}
+        {/* プロフィール */}
         <MyProfile />
       </header>
     </>
