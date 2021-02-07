@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { RoundedBtn } from '../../Atoms/Btn';
-import { Avatar, rikuma } from '../../../assets/images/index';
-import { mypage } from '../../../assets/script/';
-import axios from 'axios';
+import React, { useState } from 'react';
+import { rikuma } from '../../../assets/images/index';
 import { Draft, User } from '../../../services/models';
+import { RoundedBtn } from '../../Atoms/Btn';
 import { DraftWindows } from './DraftWindow';
 
 const modal = {
@@ -35,6 +33,7 @@ interface Props {
   registerButtonHandle: (currentContent: string) => void;
   closeButtonHandle: () => void;
   registerDraftButtonHandle: (currentContent: string) => void;
+  draftDeleteButtonHandle: (id: number) => void;
   drafts: Draft[];
 }
 
@@ -47,6 +46,7 @@ export const CommentWindow2: React.FC<Props> = ({
   closeButtonHandle,
   registerDraftButtonHandle,
   drafts,
+  draftDeleteButtonHandle,
 }) => {
   // コンテンツのテキストを管理するローカルステート
   const [inputText, setInputText] = useState<string>('');
@@ -76,11 +76,12 @@ export const CommentWindow2: React.FC<Props> = ({
             backButtonHandler={() => {
               setIsEditMode(false);
             }}
+            // 下描きセーブのハンドラ
             saveButtonHandler={() => {
-              // TODO 下描きセーブボタンのハンドラ
-              console.log(inputText);
               registerDraftButtonHandle(inputText);
             }}
+            // 下描き削除のハンドラ
+            deleteButtonHandler={draftDeleteButtonHandle}
             draftToMyActivityButtonHandler={(draftText: string) => {
               setInputText(draftText);
             }}

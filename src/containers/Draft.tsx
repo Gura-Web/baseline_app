@@ -77,6 +77,12 @@ const CommendWindowWithDraftContainer: FC<EnhancedMyProfileProps> = ({
         registerDraftButtonHandle={draftContents => {
           registerDraft({ contents: draftContents });
         }}
+        // TODO 下描き削除ボタンの処理
+        draftDeleteButtonHandle={id => {
+          console.log(id);
+
+          // TODO 下描きの削除処理
+        }}
         // 下描き削除機能の処理
         drafts={drafts}
       />

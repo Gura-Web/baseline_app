@@ -1,16 +1,13 @@
 import React, { FC } from 'react';
+import { CheckIconGreen, MenuDownIcon, TrashIcon } from '../../../assets/images';
 import { Draft } from '../../../services/models';
-import {
-  CheckIconGreen,
-  MenuDownIcon,
-  TrashIcon,
-} from '../../../assets/images';
 import { RoundedBtn } from '../../Atoms/Btn';
 
 interface Props {
   drafts: Draft[];
   backButtonHandler: () => void;
   saveButtonHandler: () => void;
+  deleteButtonHandler: (id: number) => void;
   draftToMyActivityButtonHandler: (draftText: string) => void;
 }
 
@@ -18,6 +15,7 @@ export const DraftWindows: FC<Props> = ({
   drafts,
   backButtonHandler,
   saveButtonHandler,
+  deleteButtonHandler,
   draftToMyActivityButtonHandler,
 }) => {
   const timeTextConversion = (txt: string) => {
@@ -54,10 +52,11 @@ export const DraftWindows: FC<Props> = ({
             </p>
             <p className="saveText-item__txt">{draft.content}</p>
             <div className="saveText-item__wrap">
+              {/* 削除ボタン */}
               <button
                 type="button"
                 onClick={() => {
-                  // TODO 削除の実装
+                  deleteButtonHandler(draft.id);
                 }}
                 className="btn saveText-item__deleteBtn"
               >
@@ -69,6 +68,7 @@ export const DraftWindows: FC<Props> = ({
                   draftToMyActivityButtonHandler(draft.content);
 
                   // TODO 削除をここに
+                  // TODO ここどうするか相談
                 }}
                 className="btn saveText-item__useBtn"
               >
