@@ -1,5 +1,9 @@
 import React, { FC } from 'react';
-import { CheckIconGreen, MenuDownIcon, TrashIcon } from '../../../assets/images';
+import {
+  CheckIconGreen,
+  MenuDownIcon,
+  TrashIcon,
+} from '../../../assets/images';
 import { Draft } from '../../../services/models';
 import { RoundedBtn } from '../../Atoms/Btn';
 
