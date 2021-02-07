@@ -1,17 +1,16 @@
 import { AnimatePresence } from 'framer-motion';
-import React, { FC, useEffect } from 'react';
-import { withRouter, RedirectProps } from 'react-router-dom';
+import React, { FC } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
+import { draft, RegistDraftParams } from '../actions/draft/draft';
 import { myActivity } from '../actions/myActivity/myActivity';
 import { PrimaryBtn } from '../components/Atoms/Btn';
-import { draft, RegistDraftParams } from '../actions/draft/draft';
-import { CommentWindow2 } from '../components/Molecules/Modal/CommentWindow2';
 import { Modal } from '../components/Organisms/Modal/Modal2';
 import { DraftState } from '../reducers/draft';
 import { MyActivityState } from '../reducers/myActivity';
 import { MyProfileState } from '../reducers/myProfile';
 import { Draft, User } from '../services/models';
+import { CommendWindowWithDraft } from './Draft';
 
 interface StateProps {
   user: User;
@@ -53,34 +52,19 @@ const MyActivityContainer: FC<EnhancedMyProfileProps> = ({
   user,
   closeMyActivityWindow,
   isOpen,
-  getDraft,
-  registDraft,
-  drafts,
 }) => {
-  useEffect(() => {
-    getDraft();
-  }, [getDraft]);
-
   return (
     <>
       <AnimatePresence exitBeforeEnter>
         <Modal visible={isOpen} backgroundClickHandler={closeMyActivityWindow}>
-          <CommentWindow2
+          <CommendWindowWithDraft
             title="アクティビティを投稿"
-            isLoading={false}
             user={user}
-            // TODO 登録の動作
+            closeButtonHandler={closeMyActivityWindow}
             registerButtonHandle={draftContents => {
               console.log('登録');
               console.log(draftContents);
-              registDraft({ contents: draftContents });
             }}
-            // TODO 直す
-            closeButtonHandle={closeMyActivityWindow}
-            registerDraftButtonHandle={draftContents => {
-              registDraft({ contents: draftContents });
-            }}
-            drafts={drafts}
           />
         </Modal>
       </AnimatePresence>
