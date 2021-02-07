@@ -1,24 +1,7 @@
-import * as Action from '../actions/myActivity/myActivityActionType';
-import * as ModalAction from '../actions/modal/actions';
-
+import { call, fork, put, takeLatest } from 'redux-saga/effects';
 import { myActivity } from '../actions/myActivity/myActivity';
-import { fork, takeLatest, put, call } from 'redux-saga/effects';
+import * as Action from '../actions/myActivity/myActivityActionType';
 import { getMyActivityFactory } from '../services/myActivity';
-import { openModal, watchOpenModal } from './modal';
-import { modal } from '../actions/modal/modal';
-
-export function* openMyActivityWindow(
-  action: ReturnType<typeof myActivity.open>,
-) {
-  yield put(modal.open());
-}
-
-export function* closeMyActivityWindow(
-  action: ReturnType<typeof myActivity.close>,
-) {
-  // TODO アニメーション問題
-  yield put(modal.close());
-}
 
 export function* runGetMyActivity(action: ReturnType<typeof myActivity.start>) {
   const { params } = action.payload;
@@ -37,16 +20,4 @@ export function* watchRunGetMyActivity() {
   yield takeLatest(Action.GET_MY_ACTIVITY_START, runGetMyActivity);
 }
 
-export function* watchOpenMyActivityWindow() {
-  yield takeLatest(Action.MY_ACTIVITY_POST_WINDOW_OPEN, openMyActivityWindow);
-}
-
-export function* watchCloseMyActivityWindow() {
-  yield takeLatest(Action.MY_ACTIVITY_POST_WINDOW_CLOSE, closeMyActivityWindow);
-}
-
-export default [
-  fork(watchOpenMyActivityWindow),
-  fork(watchRunGetMyActivity),
-  fork(watchCloseMyActivityWindow),
-];
+export default [fork(watchRunGetMyActivity)];

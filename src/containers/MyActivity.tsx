@@ -1,16 +1,17 @@
-import { bindActionCreators, Dispatch } from 'redux';
-import { connect } from 'react-redux';
+import { AnimatePresence } from 'framer-motion';
 import React, { FC, useEffect } from 'react';
 import { withRouter, RedirectProps } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators, Dispatch } from 'redux';
 import { myActivity } from '../actions/myActivity/myActivity';
-import { CommentWindow2 } from '../components/Molecules/Modal/CommentWindow2';
-import { User, Draft } from '../services/models';
-import { MyProfileState } from '../reducers/myProfile';
-import { MyActivityState } from '../reducers/myActivity';
 import { PrimaryBtn } from '../components/Atoms/Btn';
 import { draft, RegistDraftParams } from '../actions/draft/draft';
+import { CommentWindow2 } from '../components/Molecules/Modal/CommentWindow2';
+import { Modal } from '../components/Organisms/Modal/Modal2';
 import { DraftState } from '../reducers/draft';
-import { AnimatePresence } from 'framer-motion';
+import { MyActivityState } from '../reducers/myActivity';
+import { MyProfileState } from '../reducers/myProfile';
+import { Draft, User } from '../services/models';
 
 interface StateProps {
   user: User;
@@ -58,12 +59,12 @@ const MyActivityContainer: FC<EnhancedMyProfileProps> = ({
 }) => {
   useEffect(() => {
     getDraft();
-  }, []);
+  }, [getDraft]);
 
   return (
     <>
       <AnimatePresence exitBeforeEnter>
-        {isOpen && (
+        <Modal visible={isOpen} backgroundClickHandler={closeMyActivityWindow}>
           <CommentWindow2
             title="アクティビティを投稿"
             isLoading={false}
@@ -81,7 +82,7 @@ const MyActivityContainer: FC<EnhancedMyProfileProps> = ({
             }}
             drafts={drafts}
           />
-        )}
+        </Modal>
       </AnimatePresence>
     </>
   );
@@ -100,6 +101,7 @@ export const OpenPostMyActivityButton = connect(
   mapDispatchToProps,
 )(OpenMyActivityButtonContainer);
 
-export const MyActivityPostWindow = withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(MyActivityContainer),
-);
+export const MyActivityPostWindow = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(MyActivityContainer);

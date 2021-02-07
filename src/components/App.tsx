@@ -1,24 +1,17 @@
-import React, { useState, useEffect, FC } from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import { SideMenu, Header } from './Organisms/Header/index';
-import { SideMenu as Sidemenu2 } from './Organisms/Header/Test';
-import { Modal } from './Organisms/Modal';
-import { Modal as Modal2 } from '../containers/Modal';
-import * as Page from './Pages';
-import '../assets/styles/App.scss';
+import React, { FC, useEffect, useState } from 'react';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import { mypage } from '../assets/script';
-import MyProfile from '../containers/MyProfile';
+import '../assets/styles/App.scss';
 import Login from '../containers/Login';
 import { MyActivityPostWindow } from '../containers/MyActivity';
 import { MyActivityPage } from '../containers/MyPage';
+import { SideMenu } from '../containers/MyProfile';
+import { Header } from './Organisms/Header';
+import * as Page from './Pages';
 
-interface StateProps {
-  isModal?: boolean;
-}
-
-const App: FC<StateProps> = ({ isModal = false }) => {
-  const [showModal, setShowModal] = useState<boolean>(false);
+const App: FC = () => {
+  // const [showModal, setShowModal] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [isLogin, setIsLogin] = useState<boolean>(false);
 
@@ -60,7 +53,7 @@ const App: FC<StateProps> = ({ isModal = false }) => {
             <Route
               path="/"
               // TODO SideBar直す
-              component={Sidemenu2}
+              component={SideMenu}
               // render={() => (
               //   <SideMenu
               //     setShowModal={setShowModal}
@@ -241,25 +234,19 @@ const App: FC<StateProps> = ({ isModal = false }) => {
           </Switch>
           <AnimatePresence />
 
-          <Modal2>
-            {/* モーダルのルート */}
-            <Switch>
-              <Route path="/mypage/edit/:id">
-                <p>sdfkjal;dfj;lj</p>
-              </Route>
-              <Route path="/" component={MyActivityPostWindow} />
-            </Switch>
-          </Modal2>
           {/* <Popup type="activityError" /> */}
         </Router>
 
-        {/*<Modal*/}
+        {/* マイアクティビティ投稿ウィンドウ */}
+        <MyActivityPostWindow />
+
+        {/* <Modal */}
         {/*  type="activity-post"*/}
         {/*  showModal={showModal}*/}
         {/*  // showModal*/}
         {/*  setShowModal={setShowModal}*/}
         {/*  getMyData={getMyData}*/}
-        {/*/>*/}
+        {/* /> */}
         <footer className="footer">
           <p className="copyright">
             <small>©︎ 2020 Baseline Team</small>

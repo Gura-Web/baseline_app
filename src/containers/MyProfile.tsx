@@ -1,11 +1,12 @@
-import { bindActionCreators, Dispatch } from 'redux';
 import React, { FC, useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { User } from '../services/models';
-import { MyProfileState } from '../reducers/myProfile';
+import { withRouter } from 'react-router-dom';
+import { bindActionCreators, Dispatch } from 'redux';
 import { getMyProfile } from '../actions/baseline';
+import { SideMenu as SideMenuComponent } from '../components/Organisms/Header';
 import { MyProfile as MyProfileComponent } from '../components/Organisms/MyProfile';
+import { MyProfileState } from '../reducers/myProfile';
+import { User } from '../services/models';
 
 interface StateProps {
   user: User;
@@ -48,10 +49,18 @@ const MyProfileContainer: FC<EnhancedMyProfileProps> = ({
   );
 };
 
+const SideMenuContainer: FC<EnhancedMyProfileProps> = ({ isLoading }) => {
+  return <SideMenuComponent isLoading={isLoading} />;
+};
+
 export const MyProfile = connect(
   mapStateToProps,
   mapDispatchToProps,
 )(MyProfileContainer);
+
+export const SideMenu = withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(SideMenuContainer),
+);
 
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(MyProfileContainer),

@@ -1,9 +1,8 @@
 import auth from './auth';
-import myProfile from './myProfile';
-import myActivity from './myActivity';
-import modal from './modal';
 import draft from './draft';
+import myActivity from './myActivity';
+import myProfile from './myProfile';
 
-const forks = [...myProfile, ...auth, ...myActivity, ...modal, ...draft];
+const forks = [...myProfile, ...auth, ...myActivity, ...draft];
 
 export default forks;

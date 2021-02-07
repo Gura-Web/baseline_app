@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { CheckIcon } from '../../../assets/images/index';
 import { CheckBoxProps } from './CheckboxProps';
 
@@ -53,9 +53,9 @@ const Checkbox: React.FC<CheckBoxProps> = ({
     return checkedPref?.some((pref: any) => {
       if (id == pref.id) {
         return true;
-      } else {
-        return false;
       }
+
+      return false;
     });
   };
   const onDefaultCheckedFunc = () => {
@@ -70,7 +70,7 @@ const Checkbox: React.FC<CheckBoxProps> = ({
   return (
     <>
       <input
-        onChange={onChange}
+        onChange={checkHandler}
         id={`input-${id}`}
         data-key={id}
         className="check-radio-input"
