@@ -7,8 +7,14 @@ export interface User {
   iconImageUrl: string | null;
   sex: number;
   email: string;
+  desiredOccupation?: desiredOccupation;
   desiredOccupations: number;
   companyInformation?: CompanyInformation[];
+}
+
+export interface desiredOccupation {
+  id: number;
+  name: string;
 }
 
 export interface CompanyInformation {

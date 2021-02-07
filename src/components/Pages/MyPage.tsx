@@ -1,11 +1,10 @@
-import React, { FC } from 'react';
 import { motion } from 'framer-motion';
+import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { GearIcon } from '../../assets/images';
 import { pageTransitionNormal } from '../../assets/script';
+import { User } from '../../services/models';
 import { UserData } from '../Molecules/Bar';
-import { MyActivity as IMyActivity, User } from '../../services/models';
-import { GearIcon, PencilIcon, TrashIcon } from '../../assets/images';
-import { Comment } from '../Molecules/Card';
 import { MyActivity } from '../Organisms/Activity';
 
 interface StateProps {
@@ -38,7 +37,8 @@ export const MyPage: FC<StateProps> = ({ user, isLoading = true }) => {
           variants={pageTransitionNormal}
         >
           <h2 className="heading1">マイページ</h2>
-          <UserData user={user} />
+          {/* 自分の情報 */}
+          <UserData user={user} pageType="myPage" />
           <Link to="/01/account-setting" className="icon-txt icon-txt--normal">
             <img src={GearIcon} alt="" />
             アカウント設定へ
