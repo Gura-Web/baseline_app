@@ -10,7 +10,6 @@ import { Header } from './Organisms/Header';
 import * as Page from './Pages';
 
 const App: FC = () => {
-  const [loading, setLoading] = useState<boolean>(false);
   const [isLogin, setIsLogin] = useState<boolean>(false);
 
   const [homeFreeWord, setHomeFreeWord] = useState<string>();
