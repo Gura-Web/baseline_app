@@ -11,28 +11,27 @@ import { Header } from './Organisms/Header';
 import * as Page from './Pages';
 
 const App: FC = () => {
-  // const [showModal, setShowModal] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [isLogin, setIsLogin] = useState<boolean>(false);
 
   const [homeFreeWord, setHomeFreeWord] = useState<string>();
   const [myData, setMyData] = useState<any>();
   const urlParamStr = window.location.pathname;
-  useEffect(() => {
-    // if (urlParamStr.match(/login/) || urlParamStr.match(/register/)) {
-    setLoading(true);
-  }, []);
+  // useEffect(() => {
+  //   // if (urlParamStr.match(/login/) || urlParamStr.match(/register/)) {
+  //   setLoading(true);
+  // }, []);
 
-  const getMyData = (notLoginFunc: any) => {
-    mypage().then((getData: any) => {
-      setMyData({
-        ...myData,
-        data: getData.data,
-        company_information: getData.data.company_information,
-      });
-      setLoading(true);
-    });
-  };
+  // const getMyData = (notLoginFunc: any) => {
+  //   mypage().then((getData: any) => {
+  //     setMyData({
+  //       ...myData,
+  //       data: getData.data,
+  //       company_information: getData.data.company_information,
+  //     });
+  //     setLoading(true);
+  //   });
+  // };
 
   const renderDOM = () => {
     return (
@@ -50,19 +49,8 @@ const App: FC = () => {
               path="/company-info/:id/edit"
               render={props => <Header needBtn {...props} />}
             />
-            <Route
-              path="/"
-              // TODO SideBar直す
-              component={SideMenu}
-              // render={() => (
-              //   <SideMenu
-              //     setShowModal={setShowModal}
-              //     setMyData={setMyData}
-              //     myData={myData}
-              //     setIsLogin={setIsLogin}
-              //   />
-              // )}
-            />
+            {/* サイドメニュー */}
+            <Route path="/" component={SideMenu} />
           </Switch>
           <AnimatePresence exitBeforeEnter />
           <Switch>
@@ -132,18 +120,8 @@ const App: FC = () => {
                   path="/user/:id"
                   render={props => <Page.UserPage {...props} />}
                 />
-                <Route
-                  path="/mypage"
-                  component={MyActivityPage}
-                  // render={() => (
-                  //   <Page.OldMyPage
-                  //     getMyData={getMyData}
-                  //     myData={myData}
-                  //     loading={loading}
-                  //     setMyData={setMyData}
-                  //   />
-                  // )}
-                />
+                {/* マイページ */}
+                <Route path="/mypage" component={MyActivityPage} />
 
                 <Route
                   exact
@@ -191,9 +169,7 @@ const App: FC = () => {
                 <Route
                   exact
                   path="/:user/account-setting"
-                  render={() => (
-                    <Page.AccountSetting myData={myData} loading={loading} />
-                  )}
+                  render={() => <Page.AccountSetting myData={myData} loading />}
                 />
                 <Route
                   exact
@@ -240,13 +216,6 @@ const App: FC = () => {
         {/* マイアクティビティ投稿ウィンドウ */}
         <MyActivityPostWindow />
 
-        {/* <Modal */}
-        {/*  type="activity-post"*/}
-        {/*  showModal={showModal}*/}
-        {/*  // showModal*/}
-        {/*  setShowModal={setShowModal}*/}
-        {/*  getMyData={getMyData}*/}
-        {/* /> */}
         <footer className="footer">
           <p className="copyright">
             <small>©︎ 2020 Baseline Team</small>
@@ -256,7 +225,7 @@ const App: FC = () => {
     );
   };
 
-  return <div className="App">{loading && renderDOM()}</div>;
+  return <div className="App">{renderDOM()}</div>;
 };
 
 export default App;
