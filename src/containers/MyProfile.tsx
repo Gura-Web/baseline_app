@@ -5,6 +5,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { getMyProfile } from '../actions/baseline';
 import { SideMenu as SideMenuComponent } from '../components/Organisms/Header';
 import { MyProfile as MyProfileComponent } from '../components/Organisms/MyProfile';
+import { AccountSetting as AccountSettingComponent } from '../components/Pages';
 import { MyProfileState } from '../reducers/myProfile';
 import { User } from '../services/models';
 
@@ -42,11 +43,25 @@ const MyProfileContainer: FC<EnhancedMyProfileProps> = ({
 }) => {
   useEffect(() => {
     getMyProfileStart();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <MyProfileComponent user={user} isLoading={isLoading} isError={isError} />
   );
+};
+
+const AccountSettingContainer: FC<EnhancedMyProfileProps> = ({
+  user,
+  isLoading,
+  getMyProfileStart,
+}) => {
+  useEffect(() => {
+    getMyProfileStart();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return <AccountSettingComponent user={user} isLoading={isLoading} />;
 };
 
 const SideMenuContainer: FC<EnhancedMyProfileProps> = ({ isLoading }) => {
@@ -60,6 +75,10 @@ export const MyProfile = connect(
 
 export const SideMenu = withRouter(
   connect(mapStateToProps, mapDispatchToProps)(SideMenuContainer),
+);
+
+export const AccountSetting = withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(AccountSettingContainer),
 );
 
 export default withRouter(

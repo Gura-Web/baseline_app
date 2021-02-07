@@ -8,7 +8,7 @@ export { default as CompanyInfo } from './CompanyInfo/CompanyInfo';
 export { Step, Entry, Interview } from './CompanyInfo/index';
 export { Send, Setting, TypeMail } from './PasswordForget/index';
 export { default as ProfileEdit } from './ProfileEdit';
-export { AccountSetting, SettingForm } from './AccountSetting/index';
+export { AccountSetting, SettingForm } from './AccountSetting';
 export { default as AccountSettingContent } from './AccountSetting/SettingForm';
 export {
   DetailContents,

@@ -1,12 +1,11 @@
 import { AnimatePresence } from 'framer-motion';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
-import { mypage } from '../assets/script';
 import '../assets/styles/App.scss';
 import Login from '../containers/Login';
 import { MyActivityPostWindow } from '../containers/MyActivity';
 import { MyActivityPage } from '../containers/MyPage';
-import { SideMenu } from '../containers/MyProfile';
+import { AccountSetting, SideMenu } from '../containers/MyProfile';
 import { Header } from './Organisms/Header';
 import * as Page from './Pages';
 
@@ -169,7 +168,7 @@ const App: FC = () => {
                 <Route
                   exact
                   path="/:user/account-setting"
-                  render={() => <Page.AccountSetting myData={myData} loading />}
+                  component={AccountSetting}
                 />
                 <Route
                   exact

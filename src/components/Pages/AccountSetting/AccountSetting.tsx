@@ -1,16 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { ArrowIcon, TrashIcon } from "../../../assets/images";
-import { Link, useHistory } from "react-router-dom";
-import { motion } from "framer-motion";
-import { Modal } from "../../Organisms/Modal";
-import { pageTransitionNormal } from "../../../assets/script/pageTransition";
+import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { ArrowIcon, TrashIcon } from '../../../assets/images';
+import { pageTransitionNormal } from '../../../assets/script/pageTransition';
+import { User } from '../../../services/models';
+import { Modal } from '../../Organisms/Modal';
 
 interface Props {
-  myData: any;
-  loading: boolean;
+  user: User;
+  isLoading: boolean;
 }
 
-const AccountSetting: React.FC<Props> = (props) => {
+const AccountSetting: React.FC<Props> = ({
+  isLoading,
+  user: { studentNumber },
+}) => {
   const history = useHistory();
   const [showModal, setShowModal] = useState<boolean>(false);
   const renderDOM = () => {
@@ -24,8 +28,9 @@ const AccountSetting: React.FC<Props> = (props) => {
           variants={pageTransitionNormal}
         >
           <button
+            type="button"
             className="btn pageBack-link"
-            onClick={() => history.goBack()}
+            onClick={history.goBack}
           >
             <span className="heading4">マイページへ</span>
           </button>
@@ -36,9 +41,7 @@ const AccountSetting: React.FC<Props> = (props) => {
               <li className="setting-item">
                 <Link to="/01/account-setting/student-number">
                   <p className="setting-item__label">学籍番号</p>
-                  <p className="setting-item__value">
-                    {props.myData.data.student_number}
-                  </p>
+                  <p className="setting-item__value">{studentNumber}</p>
                   <p className="setting-item__arrow">
                     <img src={ArrowIcon} alt="" />
                   </p>
@@ -64,6 +67,7 @@ const AccountSetting: React.FC<Props> = (props) => {
                   </p>
                 </Link>
               </li> */}
+              {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
               <li
                 className="setting-item delete"
                 onClick={() => setShowModal(true)}
@@ -87,7 +91,8 @@ const AccountSetting: React.FC<Props> = (props) => {
       </>
     );
   };
-  return <>{props.loading && renderDOM()}</>;
+
+  return <>{!isLoading && renderDOM()}</>;
 };
 
 export default AccountSetting;
