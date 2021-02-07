@@ -4,18 +4,13 @@ import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import { mypage } from '../assets/script';
 import '../assets/styles/App.scss';
 import Login from '../containers/Login';
-import { Modal as Modal2 } from '../containers/Modal';
 import { MyActivityPostWindow } from '../containers/MyActivity';
 import { MyActivityPage } from '../containers/MyPage';
 import { SideMenu } from '../containers/MyProfile';
 import { Header } from './Organisms/Header';
 import * as Page from './Pages';
 
-interface StateProps {
-  isModal?: boolean;
-}
-
-const App: FC<StateProps> = ({ isModal = false }) => {
+const App: FC = () => {
   // const [showModal, setShowModal] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [isLogin, setIsLogin] = useState<boolean>(false);
@@ -239,25 +234,23 @@ const App: FC<StateProps> = ({ isModal = false }) => {
           </Switch>
           <AnimatePresence />
 
-          <Modal2>
-            {/* モーダルのルート */}
-            <Switch>
-              <Route path="/mypage/edit/:id">
-                <p>sdfkjal;dfj;lj</p>
-              </Route>
-              <Route path="/" component={MyActivityPostWindow} />
-            </Switch>
-          </Modal2>
+          {/* モーダルのルート */}
+          <Switch>
+            <Route path="/mypage/edit/:id">
+              <p>sdfkjal;dfj;lj</p>
+            </Route>
+            <Route path="/" component={MyActivityPostWindow} />
+          </Switch>
           {/* <Popup type="activityError" /> */}
         </Router>
 
-        {/*<Modal*/}
+        {/* <Modal */}
         {/*  type="activity-post"*/}
         {/*  showModal={showModal}*/}
         {/*  // showModal*/}
         {/*  setShowModal={setShowModal}*/}
         {/*  getMyData={getMyData}*/}
-        {/*/>*/}
+        {/* /> */}
         <footer className="footer">
           <p className="copyright">
             <small>©︎ 2020 Baseline Team</small>

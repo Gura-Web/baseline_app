@@ -1,14 +1,12 @@
 import { combineReducers } from 'redux';
-import { myProfileReducer } from './myProfile';
+import { draftReducer } from './draft';
 import { loginReducer } from './login';
 import { myActivityReducer } from './myActivity';
-import { modalReducer } from './modal';
-import { draftReducer } from './draft';
+import { myProfileReducer } from './myProfile';
 
 export default combineReducers({
   myProfile: myProfileReducer,
   login: loginReducer,
   myActivity: myActivityReducer,
-  modal: modalReducer,
   draft: draftReducer,
 });
