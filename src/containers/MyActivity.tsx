@@ -1,14 +1,14 @@
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import React, { FC, useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, RedirectProps } from 'react-router-dom';
 import { myActivity } from '../actions/myActivity/myActivity';
 import { CommentWindow2 } from '../components/Molecules/Modal/CommentWindow2';
 import { User, Draft } from '../services/models';
 import { MyProfileState } from '../reducers/myProfile';
 import { MyActivityState } from '../reducers/myActivity';
 import { PrimaryBtn } from '../components/Atoms/Btn';
-import { draft } from '../actions/draft/draft';
+import { draft, RegistDraftParams } from '../actions/draft/draft';
 import { DraftState } from '../reducers/draft';
 import { AnimatePresence } from 'framer-motion';
 
@@ -22,6 +22,7 @@ interface DispatchProps {
   openMyActivityWindow: () => void;
   closeMyActivityWindow: () => void;
   getDraft: () => void;
+  registDraft: (params: RegistDraftParams) => void;
 }
 
 type EnhancedMyProfileProps = StateProps & DispatchProps;
@@ -41,7 +42,8 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
     {
       openMyActivityWindow: () => myActivity.open(),
       closeMyActivityWindow: () => myActivity.close(),
-      getDraft: () => draft.start(),
+      getDraft: () => draft.getStart(),
+      registDraft: params => draft.registStart(params),
     },
     dispatch,
   );
@@ -51,6 +53,7 @@ const MyActivityContainer: FC<EnhancedMyProfileProps> = ({
   closeMyActivityWindow,
   isOpen,
   getDraft,
+  registDraft,
   drafts,
 }) => {
   useEffect(() => {
@@ -66,12 +69,16 @@ const MyActivityContainer: FC<EnhancedMyProfileProps> = ({
             isLoading={false}
             user={user}
             // TODO 登録の動作
-            registerButtonHandle={test => {
+            registerButtonHandle={draftContents => {
               console.log('登録');
-              console.log(test);
+              console.log(draftContents);
+              registDraft({ contents: draftContents });
             }}
             // TODO 直す
             closeButtonHandle={closeMyActivityWindow}
+            registerDraftButtonHandle={draftContents => {
+              registDraft({ contents: draftContents });
+            }}
             drafts={drafts}
           />
         )}

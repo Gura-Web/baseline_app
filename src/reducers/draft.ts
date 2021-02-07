@@ -17,6 +17,8 @@ export const draftReducer: Reducer<DraftState, DraftAction> = (
   state: DraftState = initialState,
   action: DraftAction,
 ) => {
+  console.log('アクションタイプ');
+  console.log(action.type);
   switch (action.type) {
     case ActionType.GET_DRAFT_START:
       return {
@@ -30,6 +32,21 @@ export const draftReducer: Reducer<DraftState, DraftAction> = (
         isLoading: false,
       };
     case ActionType.GET_DRAFT_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+      };
+    case ActionType.REGIST_DRAFT_START:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case ActionType.REGIST_DRAFT_SUCCEED:
+      return {
+        ...state,
+        isLoading: false,
+      };
+    case ActionType.REGIST_DRAFT_FAILED:
       return {
         ...state,
         isLoading: false,

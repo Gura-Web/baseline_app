@@ -6,23 +6,43 @@ interface GetDraftResult {
   drafts: Draft[];
 }
 
+export interface RegistDraftParams {
+  contents: string;
+}
+
 export const draft = {
-  start: () => ({
+  getStart: () => ({
     type: ActionType.GET_DRAFT_START as typeof ActionType.GET_DRAFT_START,
     payload: {},
   }),
-  succeed: (result: GetDraftResult) => ({
+  getSucceed: (result: GetDraftResult) => ({
     type: ActionType.GET_DRAFT_SUCCEED as typeof ActionType.GET_DRAFT_SUCCEED,
     payload: { result },
   }),
-  failed: (error: AxiosError) => ({
+  getFailed: (error: AxiosError) => ({
     type: ActionType.GET_DRAFT_FAILED as typeof ActionType.GET_DRAFT_FAILED,
+    payload: { error },
+    error: true,
+  }),
+  registStart: (params: RegistDraftParams) => ({
+    type: ActionType.REGIST_DRAFT_START as typeof ActionType.REGIST_DRAFT_START,
+    payload: { params },
+  }),
+  registSucceed: () => ({
+    type: ActionType.REGIST_DRAFT_SUCCEED as typeof ActionType.REGIST_DRAFT_SUCCEED,
+    payload: {},
+  }),
+  registFailed: (error: AxiosError) => ({
+    type: ActionType.REGIST_DRAFT_FAILED as typeof ActionType.REGIST_DRAFT_FAILED,
     payload: { error },
     error: true,
   }),
 };
 
 export type DraftAction =
-  | ReturnType<typeof draft.start>
-  | ReturnType<typeof draft.succeed>
-  | ReturnType<typeof draft.failed>;
+  | ReturnType<typeof draft.getStart>
+  | ReturnType<typeof draft.getSucceed>
+  | ReturnType<typeof draft.getFailed>
+  | ReturnType<typeof draft.registStart>
+  | ReturnType<typeof draft.registSucceed>
+  | ReturnType<typeof draft.registFailed>;

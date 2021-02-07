@@ -28,6 +28,30 @@ export const getDraftFactory = (optionConfig?: AxiosRequestConfig) => {
   return getDraft;
 };
 
+export const registDraftFactory = (
+  contents: string,
+  optionConfig?: AxiosRequestConfig,
+) => {
+  const config = {
+    ...DEFAULT_API_CONFIG,
+    ...optionConfig,
+  };
+
+  const instance = axios.create(config);
+
+  const registDraft = async () => {
+    const response = await instance.post(`/api/draft`, { content: contents });
+
+    console.log(response);
+
+    if (response.status !== 200) {
+      throw new Error('Server Error');
+    }
+  };
+
+  return registDraft;
+};
+
 export const indexDraft = () => {
   return api
     .get(`/api/draft`)

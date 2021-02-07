@@ -34,6 +34,7 @@ interface Props {
   // type?: string;
   registerButtonHandle: (currentContent: string) => void;
   closeButtonHandle: () => void;
+  registerDraftButtonHandle: (currentContent: string) => void;
   drafts: Draft[];
 }
 
@@ -44,6 +45,7 @@ export const CommentWindow2: React.FC<Props> = ({
   isLoading,
   registerButtonHandle,
   closeButtonHandle,
+  registerDraftButtonHandle,
   drafts,
 }) => {
   // コンテンツのテキストを管理するローカルステート
@@ -77,6 +79,7 @@ export const CommentWindow2: React.FC<Props> = ({
             saveButtonHandler={() => {
               // TODO 下描きセーブボタンのハンドラ
               console.log(inputText);
+              registerDraftButtonHandle(inputText);
             }}
             draftToMyActivityButtonHandler={(draftText: string) => {
               setInputText(draftText);
