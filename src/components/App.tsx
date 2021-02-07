@@ -14,22 +14,6 @@ const App: FC = () => {
 
   const [homeFreeWord, setHomeFreeWord] = useState<string>();
   const [myData, setMyData] = useState<any>();
-  const urlParamStr = window.location.pathname;
-  // useEffect(() => {
-  //   // if (urlParamStr.match(/login/) || urlParamStr.match(/register/)) {
-  //   setLoading(true);
-  // }, []);
-
-  // const getMyData = (notLoginFunc: any) => {
-  //   mypage().then((getData: any) => {
-  //     setMyData({
-  //       ...myData,
-  //       data: getData.data,
-  //       company_information: getData.data.company_information,
-  //     });
-  //     setLoading(true);
-  //   });
-  // };
 
   const renderDOM = () => {
     return (
@@ -38,11 +22,7 @@ const App: FC = () => {
           <Switch>
             <Route path="/register" render={() => <Header needBtn={false} />} />
             <Route path="/password" render={() => <Header needBtn={false} />} />
-            <Route
-              path="/login"
-              // component={Login}
-              render={() => <Header needBtn={false} />}
-            />
+            <Route path="/login" render={() => <Header needBtn={false} />} />
             <Route
               path="/company-info/:id/edit"
               render={props => <Header needBtn {...props} />}
