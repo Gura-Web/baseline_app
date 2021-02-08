@@ -6,6 +6,10 @@ interface GetMyActivityResult {
   user: User;
 }
 
+interface EditMyActivityParams {
+  id?: number;
+}
+
 export interface GetMyActivityParams {
   id?: number;
 }
@@ -32,20 +36,6 @@ export const myActivity = {
     error: true,
   }),
 
-  showStart: () => ({
-    type: ActionType.SHOW_MY_ACTIVITY_START as typeof ActionType.SHOW_MY_ACTIVITY_START,
-    payload: {},
-  }),
-  showSucceed: () => ({
-    type: ActionType.SHOW_MY_ACTIVITY_SUCCEED as typeof ActionType.SHOW_MY_ACTIVITY_SUCCEED,
-    payload: {},
-  }),
-  showFailed: (error: AxiosError) => ({
-    type: ActionType.SHOW_MY_ACTIVITY_FAILED as typeof ActionType.SHOW_MY_ACTIVITY_FAILED,
-    payload: { error },
-    error: true,
-  }),
-
   postStart: () => ({
     type: ActionType.POST_MY_ACTIVITY_START as typeof ActionType.POST_MY_ACTIVITY_START,
     payload: {},
@@ -60,9 +50,23 @@ export const myActivity = {
     error: true,
   }),
 
-  editStart: () => ({
-    type: ActionType.EDIT_MY_ACTIVITY_START as typeof ActionType.EDIT_MY_ACTIVITY_START,
+  showStart: (params: EditMyActivityParams) => ({
+    type: ActionType.SHOW_MY_ACTIVITY_START as typeof ActionType.SHOW_MY_ACTIVITY_START,
+    payload: { params },
+  }),
+  showSucceed: () => ({
+    type: ActionType.SHOW_MY_ACTIVITY_SUCCEED as typeof ActionType.SHOW_MY_ACTIVITY_SUCCEED,
     payload: {},
+  }),
+  showFailed: (error: AxiosError) => ({
+    type: ActionType.SHOW_MY_ACTIVITY_FAILED as typeof ActionType.SHOW_MY_ACTIVITY_FAILED,
+    payload: { error },
+    error: true,
+  }),
+
+  editStart: (params: EditMyActivityParams) => ({
+    type: ActionType.EDIT_MY_ACTIVITY_START as typeof ActionType.EDIT_MY_ACTIVITY_START,
+    payload: { params },
   }),
   editSucceed: () => ({
     type: ActionType.EDIT_MY_ACTIVITY_SUCCEED as typeof ActionType.EDIT_MY_ACTIVITY_SUCCEED,
@@ -94,4 +98,13 @@ export type MyActivityAction =
   | ReturnType<typeof myActivity.close>
   | ReturnType<typeof myActivity.getStart>
   | ReturnType<typeof myActivity.getSucceed>
-  | ReturnType<typeof myActivity.getFailed>;
+  | ReturnType<typeof myActivity.getFailed>
+  | ReturnType<typeof myActivity.postStart>
+  | ReturnType<typeof myActivity.postSucceed>
+  | ReturnType<typeof myActivity.postFailed>;
+// | ReturnType<typeof myActivity.showStart>
+// | ReturnType<typeof myActivity.showSucceed>
+// | ReturnType<typeof myActivity.showFailed>
+// | ReturnType<typeof myActivity.editStart>
+// | ReturnType<typeof myActivity.editSucceed>
+// | ReturnType<typeof myActivity.editFailed>;
