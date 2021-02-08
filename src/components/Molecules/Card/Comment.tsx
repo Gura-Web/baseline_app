@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+import { ArrowIcon, PencilIcon, rikuma, TrashIcon } from '../../../assets/images/index';
 import { pageTransitionNormal } from '../../../assets/script';
-import { ArrowIcon, rikuma } from '../../../assets/images/index';
 import { User } from '../../../services/models';
 
 interface Props {
@@ -11,7 +11,9 @@ interface Props {
   contents: string;
   updateTime: string;
   isArrow: boolean;
-  menu: JSX.Element;
+  postId: number;
+  editButtonHandler: (id: number) => void;
+  deleteButtonHandler: (id: number) => void;
 }
 
 export const Comment: React.FC<Props> = ({
@@ -20,7 +22,9 @@ export const Comment: React.FC<Props> = ({
   contents,
   updateTime,
   postedYear,
-  menu,
+  postId,
+  deleteButtonHandler,
+  editButtonHandler,
 }) => {
   const { firstName, lastName, iconImageUrl } = author;
 
@@ -96,8 +100,6 @@ export const Comment: React.FC<Props> = ({
           {contents}
         </p>
       </div>
-      {/* TODO 改修 */}
-
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
       <ul
         className={`activity-item-menu ${toggleMenu && 'view'}`}
@@ -107,11 +109,31 @@ export const Comment: React.FC<Props> = ({
           }
         }}
       >
-        {menu}
         {/* 編集ボタン */}
+        {/* TODO 編集機能を追加する */}
+        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
+        <li
+          className="activity-item-menu__item"
+          onClick={() => {
+            editButtonHandler(postId);
+          }}
+        >
+          <img src={PencilIcon} alt="" />
+          <span>編集</span>
+        </li>
+        {/* 削除ボタン */}
+        {/* TODO 削除機能を追加する */}
+        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
+        <li
+          className="activity-item-menu__item cAttention"
+          onClick={() => {
+            deleteButtonHandler(postId);
+          }}
+        >
+          <img src={TrashIcon} alt="" />
+          <span>削除</span>
+        </li>
       </ul>
-      {/* TODO 改修 */}
-      {/* )} */}
     </motion.article>
   );
 };

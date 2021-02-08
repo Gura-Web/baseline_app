@@ -5,14 +5,21 @@ import { GearIcon } from '../../assets/images';
 import { pageTransitionNormal } from '../../assets/script';
 import { User } from '../../services/models';
 import { UserData } from '../Molecules/Bar';
-import { MyActivity } from '../Organisms/Activity';
+import { MyActivityPost } from '../Organisms/Activity';
 
 interface StateProps {
   isLoading: boolean;
   user: User;
+  editButtonHandler: (id: number) => void;
+  deleteButtonHandler: (id: number) => void;
 }
 
-export const MyPage: FC<StateProps> = ({ user, isLoading = true }) => {
+export const MyPage: FC<StateProps> = ({
+  user,
+  isLoading = true,
+  editButtonHandler,
+  deleteButtonHandler,
+}) => {
   // TODO 神関数
   // const test = user.companyInformation?.flatMap(({ myActivities }) =>
   //   myActivities === undefined ? [] : [...myActivities],
@@ -47,10 +54,12 @@ export const MyPage: FC<StateProps> = ({ user, isLoading = true }) => {
             {/* TODO 記事のリスト */}
             {companyInformationList &&
               companyInformationList.map(myActivity => (
-                <MyActivity
+                <MyActivityPost
                   author={user}
                   companyInformation={myActivity}
                   key={myActivity.id}
+                  editButtonHandler={editButtonHandler}
+                  deleteButtonHandler={deleteButtonHandler}
                 />
               ))}
           </div>

@@ -2,13 +2,10 @@ import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { bindActionCreators, Dispatch } from 'redux';
-import { User, userInit } from '../services/models';
-import { MyActivityState } from '../reducers/myActivity';
-import {
-  GetMyActivityParams,
-  myActivity,
-} from '../actions/myActivity/myActivity';
+import { GetMyActivityParams, myActivity } from '../actions/myActivity/myActivity';
 import { MyPage } from '../components/Pages/MyPage';
+import { MyActivityState } from '../reducers/myActivity';
+import { User, userInit } from '../services/models';
 
 interface StateProps {
   user: User;
@@ -45,7 +42,20 @@ const MyActivityContainer: FC<EnhancedMyProfileProps> = ({
     getMyActivity({});
   }, []);
 
-  return <MyPage user={user} isLoading={isLoading} />;
+  return (
+    <MyPage
+      user={user}
+      isLoading={isLoading}
+      editButtonHandler={id => {
+        console.log('編集が押された', id);
+        // TODO 編集画面が出る処理
+      }}
+      deleteButtonHandler={id => {
+        console.log('削除が押された', id);
+        // TODO 消しますか？のモーダルが出る処理
+      }}
+    />
+  );
 };
 
 export const MyActivityPage = connect(
