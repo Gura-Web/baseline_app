@@ -21,6 +21,14 @@ export function* runGetMyActivity(
   }
 }
 
+// リロード処理
+export function* runReloadMyActivity() {
+  const api = getMyActivityFactory();
+  const user = yield call(api);
+
+  yield put(myActivity.getSucceed({ user }));
+}
+
 // 投稿処理
 export function* runPostMyActivity(
   action: ReturnType<typeof myActivity.postStart>,
@@ -34,10 +42,6 @@ export function* runPostMyActivity(
     yield put(myActivity.postSucceed());
 
     // TODO リロード処理としてまとめる
-    const api2 = getMyActivityFactory();
-    const user = yield call(api2);
-
-    yield put(myActivity.getSucceed({ user }));
   } catch (error) {
     yield put(myActivity.postFailed(error));
   }
@@ -51,4 +55,12 @@ export function* watchRunPostMyActivity() {
   yield takeLatest(Action.POST_MY_ACTIVITY_START, runPostMyActivity);
 }
 
-export default [fork(watchRunGetMyActivity), fork(watchRunPostMyActivity)];
+export function* watchRunReloadMyActivity() {
+  yield takeLatest(Action.POST_MY_ACTIVITY_SUCCEED, runReloadMyActivity);
+}
+
+export default [
+  fork(watchRunGetMyActivity),
+  fork(watchRunPostMyActivity),
+  fork(watchRunReloadMyActivity),
+];
