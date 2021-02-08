@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { rikuma } from '../../../assets/images/index';
 import { Draft, User } from '../../../services/models';
 import { RoundedBtn } from '../../Atoms/Btn';
@@ -25,7 +25,7 @@ interface Props {
   // showModal: any;
   // setShowModal: any;
   // setSaveTextModal: any;
-  content?: string;
+  initContent?: string;
   // setCurrentText?: any;
   // btnClickFunc?: any;
   // editId?: number;
@@ -39,7 +39,7 @@ interface Props {
 
 export const CommentWindow2: React.FC<Props> = ({
   title,
-  content,
+  initContent,
   user,
   isLoading,
   registerButtonHandle,
@@ -51,6 +51,14 @@ export const CommentWindow2: React.FC<Props> = ({
   // コンテンツのテキストを管理するローカルステート
   const [inputText, setInputText] = useState<string>('');
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
+
+  useEffect(
+    () => {
+      setInputText(initContent ?? '');
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
 
   const handleTextChange = (textValue: string) => {
     setInputText(textValue);
@@ -105,7 +113,7 @@ export const CommentWindow2: React.FC<Props> = ({
                 name="content"
                 className="modal__textarea"
                 required
-                defaultValue={content ?? inputText ?? ''}
+                defaultValue={initContent ?? inputText ?? ''}
                 onChange={e => handleTextChange(e.target.value)}
               />
             </div>
