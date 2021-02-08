@@ -2,7 +2,10 @@ import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { bindActionCreators, Dispatch } from 'redux';
-import { GetMyActivityParams, myActivity } from '../actions/myActivity/myActivity';
+import {
+  GetMyActivityParams,
+  myActivity,
+} from '../actions/myActivity/myActivity';
 import { MyPage } from '../components/Pages/MyPage';
 import { MyActivityState } from '../reducers/myActivity';
 import { User, userInit } from '../services/models';
