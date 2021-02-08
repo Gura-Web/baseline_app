@@ -32,6 +32,12 @@ export function* runPostMyActivity(
     yield call(api);
 
     yield put(myActivity.postSucceed());
+
+    // TODO リロード処理としてまとめる
+    const api2 = getMyActivityFactory();
+    const user = yield call(api2);
+
+    yield put(myActivity.getSucceed({ user }));
   } catch (error) {
     yield put(myActivity.postFailed(error));
   }

@@ -43,7 +43,7 @@ export const postMyActivityFactory = (
   const instance = axios.create(config);
 
   const postMyActivity = async () => {
-    const response = await instance.post('/my_activity', { content });
+    const response = await instance.post('/api/my_activity', { content });
 
     if (response.status !== 200) {
       throw new Error('Server Error');

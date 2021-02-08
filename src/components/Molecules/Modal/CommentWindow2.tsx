@@ -67,6 +67,7 @@ export const CommentWindow2: React.FC<Props> = ({
   // 登録ボタンの高階関数
   const register = () => {
     registerButtonHandle(inputText);
+    closeButtonHandle();
   };
 
   return (
