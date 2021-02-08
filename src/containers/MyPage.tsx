@@ -43,6 +43,7 @@ const MyActivityContainer: FC<EnhancedMyProfileProps> = ({
 }) => {
   useEffect(() => {
     getMyActivity({});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
