@@ -7,12 +7,12 @@ export interface User {
   iconImageUrl: string | null;
   sex: number;
   email: string;
-  desiredOccupation?: desiredOccupation;
+  desiredOccupation?: DesiredOccupation;
   desiredOccupations: number;
   companyInformation?: CompanyInformation[];
 }
 
-export interface desiredOccupation {
+export interface DesiredOccupation {
   id: number;
   name: string;
 }
