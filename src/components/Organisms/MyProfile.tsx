@@ -7,9 +7,15 @@ interface StateProps {
   user: User;
   isLoading: boolean;
   isError: boolean;
+  logoutButtonHandler: () => void;
 }
 
-export const MyProfile: FC<StateProps> = ({ user, isLoading, isError }) => {
+export const MyProfile: FC<StateProps> = ({
+  user,
+  isLoading,
+  isError,
+  logoutButtonHandler,
+}) => {
   const [viewMenu, setViewMenu] = useState(false);
 
   const history = useHistory();
@@ -46,7 +52,12 @@ export const MyProfile: FC<StateProps> = ({ user, isLoading, isError }) => {
         <div>
           <ul className="myAvatar__wrap">
             {/* TODO ログアウト機能 */}
-            <li className="myAvatar-menu__item cAttention">ログアウト</li>
+            <li
+              className="myAvatar-menu__item cAttention"
+              onClick={logoutButtonHandler}
+            >
+              ログアウト
+            </li>
           </ul>
         </div>
       </div>

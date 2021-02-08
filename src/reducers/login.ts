@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import * as ActionType from '../actions/auth/login';
+import * as ActionType from '../actions/auth/auth';
 import { LoginAction } from '../actions/auth/doLogin';
 
 export interface LoginState {
@@ -26,6 +26,7 @@ export const loginReducer: Reducer<LoginState, LoginAction> = (
     case ActionType.DO_LOGIN_START:
       return {
         ...state,
+        isError: false,
       };
     case ActionType.DO_LOGIN_SUCCEED:
       return {
@@ -38,6 +39,20 @@ export const loginReducer: Reducer<LoginState, LoginAction> = (
       return {
         ...state,
         isError: true,
+      };
+
+    case ActionType.DO_LOGOUT_START:
+      return {
+        ...state,
+      };
+    case ActionType.DO_LOGOUT_SUCCEED:
+      return {
+        ...state,
+      };
+
+    case ActionType.DO_LOGOUT_FAILED:
+      return {
+        ...state,
       };
 
     default:

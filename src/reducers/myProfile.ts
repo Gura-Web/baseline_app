@@ -33,6 +33,7 @@ export const myProfileReducer: Reducer<MyProfileState, MyProfileAction> = (
     case ActionType.GET_MY_PROFILE_START:
       return {
         ...state,
+        isError: false,
       };
     case ActionType.GET_MY_PROFILE_SUCCEED:
       return {

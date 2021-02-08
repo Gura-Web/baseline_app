@@ -26,7 +26,7 @@ const mapStateToProps = (state: { login: LoginState }): StateProps => ({
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
-      doLoginStart: params => doLogin.start(params),
+      doLoginStart: params => doLogin.loginStart(params),
       loginPageRead: () => doLogin.init(),
     },
     dispatch,

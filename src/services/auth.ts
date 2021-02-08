@@ -27,6 +27,26 @@ export const doLoginFactory = (
   return doLogin;
 };
 
+export const doLogoutFactory = (optionConfig?: AxiosRequestConfig) => {
+  const config = {
+    ...DEFAULT_API_CONFIG,
+    ...optionConfig,
+  };
+
+  const instance = axios.create(config);
+
+  const doLogout = async () => {
+    // ログイン処理
+    const response = await instance.post('/api/auth/logout');
+
+    if (response.status !== 200) {
+      throw new Error('Server Error');
+    }
+  };
+
+  return doLogout;
+};
+
 export const logout = (func: { (): void; (): void }) => {
   api
     .post('/api/auth/logout')
