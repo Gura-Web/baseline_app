@@ -18,7 +18,7 @@ interface StateProps {
 interface DispatchProps {
   openMyActivityWindow: () => void;
   closeMyActivityWindow: () => void;
-  postMyActivity: (content: string) => void;
+  postMyActivity: (content: string, userId: number) => void;
 }
 
 type EnhancedMyProfileProps = StateProps & DispatchProps;
@@ -36,7 +36,8 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
     {
       openMyActivityWindow: () => myActivity.open(),
       closeMyActivityWindow: () => myActivity.close(),
-      postMyActivity: content => myActivity.postStart({ content }),
+      postMyActivity: (content, userId) =>
+        myActivity.postStart({ content, userId }),
     },
     dispatch,
   );
@@ -57,7 +58,7 @@ const MyActivityPostContainer: FC<EnhancedMyProfileProps> = ({
             closeButtonHandler={closeMyActivityWindow}
             registerButtonHandle={contents => {
               console.log('登録');
-              postMyActivity(contents);
+              postMyActivity(contents, user.id);
             }}
           />
         </Modal>

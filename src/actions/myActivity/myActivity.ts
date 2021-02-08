@@ -11,10 +11,11 @@ interface EditMyActivityParams {
 }
 
 export interface GetMyActivityParams {
-  id?: number;
+  userId?: number;
 }
 
 export interface PostMyActivityParams {
+  userId: number;
   content: string;
 }
 
@@ -24,6 +25,11 @@ export const myActivity = {
   }),
   close: () => ({
     type: ActionType.MY_ACTIVITY_POST_WINDOW_CLOSE as typeof ActionType.MY_ACTIVITY_POST_WINDOW_CLOSE,
+  }),
+
+  reload: (params: GetMyActivityParams) => ({
+    type: ActionType.RELOAD_MY_ACTIVITY_START as typeof ActionType.RELOAD_MY_ACTIVITY_START,
+    payload: { params },
   }),
 
   getStart: (params: GetMyActivityParams) => ({
@@ -98,6 +104,7 @@ export const myActivity = {
 };
 
 export type MyActivityAction =
+  | ReturnType<typeof myActivity.reload>
   | ReturnType<typeof myActivity.open>
   | ReturnType<typeof myActivity.close>
   | ReturnType<typeof myActivity.getStart>

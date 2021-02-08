@@ -12,7 +12,7 @@ export function* runGetMyActivity(
   const { params } = action.payload;
 
   try {
-    const api = getMyActivityFactory(params.id);
+    const api = getMyActivityFactory(params.userId);
     const user = yield call(api);
 
     yield put(myActivity.getSucceed({ user }));
@@ -22,8 +22,12 @@ export function* runGetMyActivity(
 }
 
 // リロード処理
-export function* runReloadMyActivity() {
-  const api = getMyActivityFactory();
+export function* runReloadMyActivity(
+  action: ReturnType<typeof myActivity.reload>,
+) {
+  const { params } = action.payload;
+
+  const api = getMyActivityFactory(params.userId);
   const user = yield call(api);
 
   yield put(myActivity.getSucceed({ user }));
@@ -41,7 +45,8 @@ export function* runPostMyActivity(
 
     yield put(myActivity.postSucceed());
 
-    // TODO リロード処理としてまとめる
+    // リロード処理
+    yield put(myActivity.reload(params));
   } catch (error) {
     yield put(myActivity.postFailed(error));
   }
@@ -56,7 +61,7 @@ export function* watchRunPostMyActivity() {
 }
 
 export function* watchRunReloadMyActivity() {
-  yield takeLatest(Action.POST_MY_ACTIVITY_SUCCEED, runReloadMyActivity);
+  yield takeLatest(Action.RELOAD_MY_ACTIVITY_START, runReloadMyActivity);
 }
 
 export default [

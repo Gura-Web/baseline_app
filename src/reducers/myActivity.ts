@@ -31,6 +31,12 @@ export const myActivityReducer: Reducer<MyActivityState, MyActivityAction> = (
         visible: false,
       };
 
+    case ActionType.RELOAD_MY_ACTIVITY_START:
+      return {
+        ...state,
+        isLoading: false,
+      };
+
     // 取得処理
     case ActionType.GET_MY_ACTIVITY_START:
       return {
