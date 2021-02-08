@@ -5,7 +5,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { getMyProfile } from '../actions/baseline';
 import { SideMenu as SideMenuComponent } from '../components/Organisms/Header';
 import { MyProfile as MyProfileComponent } from '../components/Organisms/MyProfile';
-import { AccountSetting as AccountSettingComponent } from '../components/Pages';
+import { AccountSetting as AccountSettingComponent, ProfileEdit as ProfileEditComponent } from '../components/Pages';
 import { MyProfileState } from '../reducers/myProfile';
 import { User } from '../services/models';
 
@@ -64,6 +64,18 @@ const AccountSettingContainer: FC<EnhancedMyProfileProps> = ({
   return <AccountSettingComponent user={user} isLoading={isLoading} />;
 };
 
+const ProfileEditContainer: FC<EnhancedMyProfileProps> = ({
+  user,
+  getMyProfileStart,
+}) => {
+  useEffect(() => {
+    getMyProfileStart();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return <ProfileEditComponent user={user} />;
+};
+
 const SideMenuContainer: FC<EnhancedMyProfileProps> = ({ isLoading }) => {
   return <SideMenuComponent isLoading={isLoading} />;
 };
@@ -77,10 +89,10 @@ export const SideMenu = withRouter(
   connect(mapStateToProps, mapDispatchToProps)(SideMenuContainer),
 );
 
-export const AccountSetting = withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(AccountSettingContainer),
+export const ProfileEdit = withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(ProfileEditContainer),
 );
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(MyProfileContainer),
+export const AccountSetting = withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(AccountSettingContainer),
 );

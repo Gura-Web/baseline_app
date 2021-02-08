@@ -1,22 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
-import { SelectSecondary } from "../Atoms/Input/index";
-import { Secondary } from "../Atoms/TextInput";
-import { RoundedBtn } from "../Atoms/Btn";
-import { motion } from "framer-motion";
-import { rikuma, CameraIcon } from "../../assets/images/index";
-import { pageTransitionNormal } from "../../assets/script/pageTransition";
-import {
-  mypage,
-  indexJob,
-  indexYearGraduation,
-  editProfile,
-} from "../../assets/script";
+import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { CameraIcon, rikuma } from '../../assets/images/index';
+import { editProfile, indexJob, indexYearGraduation, mypage } from '../../assets/script';
+import { pageTransitionNormal } from '../../assets/script/pageTransition';
+import { User } from '../../services/models';
+import { RoundedBtn } from '../Atoms/Btn';
+import { SelectSecondary } from '../Atoms/Input/index';
+import { Secondary } from '../Atoms/TextInput';
 
 interface Props {
-  myData: any;
+  user: User;
 }
-const ProfileEdit: React.FC<Props> = (props) => {
+
+const ProfileEdit: React.FC<Props> = ({ user }) => {
   const [myData, setMyData] = useState<any>();
   const [jobs, setJobs] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -44,21 +41,21 @@ const ProfileEdit: React.FC<Props> = (props) => {
     { isEmpty3: false },
   ];
   const gender = [
-    { id: 0, name: "男性" },
-    { id: 1, name: "女性" },
-    { id: 2, name: "その他" },
+    { id: 0, name: '男性' },
+    { id: 1, name: '女性' },
+    { id: 2, name: 'その他' },
   ];
 
   const selectBtnChanges = () => {
-    const selectBtns = document.querySelectorAll(".select-btn");
+    const selectBtns = document.querySelectorAll('.select-btn');
 
     selectBtns.forEach((btn: any) => {
-      btn.addEventListener("click", () => {
-        selectBtns.forEach((item) => {
-          item.classList.remove("current");
+      btn.addEventListener('click', () => {
+        selectBtns.forEach(item => {
+          item.classList.remove('current');
         });
-        btn.classList.add("current");
-        btn.querySelector("input").checked = true;
+        btn.classList.add('current');
+        btn.querySelector('input').checked = true;
       });
     });
   };
@@ -73,35 +70,36 @@ const ProfileEdit: React.FC<Props> = (props) => {
     year_of_graduation: string;
     icon?: string | undefined | ArrayBuffer | null;
   }
+
   let sendObj: sendObj = {
-    student_number: "",
+    student_number: '',
     annual: null,
-    first_name: "",
-    last_name: "",
+    first_name: '',
+    last_name: '',
     sex: null,
     desired_occupations: null,
-    year_of_graduation: "",
+    year_of_graduation: '',
   };
 
   const changeBtnClickHandler = () => {
     const firstname = (document.querySelector(
-      'input[name="first_name"]'
+      'input[name="first_name"]',
     ) as HTMLInputElement).value;
     const lastname = (document.querySelector(
-      'input[name="last_name"]'
+      'input[name="last_name"]',
     ) as HTMLInputElement).value;
     const gender = document.querySelectorAll(
-      'input[name="gender"]'
+      'input[name="gender"]',
     ) as NodeListOf<HTMLInputElement>;
     const job = (document.querySelector(
-      'select[name="job"]'
+      'select[name="job"]',
     ) as HTMLSelectElement).value;
     const graduationYear = (document.querySelector(
-      'select[name="graduation_year"]'
+      'select[name="graduation_year"]',
     ) as HTMLSelectElement).value;
 
     let genderValue;
-    gender.forEach((item) => {
+    gender.forEach(item => {
       if (item.checked) {
         genderValue = item.value;
       }
@@ -119,25 +117,25 @@ const ProfileEdit: React.FC<Props> = (props) => {
     };
     console.log(sendObj);
     editProfile(myData.id, sendObj);
-    handleLink("/mypage");
+    handleLink('/mypage');
   };
 
   const handleImage = (event: any) => {
     const image = event.target.files[0];
     const imageUrl = URL.createObjectURL(image);
     const avatarArea = document.querySelector(
-      ".select-image__avatar"
+      '.select-image__avatar',
     )! as HTMLImageElement;
     avatarArea.src = imageUrl;
 
     const file = image;
     const reader = new FileReader();
     reader.addEventListener(
-      "load",
-      function () {
+      'load',
+      function() {
         sendObj.icon = reader.result;
       },
-      false
+      false,
     );
     if (file) {
       reader.readAsDataURL(file);
@@ -166,9 +164,7 @@ const ProfileEdit: React.FC<Props> = (props) => {
                   <div className="select-image__wrap">
                     <img
                       className="select-image__avatar"
-                      src={
-                        myData.icon_image_url ? myData.icon_image_url : rikuma
-                      }
+                      src={user.iconImageUrl ?? rikuma}
                       alt=""
                     />
                     <div className="select-image__overlay">
@@ -191,7 +187,7 @@ const ProfileEdit: React.FC<Props> = (props) => {
                   labelTxt="苗字"
                   isRequired={false}
                   isRequiredTxt={false}
-                  defaultValue={myData.first_name}
+                  defaultValue={user.firstName}
                   placeholderTxt="山本 仁"
                   isError={isError}
                   isIcon={false}
@@ -202,7 +198,7 @@ const ProfileEdit: React.FC<Props> = (props) => {
                   labelTxt="名前"
                   isRequired={false}
                   isRequiredTxt={false}
-                  defaultValue={myData.last_name}
+                  defaultValue={user.lastName}
                   placeholderTxt="山本 仁"
                   isError={isError}
                   isIcon={false}
@@ -210,22 +206,22 @@ const ProfileEdit: React.FC<Props> = (props) => {
                 <div className="gender-select">
                   <p className="gender-select__heading">性別</p>
                   <ul className="gender-select-list">
-                    {gender.map((data) => {
+                    {gender.map(data => {
                       return (
                         <li>
                           <label
                             onClick={() => selectBtnChanges()}
                             className={`btn select-btn ${
-                              data.id === myData.sex ? "current" : ""
+                              data.id === user.sex ? 'current' : ''
                             }`}
                           >
                             <span>{data.name}</span>
                             <input
-                              onClick={(event) => event.stopPropagation()}
+                              onClick={event => event.stopPropagation()}
                               type="radio"
                               name="gender"
                               value={data.id}
-                              checked={data.id === myData.sex && true}
+                              checked={data.id === user.sex && true}
                             />
                           </label>
                         </li>
@@ -236,19 +232,19 @@ const ProfileEdit: React.FC<Props> = (props) => {
               </div>
             </div>
           </div>
-
           <div className="contentBox contentBox--big">
             <SelectSecondary
               ttl="希望職種"
               name="job"
               selectObj={jobs}
-              defaultValue={myData.desired_occupation.id}
+              // TODO 直す user.desiredOccupation?.id
+              defaultValue={1}
             />
             <SelectSecondary
               ttl="卒業年次"
               name="graduation_year"
               selectObj={yearGraduation}
-              defaultValue={myData.year_of_graduation}
+              defaultValue={user.yearOfGraduation}
             />
             <div className="contentBox__wrap">
               <p className="contentBox__cansel btn">

@@ -5,7 +5,7 @@ import '../assets/styles/App.scss';
 import Login from '../containers/Login';
 import { MyActivityPostWindow } from '../containers/MyActivity';
 import { MyActivityPage } from '../containers/MyPage';
-import { AccountSetting, SideMenu } from '../containers/MyProfile';
+import { AccountSetting, ProfileEdit, SideMenu } from '../containers/MyProfile';
 import { Header } from './Organisms/Header';
 import * as Page from './Pages';
 
@@ -125,10 +125,7 @@ const App: FC = () => {
                     <Page.CompanyInfo myData={myData} {...props} />
                   )}
                 />
-                <Route
-                  path="/profile-edit"
-                  render={() => <Page.ProfileEdit myData={myData} />}
-                />
+                <Route path="/profile-edit" component={ProfileEdit} />
                 {/* <Route><h2>ページは存在しません</h2></Route> */}
 
                 <Route
