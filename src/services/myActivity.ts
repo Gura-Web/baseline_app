@@ -31,6 +31,28 @@ export const getMyActivityFactory = (
   return getMyActivity;
 };
 
+export const postMyActivityFactory = (
+  content: string,
+  optionConfig?: AxiosRequestConfig,
+) => {
+  const config = {
+    ...DEFAULT_API_CONFIG,
+    ...optionConfig,
+  };
+
+  const instance = axios.create(config);
+
+  const postMyActivity = async () => {
+    const response = await instance.post('/my_activity', { content });
+
+    if (response.status !== 200) {
+      throw new Error('Server Error');
+    }
+  };
+
+  return postMyActivity;
+};
+
 export const getOldMyActivity = (id: number) => {
   return api
     .get(`/api/my_activity/show/1`)

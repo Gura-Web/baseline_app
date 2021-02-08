@@ -14,6 +14,10 @@ export interface GetMyActivityParams {
   id?: number;
 }
 
+export interface PostMyActivityParams {
+  content: string;
+}
+
 export const myActivity = {
   open: () => ({
     type: ActionType.MY_ACTIVITY_POST_WINDOW_OPEN as typeof ActionType.MY_ACTIVITY_POST_WINDOW_OPEN,
@@ -36,9 +40,9 @@ export const myActivity = {
     error: true,
   }),
 
-  postStart: () => ({
+  postStart: (params: PostMyActivityParams) => ({
     type: ActionType.POST_MY_ACTIVITY_START as typeof ActionType.POST_MY_ACTIVITY_START,
-    payload: {},
+    payload: { params },
   }),
   postSucceed: () => ({
     type: ActionType.POST_MY_ACTIVITY_SUCCEED as typeof ActionType.POST_MY_ACTIVITY_SUCCEED,

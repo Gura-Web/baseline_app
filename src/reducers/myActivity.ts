@@ -31,7 +31,7 @@ export const myActivityReducer: Reducer<MyActivityState, MyActivityAction> = (
         visible: false,
       };
 
-    // アクティビティの取得処理
+    // 取得処理
     case ActionType.GET_MY_ACTIVITY_START:
       return {
         ...state,
@@ -49,6 +49,7 @@ export const myActivityReducer: Reducer<MyActivityState, MyActivityAction> = (
         isLoading: false,
       };
 
+    // 投稿処理
     case ActionType.POST_MY_ACTIVITY_START:
       return {
         ...state,
