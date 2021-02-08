@@ -31,7 +31,7 @@ const mapStateToProps = (state: {
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
-      getMyActivity: params => myActivity.start(params),
+      getMyActivity: params => myActivity.getStart(params),
     },
     dispatch,
   );

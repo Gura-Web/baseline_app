@@ -3,16 +3,18 @@ import { myActivity } from '../actions/myActivity/myActivity';
 import * as Action from '../actions/myActivity/myActivityActionType';
 import { getMyActivityFactory } from '../services/myActivity';
 
-export function* runGetMyActivity(action: ReturnType<typeof myActivity.start>) {
+export function* runGetMyActivity(
+  action: ReturnType<typeof myActivity.getStart>,
+) {
   const { params } = action.payload;
 
   try {
     const api = getMyActivityFactory(params.id);
     const user = yield call(api);
 
-    yield put(myActivity.succeed({ user }));
+    yield put(myActivity.getSucceed({ user }));
   } catch (error) {
-    yield put(myActivity.failed(params, error));
+    yield put(myActivity.getFailed(params, error));
   }
 }
 

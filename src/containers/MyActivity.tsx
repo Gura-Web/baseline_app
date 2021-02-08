@@ -39,7 +39,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
     dispatch,
   );
 
-const MyActivityContainer: FC<EnhancedMyProfileProps> = ({
+const MyActivityPostContainer: FC<EnhancedMyProfileProps> = ({
   user,
   closeMyActivityWindow,
   isOpen,
@@ -79,4 +79,4 @@ export const OpenPostMyActivityButton = connect(
 export const MyActivityPostWindow = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(MyActivityContainer);
+)(MyActivityPostContainer);
