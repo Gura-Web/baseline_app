@@ -4,6 +4,7 @@ import * as Action from '../actions/myActivity/myActivityActionType';
 import {
   getMyActivityFactory,
   postMyActivityFactory,
+  showMyActivityFactory,
 } from '../services/myActivity';
 
 export function* runGetMyActivity(
@@ -52,20 +53,41 @@ export function* runPostMyActivity(
   }
 }
 
-export function* watchRunGetMyActivity() {
-  yield takeLatest(Action.GET_MY_ACTIVITY_START, runGetMyActivity);
+// 個別取得
+export function* runShowMyActivity(
+  action: ReturnType<typeof myActivity.showStart>,
+) {
+  const { params } = action.payload;
+
+  try {
+    const api = showMyActivityFactory(params.id);
+    const companyInformation = yield call(api);
+
+    yield put(myActivity.showSucceed({ companyInformation }));
+  } catch (error) {
+    yield put(myActivity.showFailed(error));
+  }
 }
 
-export function* watchRunPostMyActivity() {
-  yield takeLatest(Action.POST_MY_ACTIVITY_START, runPostMyActivity);
+export function* watchRunGetMyActivity() {
+  yield takeLatest(Action.GET_MY_ACTIVITY_START, runGetMyActivity);
 }
 
 export function* watchRunReloadMyActivity() {
   yield takeLatest(Action.RELOAD_MY_ACTIVITY_START, runReloadMyActivity);
 }
 
+export function* watchRunPostMyActivity() {
+  yield takeLatest(Action.POST_MY_ACTIVITY_START, runPostMyActivity);
+}
+
+export function* watchRunShowMyActivity() {
+  yield takeLatest(Action.SHOW_MY_ACTIVITY_START, runShowMyActivity);
+}
+
 export default [
   fork(watchRunGetMyActivity),
   fork(watchRunPostMyActivity),
   fork(watchRunReloadMyActivity),
+  fork(watchRunShowMyActivity),
 ];

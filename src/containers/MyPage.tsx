@@ -5,6 +5,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import {
   GetMyActivityParams,
   myActivity,
+  ShowMyActivityParams,
 } from '../actions/myActivity/myActivity';
 import { MyPage } from '../components/Pages/MyPage';
 import { MyActivityState } from '../reducers/myActivity';
@@ -17,6 +18,7 @@ interface StateProps {
 
 interface DispatchProps {
   getMyActivity: (params: GetMyActivityParams) => void;
+  showMyActivity: (params: ShowMyActivityParams) => void;
 }
 
 type EnhancedMyProfileProps = StateProps & DispatchProps;
@@ -32,12 +34,14 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
       getMyActivity: params => myActivity.getStart(params),
+      showMyActivity: params => myActivity.showStart(params),
     },
     dispatch,
   );
 
 const MyActivityContainer: FC<EnhancedMyProfileProps> = ({
   getMyActivity,
+  showMyActivity,
   user = userInit,
   isLoading = false,
 }) => {
@@ -53,6 +57,7 @@ const MyActivityContainer: FC<EnhancedMyProfileProps> = ({
       editButtonHandler={id => {
         console.log('編集が押された', id);
         // TODO 編集画面が出る処理
+        showMyActivity({ id });
       }}
       deleteButtonHandler={id => {
         console.log('削除が押された', id);

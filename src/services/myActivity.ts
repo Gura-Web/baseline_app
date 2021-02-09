@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import camelcaseKeys from 'camelcase-keys';
 import { api, DEFAULT_API_CONFIG } from './api';
-import { User } from './models';
+import { CompanyInformation, User } from './models';
 
 export const getMyActivityFactory = (
   id?: number,
@@ -51,6 +51,60 @@ export const postMyActivityFactory = (
   };
 
   return postMyActivity;
+};
+
+export const showMyActivityFactory = (
+  id: number,
+  optionConfig?: AxiosRequestConfig,
+) => {
+  const config = {
+    ...DEFAULT_API_CONFIG,
+    ...optionConfig,
+  };
+
+  const instance = axios.create(config);
+
+  const showMyActivity = async () => {
+    const response = await instance.get(`/api/my_activity/show/${id}`);
+
+    if (response.status !== 200) {
+      throw new Error('Server Error');
+    }
+
+    const companyInformation: CompanyInformation = camelcaseKeys(
+      response.data,
+      { deep: true },
+    );
+
+    return companyInformation;
+  };
+
+  return showMyActivity;
+};
+
+export const editMyActivityFactory = (
+  id: number,
+  content: string,
+  optionConfig?: AxiosRequestConfig,
+) => {
+  const config = {
+    ...DEFAULT_API_CONFIG,
+    ...optionConfig,
+  };
+
+  const instance = axios.create(config);
+
+  const editMyActivity = async () => {
+    const response = await instance.post(`/api/my_activity/edit/${id}`, {
+      content,
+    });
+
+    if (response.status !== 200) {
+      throw new Error('Server Error');
+    }
+  };
+
+  return editMyActivity;
 };
 
 export const getOldMyActivity = (id: number) => {

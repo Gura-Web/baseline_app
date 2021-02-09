@@ -11,22 +11,22 @@ interface Props {
 
 export const MyActivityPost: FC<Props> = ({
   author,
-  companyInformation: { myActivities },
+  companyInformation,
   editButtonHandler,
   deleteButtonHandler,
 }) => {
   // もしMyActivityの1個目がなかったらスキップ
-  if (!myActivities?.[0]) {
+  if (!companyInformation.myActivities?.[0]) {
     return <></>;
   }
 
-  const myActivity = myActivities[0];
+  const myActivity = companyInformation.myActivities[0];
 
   return (
     <>
       <Comment
         author={author}
-        postId={myActivity.id}
+        postId={companyInformation.id}
         postedYear={myActivity.postedYear}
         contents={myActivity.content}
         // TODO 直す

@@ -10,7 +10,11 @@ interface ShowMyActivityResult {
   companyInformation: CompanyInformation;
 }
 
-interface EditMyActivityParams {
+export interface ShowMyActivityParams {
+  id: number;
+}
+
+export interface EditMyActivityParams {
   userId: number;
   id: number;
   content: string;
@@ -66,7 +70,7 @@ export const myActivity = {
     error: true,
   }),
 
-  showStart: (params: EditMyActivityParams) => ({
+  showStart: (params: ShowMyActivityParams) => ({
     type: ActionType.SHOW_MY_ACTIVITY_START as typeof ActionType.SHOW_MY_ACTIVITY_START,
     payload: { params },
   }),

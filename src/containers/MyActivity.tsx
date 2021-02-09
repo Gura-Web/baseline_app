@@ -56,8 +56,8 @@ const MyActivityPostContainer: FC<EnhancedMyProfileProps> = ({
             title="アクティビティを投稿"
             user={user}
             closeButtonHandler={closeMyActivityWindow}
+            // 登録ボタン
             registerButtonHandle={contents => {
-              console.log('登録');
               postMyActivity(contents, user.id);
             }}
           />
