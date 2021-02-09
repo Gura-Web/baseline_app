@@ -30,10 +30,10 @@ export interface PostMyActivityParams {
 }
 
 export const myActivity = {
-  open: () => ({
+  postWindowOpen: () => ({
     type: ActionType.MY_ACTIVITY_POST_WINDOW_OPEN as typeof ActionType.MY_ACTIVITY_POST_WINDOW_OPEN,
   }),
-  close: () => ({
+  postWindowClose: () => ({
     type: ActionType.MY_ACTIVITY_POST_WINDOW_CLOSE as typeof ActionType.MY_ACTIVITY_POST_WINDOW_CLOSE,
   }),
 
@@ -115,8 +115,8 @@ export const myActivity = {
 
 export type MyActivityAction =
   | ReturnType<typeof myActivity.reload>
-  | ReturnType<typeof myActivity.open>
-  | ReturnType<typeof myActivity.close>
+  | ReturnType<typeof myActivity.postWindowOpen>
+  | ReturnType<typeof myActivity.postWindowClose>
   | ReturnType<typeof myActivity.getStart>
   | ReturnType<typeof myActivity.getSucceed>
   | ReturnType<typeof myActivity.getFailed>

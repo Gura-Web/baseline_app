@@ -34,8 +34,8 @@ const mapStateToProps = (state: {
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
-      openMyActivityWindow: () => myActivity.open(),
-      closeMyActivityWindow: () => myActivity.close(),
+      openMyActivityWindow: () => myActivity.postWindowOpen(),
+      closeMyActivityWindow: () => myActivity.postWindowClose(),
       postMyActivity: (content, userId) =>
         myActivity.postStart({ content, userId }),
     },
