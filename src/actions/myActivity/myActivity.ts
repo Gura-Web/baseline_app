@@ -15,7 +15,6 @@ export interface ShowMyActivityParams {
 }
 
 export interface EditMyActivityParams {
-  userId: number;
   id: number;
   content: string;
 }
@@ -25,7 +24,6 @@ export interface GetMyActivityParams {
 }
 
 export interface PostMyActivityParams {
-  userId: number;
   content: string;
 }
 

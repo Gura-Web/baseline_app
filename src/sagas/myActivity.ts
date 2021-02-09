@@ -76,14 +76,14 @@ export function* runShowMyActivity(
 export function* runEditMyActivity(
   action: ReturnType<typeof myActivity.editStart>,
 ) {
-  const { id, content, userId } = action.payload.params;
+  const { id, content } = action.payload.params;
 
   try {
     const api = editMyActivityFactory(id, content);
     yield call(api);
 
     yield put(myActivity.editSucceed());
-    yield put(myActivity.reload({ userId }));
+    yield put(reload.reloadStart());
   } catch (error) {
     yield put(myActivity.showFailed(error));
   }

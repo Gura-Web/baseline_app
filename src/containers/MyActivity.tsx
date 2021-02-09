@@ -21,8 +21,8 @@ interface DispatchProps {
   closeMyActivityWindow: () => void;
   openMyActivityEditWindow: () => void;
   closeMyActivityEditWindow: () => void;
-  postMyActivity: (content: string, userId: number) => void;
-  editMyActivity: (content: string, userId: number, id: number) => void;
+  postMyActivity: (content: string) => void;
+  editMyActivity: (content: string, id: number) => void;
 }
 
 type EnhancedMyProfileProps = StateProps & DispatchProps;
@@ -36,17 +36,15 @@ const mapStateToProps = (state: {
   companyInformation: state.myActivity.companyInformation,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) =>
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
   bindActionCreators(
     {
       openMyActivityWindow: () => myActivity.postWindowOpen(),
       closeMyActivityWindow: () => myActivity.postWindowClose(),
       openMyActivityEditWindow: () => myActivity.editWindowOpen(),
       closeMyActivityEditWindow: () => myActivity.editWindowClose(),
-      postMyActivity: (content, userId) =>
-        myActivity.postStart({ content, userId }),
-      editMyActivity: (content, userId, id) =>
-        myActivity.editStart({ content, userId, id }),
+      postMyActivity: content => myActivity.postStart({ content }),
+      editMyActivity: (content, id) => myActivity.editStart({ content, id }),
     },
     dispatch,
   );
@@ -70,7 +68,7 @@ const MyActivityPostContainer: FC<EnhancedMyProfileProps> = ({
             closeButtonHandler={closeMyActivityEditWindow}
             // 登録ボタン
             registerButtonHandle={contents => {
-              postMyActivity(contents, user.id);
+              postMyActivity(contents);
             }}
           />
         </Modal>
@@ -106,7 +104,7 @@ const MyActivityEditContainer: FC<EnhancedMyProfileProps> = ({
             closeButtonHandler={closeMyActivityEditWindow}
             // 編集ボタン
             registerButtonHandle={contents => {
-              editMyActivity(contents, user.id, companyInformation.id);
+              editMyActivity(contents, companyInformation.id);
             }}
           />
         </Modal>
