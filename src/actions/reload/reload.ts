@@ -1,8 +1,8 @@
 import { AxiosError } from 'axios';
 import * as Action from './actions';
 
-interface SetReloadParams {
-  reloadHandler: Array<() => void>;
+export interface SetReloadParams {
+  reloadHandlers: Array<() => void>;
 }
 
 export const reload = {

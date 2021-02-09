@@ -7,6 +7,7 @@ import {
   myActivity,
   ShowMyActivityParams,
 } from '../actions/myActivity/myActivity';
+import { reload, SetReloadParams } from '../actions/reload/reload';
 import { MyPage } from '../components/Pages/MyPage';
 import { MyActivityState } from '../reducers/myActivity';
 import { User, userInit } from '../services/models';
@@ -19,6 +20,8 @@ interface StateProps {
 interface DispatchProps {
   getMyActivity: (params: GetMyActivityParams) => void;
   showMyActivity: (params: ShowMyActivityParams) => void;
+  setReload: (reloadFunctions: SetReloadParams) => void;
+  reloadMyActivity: (params: GetMyActivityParams) => void;
 }
 
 type EnhancedMyProfileProps = StateProps & DispatchProps;
@@ -30,11 +33,13 @@ const mapStateToProps = (state: {
   isLoading: state.myActivity.isLoading,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) =>
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
   bindActionCreators(
     {
       getMyActivity: params => myActivity.getStart(params),
       showMyActivity: params => myActivity.showStart(params),
+      reloadMyActivity: params => myActivity.reload(params),
+      setReload: params => reload.setReload(params),
     },
     dispatch,
   );
@@ -44,9 +49,18 @@ const MyActivityContainer: FC<EnhancedMyProfileProps> = ({
   showMyActivity,
   user = userInit,
   isLoading = false,
+  setReload,
+  reloadMyActivity,
 }) => {
   useEffect(() => {
     getMyActivity({});
+    setReload({
+      reloadHandlers: [
+        () => {
+          reloadMyActivity({});
+        },
+      ],
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

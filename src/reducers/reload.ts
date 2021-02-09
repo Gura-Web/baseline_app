@@ -3,12 +3,12 @@ import { ReloadAction } from '../actions/reload/reload';
 import * as Action from '../actions/reload/actions';
 
 export interface ReloadState {
-  reloadHandler: Array<() => void>;
+  reloadHandlers: Array<() => void>;
   isLoading: boolean;
 }
 
 export const initialState: ReloadState = {
-  reloadHandler: [],
+  reloadHandlers: [],
   isLoading: false,
 };
 
@@ -20,7 +20,7 @@ export const reloadReducer: Reducer<ReloadState, ReloadAction> = (
     case Action.SET_RELOAD:
       return {
         ...state,
-        reloadHandler: action.payload.params.reloadHandler,
+        reloadHandlers: action.payload.params.reloadHandlers,
       };
     case Action.RELOAD_START:
       return {

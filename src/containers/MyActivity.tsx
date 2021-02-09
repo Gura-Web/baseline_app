@@ -1,5 +1,5 @@
 import { AnimatePresence } from 'framer-motion';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { myActivity } from '../actions/myActivity/myActivity';

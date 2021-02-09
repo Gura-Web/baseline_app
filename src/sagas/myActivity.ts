@@ -1,6 +1,7 @@
 import { call, fork, put, takeLatest } from 'redux-saga/effects';
 import { myActivity } from '../actions/myActivity/myActivity';
 import * as Action from '../actions/myActivity/myActivityActionType';
+import { reload } from '../actions/reload/reload';
 import {
   editMyActivityFactory,
   getMyActivityFactory,
@@ -48,7 +49,8 @@ export function* runPostMyActivity(
     yield put(myActivity.postSucceed());
 
     // リロード処理
-    yield put(myActivity.reload(params));
+    // yield put(myActivity.reload(params));
+    yield put(reload.reloadStart());
   } catch (error) {
     yield put(myActivity.postFailed(error));
   }
