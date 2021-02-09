@@ -1,13 +1,19 @@
 import { AxiosError } from 'axios';
 import * as ActionType from './myActivityActionType';
-import { User } from '../../services/models';
+import { CompanyInformation, User } from '../../services/models';
 
 interface GetMyActivityResult {
   user: User;
 }
 
+interface ShowMyActivityResult {
+  companyInformation: CompanyInformation;
+}
+
 interface EditMyActivityParams {
-  id?: number;
+  userId: number;
+  id: number;
+  content: string;
 }
 
 export interface GetMyActivityParams {
@@ -64,9 +70,9 @@ export const myActivity = {
     type: ActionType.SHOW_MY_ACTIVITY_START as typeof ActionType.SHOW_MY_ACTIVITY_START,
     payload: { params },
   }),
-  showSucceed: () => ({
+  showSucceed: (result: ShowMyActivityResult) => ({
     type: ActionType.SHOW_MY_ACTIVITY_SUCCEED as typeof ActionType.SHOW_MY_ACTIVITY_SUCCEED,
-    payload: {},
+    payload: { result },
   }),
   showFailed: (error: AxiosError) => ({
     type: ActionType.SHOW_MY_ACTIVITY_FAILED as typeof ActionType.SHOW_MY_ACTIVITY_FAILED,
@@ -112,10 +118,10 @@ export type MyActivityAction =
   | ReturnType<typeof myActivity.getFailed>
   | ReturnType<typeof myActivity.postStart>
   | ReturnType<typeof myActivity.postSucceed>
-  | ReturnType<typeof myActivity.postFailed>;
-// | ReturnType<typeof myActivity.showStart>
-// | ReturnType<typeof myActivity.showSucceed>
-// | ReturnType<typeof myActivity.showFailed>
-// | ReturnType<typeof myActivity.editStart>
-// | ReturnType<typeof myActivity.editSucceed>
-// | ReturnType<typeof myActivity.editFailed>;
+  | ReturnType<typeof myActivity.postFailed>
+  | ReturnType<typeof myActivity.showStart>
+  | ReturnType<typeof myActivity.showSucceed>
+  | ReturnType<typeof myActivity.showFailed>
+  | ReturnType<typeof myActivity.editStart>
+  | ReturnType<typeof myActivity.editSucceed>
+  | ReturnType<typeof myActivity.editFailed>;

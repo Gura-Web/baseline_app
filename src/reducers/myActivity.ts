@@ -69,6 +69,33 @@ export const myActivityReducer: Reducer<MyActivityState, MyActivityAction> = (
         ...state,
       };
 
+    // 個別取得＆編集
+    case ActionType.SHOW_MY_ACTIVITY_START:
+      return {
+        ...state,
+      };
+    case ActionType.SHOW_MY_ACTIVITY_SUCCEED:
+      return {
+        ...state,
+        companyInformation: action.payload.result.companyInformation,
+      };
+    case ActionType.SHOW_MY_ACTIVITY_FAILED:
+      return {
+        ...state,
+      };
+    case ActionType.EDIT_MY_ACTIVITY_START:
+      return {
+        ...state,
+      };
+    case ActionType.EDIT_MY_ACTIVITY_SUCCEED:
+      return {
+        ...state,
+      };
+    case ActionType.EDIT_MY_ACTIVITY_FAILED:
+      return {
+        ...state,
+      };
+
     default:
       // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-case-declarations
       const _: never = action;
