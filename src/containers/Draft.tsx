@@ -12,6 +12,7 @@ interface StateProps {
   user: User;
   closeButtonHandler: () => void;
   registerButtonHandle: (content: string) => void;
+  initialContent?: string;
 }
 
 interface OwnProps {
@@ -19,6 +20,7 @@ interface OwnProps {
   user: User;
   closeButtonHandler: () => void;
   registerButtonHandle: (content: string) => void;
+  initialContent?: string;
 }
 
 interface DispatchProps {
@@ -39,6 +41,7 @@ const mapStateToProps = (
   user: ownProps.user,
   closeButtonHandler: ownProps.closeButtonHandler,
   registerButtonHandle: ownProps.registerButtonHandle,
+  initialContent: ownProps.initialContent,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
@@ -58,6 +61,7 @@ const CommendWindowWithDraftContainer: FC<EnhancedMyProfileProps> = ({
   title,
   closeButtonHandler,
   registerButtonHandle,
+  initialContent,
 }) => {
   useEffect(() => {
     getDraft();
@@ -68,6 +72,7 @@ const CommendWindowWithDraftContainer: FC<EnhancedMyProfileProps> = ({
       <CommentWindow2
         title={title}
         isLoading={false}
+        initContent={initialContent}
         user={user}
         // 閉じるボタンの処理
         closeButtonHandle={closeButtonHandler}

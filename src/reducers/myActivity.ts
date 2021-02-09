@@ -1,12 +1,13 @@
 import { Reducer } from 'redux';
 import { MyActivityAction } from '../actions/myActivity/myActivity';
 import * as ActionType from '../actions/myActivity/myActivityActionType';
-import { User, userInit } from '../services/models';
+import { CompanyInformation, User, userInit } from '../services/models';
 
 export interface MyActivityState {
   visible: boolean;
   isLoading: boolean;
   user: User;
+  companyInformation?: CompanyInformation;
 }
 
 export const initialState: MyActivityState = {

@@ -7,12 +7,13 @@ import { PrimaryBtn } from '../components/Atoms/Btn';
 import { Modal } from '../components/Organisms/Modal/Modal2';
 import { MyActivityState } from '../reducers/myActivity';
 import { MyProfileState } from '../reducers/myProfile';
-import { User } from '../services/models';
+import { CompanyInformation, User } from '../services/models';
 import { CommendWindowWithDraft } from './Draft';
 
 interface StateProps {
   user: User;
   isOpen: boolean;
+  companyInformation?: CompanyInformation;
 }
 
 interface DispatchProps {
@@ -21,6 +22,7 @@ interface DispatchProps {
   openMyActivityEditWindow: () => void;
   closeMyActivityEditWindow: () => void;
   postMyActivity: (content: string, userId: number) => void;
+  editMyActivity: (content: string, userId: number, id: number) => void;
 }
 
 type EnhancedMyProfileProps = StateProps & DispatchProps;
@@ -31,6 +33,7 @@ const mapStateToProps = (state: {
 }): StateProps => ({
   user: state.myProfile.user,
   isOpen: state.myActivity.visible,
+  companyInformation: state.myActivity.companyInformation,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
@@ -42,6 +45,8 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
       closeMyActivityEditWindow: () => myActivity.editWindowClose(),
       postMyActivity: (content, userId) =>
         myActivity.postStart({ content, userId }),
+      editMyActivity: (content, userId, id) =>
+        myActivity.editStart({ content, userId, id }),
     },
     dispatch,
   );
@@ -78,8 +83,15 @@ const MyActivityEditContainer: FC<EnhancedMyProfileProps> = ({
   user,
   closeMyActivityEditWindow,
   isOpen,
-  postMyActivity,
+  editMyActivity,
+  companyInformation,
 }) => {
+  if (!companyInformation || !companyInformation.myActivities?.[0]) {
+    return <></>;
+  }
+
+  const { content } = companyInformation.myActivities[0];
+
   return (
     <>
       <AnimatePresence exitBeforeEnter>
@@ -89,11 +101,12 @@ const MyActivityEditContainer: FC<EnhancedMyProfileProps> = ({
         >
           <CommendWindowWithDraft
             title="アクティビティを編集"
+            initialContent={content}
             user={user}
             closeButtonHandler={closeMyActivityEditWindow}
-            // 登録ボタン
+            // 編集ボタン
             registerButtonHandle={contents => {
-              postMyActivity(contents, user.id);
+              editMyActivity(contents, user.id, companyInformation.id);
             }}
           />
         </Modal>
