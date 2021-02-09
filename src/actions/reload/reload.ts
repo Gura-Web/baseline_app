@@ -1,13 +1,14 @@
+import { AxiosError } from 'axios';
 import * as Action from './actions';
 
 interface SetReloadParams {
-  reloadHandler: () => void;
+  reloadHandler: () => void[];
 }
 
 export const reload = {
-  setReload: () => ({
+  setReload: (params: SetReloadParams) => ({
     type: Action.SET_RELOAD as typeof Action.SET_RELOAD,
-    payload: {},
+    payload: { params },
   }),
   reloadStart: () => ({
     type: Action.RELOAD_START as typeof Action.RELOAD_START,
@@ -17,8 +18,8 @@ export const reload = {
     type: Action.RELOAD_SUCCESS as typeof Action.RELOAD_SUCCESS,
     payload: {},
   }),
-  reloadFailed: () => ({
+  reloadFailed: (error: AxiosError) => ({
     type: Action.RELOAD_FAILED as typeof Action.RELOAD_FAILED,
-    payload: {},
+    payload: { error },
   }),
 };
