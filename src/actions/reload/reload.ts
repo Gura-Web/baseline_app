@@ -2,7 +2,7 @@ import { AxiosError } from 'axios';
 import * as Action from './actions';
 
 interface SetReloadParams {
-  reloadHandler: () => void[];
+  reloadHandler: Array<() => void>;
 }
 
 export const reload = {
@@ -23,3 +23,9 @@ export const reload = {
     payload: { error },
   }),
 };
+
+export type ReloadAction =
+  | ReturnType<typeof reload.setReload>
+  | ReturnType<typeof reload.reloadStart>
+  | ReturnType<typeof reload.reloadSucceed>
+  | ReturnType<typeof reload.reloadFailed>;
