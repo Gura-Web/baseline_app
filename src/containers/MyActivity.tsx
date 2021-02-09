@@ -18,6 +18,8 @@ interface StateProps {
 interface DispatchProps {
   openMyActivityWindow: () => void;
   closeMyActivityWindow: () => void;
+  openMyActivityEditWindow: () => void;
+  closeMyActivityEditWindow: () => void;
   postMyActivity: (content: string, userId: number) => void;
 }
 
@@ -36,6 +38,8 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
     {
       openMyActivityWindow: () => myActivity.postWindowOpen(),
       closeMyActivityWindow: () => myActivity.postWindowClose(),
+      openMyActivityEditWindow: () => myActivity.editWindowOpen(),
+      closeMyActivityEditWindow: () => myActivity.editWindowClose(),
       postMyActivity: (content, userId) =>
         myActivity.postStart({ content, userId }),
     },
@@ -44,18 +48,49 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 
 const MyActivityPostContainer: FC<EnhancedMyProfileProps> = ({
   user,
-  closeMyActivityWindow,
+  closeMyActivityEditWindow,
   isOpen,
   postMyActivity,
 }) => {
   return (
     <>
       <AnimatePresence exitBeforeEnter>
-        <Modal visible={isOpen} backgroundClickHandler={closeMyActivityWindow}>
+        <Modal
+          visible={isOpen}
+          backgroundClickHandler={closeMyActivityEditWindow}
+        >
           <CommendWindowWithDraft
             title="アクティビティを投稿"
             user={user}
-            closeButtonHandler={closeMyActivityWindow}
+            closeButtonHandler={closeMyActivityEditWindow}
+            // 登録ボタン
+            registerButtonHandle={contents => {
+              postMyActivity(contents, user.id);
+            }}
+          />
+        </Modal>
+      </AnimatePresence>
+    </>
+  );
+};
+
+const MyActivityEditContainer: FC<EnhancedMyProfileProps> = ({
+  user,
+  closeMyActivityEditWindow,
+  isOpen,
+  postMyActivity,
+}) => {
+  return (
+    <>
+      <AnimatePresence exitBeforeEnter>
+        <Modal
+          visible={isOpen}
+          backgroundClickHandler={closeMyActivityEditWindow}
+        >
+          <CommendWindowWithDraft
+            title="アクティビティを編集"
+            user={user}
+            closeButtonHandler={closeMyActivityEditWindow}
             // 登録ボタン
             registerButtonHandle={contents => {
               postMyActivity(contents, user.id);
@@ -84,3 +119,8 @@ export const MyActivityPostWindow = connect(
   mapStateToProps,
   mapDispatchToProps,
 )(MyActivityPostContainer);
+
+export const MyActivityEditWindow = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(MyActivityEditContainer);

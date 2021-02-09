@@ -64,6 +64,7 @@ export function* runShowMyActivity(
     const companyInformation = yield call(api);
 
     yield put(myActivity.showSucceed({ companyInformation }));
+    yield put(myActivity.editWindowOpen());
   } catch (error) {
     yield put(myActivity.showFailed(error));
   }

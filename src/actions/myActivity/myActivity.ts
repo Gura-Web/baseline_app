@@ -37,6 +37,13 @@ export const myActivity = {
     type: ActionType.MY_ACTIVITY_POST_WINDOW_CLOSE as typeof ActionType.MY_ACTIVITY_POST_WINDOW_CLOSE,
   }),
 
+  editWindowOpen: () => ({
+    type: ActionType.MY_ACTIVITY_EDIT_WINDOW_OPEN as typeof ActionType.MY_ACTIVITY_EDIT_WINDOW_OPEN,
+  }),
+  editWindowClose: () => ({
+    type: ActionType.MY_ACTIVITY_EDIT_WINDOW_CLOSE as typeof ActionType.MY_ACTIVITY_EDIT_WINDOW_CLOSE,
+  }),
+
   reload: (params: GetMyActivityParams) => ({
     type: ActionType.RELOAD_MY_ACTIVITY_START as typeof ActionType.RELOAD_MY_ACTIVITY_START,
     payload: { params },
@@ -117,6 +124,8 @@ export type MyActivityAction =
   | ReturnType<typeof myActivity.reload>
   | ReturnType<typeof myActivity.postWindowOpen>
   | ReturnType<typeof myActivity.postWindowClose>
+  | ReturnType<typeof myActivity.editWindowOpen>
+  | ReturnType<typeof myActivity.editWindowClose>
   | ReturnType<typeof myActivity.getStart>
   | ReturnType<typeof myActivity.getSucceed>
   | ReturnType<typeof myActivity.getFailed>

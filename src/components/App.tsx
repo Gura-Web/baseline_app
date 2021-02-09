@@ -3,7 +3,10 @@ import React, { FC, useState } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import '../assets/styles/App.scss';
 import Login from '../containers/Login';
-import { MyActivityPostWindow } from '../containers/MyActivity';
+import {
+  MyActivityEditWindow,
+  MyActivityPostWindow,
+} from '../containers/MyActivity';
 import { MyActivityPage } from '../containers/MyPage';
 import { AccountSetting, ProfileEdit, SideMenu } from '../containers/MyProfile';
 import { Header } from './Organisms/Header';
@@ -190,6 +193,7 @@ const App: FC = () => {
 
         {/* マイアクティビティ投稿ウィンドウ */}
         <MyActivityPostWindow />
+        <MyActivityEditWindow />
 
         <footer className="footer">
           <p className="copyright">

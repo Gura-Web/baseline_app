@@ -31,6 +31,17 @@ export const myActivityReducer: Reducer<MyActivityState, MyActivityAction> = (
         visible: false,
       };
 
+    case ActionType.MY_ACTIVITY_EDIT_WINDOW_OPEN:
+      return {
+        ...state,
+        visible: true,
+      };
+    case ActionType.MY_ACTIVITY_EDIT_WINDOW_CLOSE:
+      return {
+        ...state,
+        visible: false,
+      };
+
     case ActionType.RELOAD_MY_ACTIVITY_START:
       return {
         ...state,
