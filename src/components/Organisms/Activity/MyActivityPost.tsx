@@ -26,14 +26,19 @@ export const MyActivityPost: FC<Props> = ({
   return (
     <>
       <Comment
+        // 表示名
         author={author}
+        // 投稿のid（編集に必要）
         postId={companyInformation.id}
+        // 投稿年次
         postedYear={myActivity.postedYear}
+        // 内容
         contents={myActivity.content}
-        // TODO 直す
+        // 投稿日時
         updateTime={`${dayjs(companyInformation.createdAt).format(
           'YYYY.MM.DD',
         )}`}
+        // 編集の矢印
         isArrow
         editButtonHandler={editButtonHandler}
         deleteButtonHandler={deleteButtonHandler}
