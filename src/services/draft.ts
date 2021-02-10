@@ -52,6 +52,30 @@ export const registDraftFactory = (
   return registDraft;
 };
 
+export const deleteDraftFactory = (
+  id: number,
+  optionConfig?: AxiosRequestConfig,
+) => {
+  const config = {
+    ...DEFAULT_API_CONFIG,
+    ...optionConfig,
+  };
+
+  const instance = axios.create(config);
+
+  const deleteDraft = async () => {
+    const response = await instance.post(`/api/draft/delete/${id}`);
+
+    console.log(response);
+
+    if (response.status !== 200) {
+      throw new Error('Server Error');
+    }
+  };
+
+  return deleteDraft;
+};
+
 export const indexDraft = () => {
   return api
     .get(`/api/draft`)

@@ -1,7 +1,11 @@
 import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import { draft, RegistDraftParams } from '../actions/draft/draft';
+import {
+  draft,
+  RegistDraftParams,
+  DeleteDraftParams,
+} from '../actions/draft/draft';
 import { CommentWindow2 } from '../components/Molecules/Modal/CommentWindow2';
 import { DraftState } from '../reducers/draft';
 import { Draft, User } from '../services/models';
@@ -24,6 +28,7 @@ interface OwnProps {
 interface DispatchProps {
   getDraft: () => void;
   registerDraft: (params: RegistDraftParams) => void;
+  deleteDraft: (params: DeleteDraftParams) => void;
 }
 
 type EnhancedMyProfileProps = StateProps & DispatchProps;
@@ -41,11 +46,12 @@ const mapStateToProps = (
   registerButtonHandle: ownProps.registerButtonHandle,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) =>
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
   bindActionCreators(
     {
       getDraft: () => draft.getStart(),
       registerDraft: params => draft.registStart(params),
+      deleteDraft: params => draft.deleteStart(params),
     },
     dispatch,
   );
@@ -58,6 +64,7 @@ const CommendWindowWithDraftContainer: FC<EnhancedMyProfileProps> = ({
   title,
   closeButtonHandler,
   registerButtonHandle,
+  deleteDraft,
 }) => {
   useEffect(() => {
     getDraft();
@@ -82,6 +89,7 @@ const CommendWindowWithDraftContainer: FC<EnhancedMyProfileProps> = ({
           console.log(id);
 
           // TODO 下描きの削除処理
+          deleteDraft({ id });
         }}
         // 下描き削除機能の処理
         drafts={drafts}
