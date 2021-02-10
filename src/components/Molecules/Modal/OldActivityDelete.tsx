@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { RoundedBtn } from '../../Atoms/Btn';
-
 const modal = {
   hidden: {
     left: '50vw',
@@ -16,34 +15,35 @@ const modal = {
 };
 
 interface Props {
-  cancelHandler: () => void;
-  acceptHandler: () => void;
+  setShowModal: any;
+  deleteId: number;
+  btnClickFunc: any;
   text: string;
-  title: string;
+  ttl: string;
 }
 
-const ActivityDelete: React.FC<Props> = ({
-  acceptHandler,
-  cancelHandler,
-  text,
-  title,
-}) => {
+const OldActivityDelete: React.FC<Props> = props => {
+  const btnClickHandler = () => {
+    props.btnClickFunc(props.deleteId);
+    props.setShowModal(false);
+  };
+
   return (
     <motion.div
       className="modal modal--normal activity-delete"
       variants={modal}
       onClick={event => event.stopPropagation()}
     >
-      <p className="heading4">{title}</p>
-      <p className="txt">{text}</p>
+      <p className="heading4">{props.ttl}</p>
+      <p className="txt">{props.text}</p>
       <div className="flex">
-        <p className="cansel" onClick={cancelHandler}>
+        <p className="cansel" onClick={() => props.setShowModal(false)}>
           キャンセル
         </p>
-        <RoundedBtn txt="削除する" isDelete="true" Func={acceptHandler} />
+        <RoundedBtn txt="削除する" isDelete={'true'} Func={btnClickHandler} />
       </div>
     </motion.div>
   );
 };
 
-export default ActivityDelete;
+export default OldActivityDelete;

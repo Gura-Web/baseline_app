@@ -12,7 +12,7 @@ import {
   LevelDesc,
   SelectCategory,
   AccountDelete,
-  ActivityDelete,
+  OldActivityDelete,
   SaveText,
 } from '../../Molecules/Modal';
 
@@ -124,7 +124,7 @@ const Modal: React.FC<Props> = props => {
       );
     } else if (props.type === 'company-comment-delete') {
       return (
-        <ActivityDelete
+        <OldActivityDelete
           ttl="このコメントを削除しますか？"
           text="削除したデータは元に戻せません。"
           setShowModal={props.setShowModal}
@@ -148,7 +148,7 @@ const Modal: React.FC<Props> = props => {
       );
     } else if (props.type === 'activity-delete') {
       return (
-        <ActivityDelete
+        <OldActivityDelete
           ttl="この活動履歴を削除しますか？"
           text="削除したデータは元に戻せません。"
           setShowModal={props.setShowModal}

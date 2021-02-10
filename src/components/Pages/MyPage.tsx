@@ -1,11 +1,13 @@
 import { motion } from 'framer-motion';
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { GearIcon } from '../../assets/images';
 import { pageTransitionNormal } from '../../assets/script';
 import { User } from '../../services/models';
 import { UserData } from '../Molecules/Bar';
+import ActivityDelete from '../Molecules/Modal/ActivityDelete';
 import { MyActivityPost } from '../Organisms/Activity';
+import { Modal } from '../Organisms/Modal/Modal2';
 
 interface StateProps {
   isLoading: boolean;
@@ -33,6 +35,13 @@ export const MyPage: FC<StateProps> = ({
     data.myActivities === undefined ? [] : data,
   );
 
+  const [isDeleteModal, setIsDeleteModal] = useState(false);
+  const [acceptFunction, setAcceptFunction] = useState({
+    func: () => {
+      console.log('nanimonai');
+    },
+  });
+
   return (
     <>
       {!isLoading && (
@@ -59,12 +68,30 @@ export const MyPage: FC<StateProps> = ({
                   companyInformation={myActivity}
                   key={myActivity.id}
                   editButtonHandler={editButtonHandler}
-                  deleteButtonHandler={deleteButtonHandler}
+                  deleteButtonHandler={id => {
+                    setIsDeleteModal(true);
+                    setAcceptFunction({
+                      func: () => {
+                        deleteButtonHandler(id);
+                        setIsDeleteModal(false);
+                      },
+                    });
+                  }}
                 />
               ))}
           </div>
         </motion.section>
       )}
+      <Modal visible={isDeleteModal}>
+        <ActivityDelete
+          title="この活動履歴を削除しますか？"
+          text="削除したデータは元に戻せません。"
+          cancelHandler={() => {
+            setIsDeleteModal(false);
+          }}
+          acceptHandler={acceptFunction.func}
+        />
+      </Modal>
     </>
   );
 };

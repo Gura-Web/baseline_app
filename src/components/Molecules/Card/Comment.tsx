@@ -8,6 +8,9 @@ import {
 } from '../../../assets/images/index';
 import { pageTransitionNormal } from '../../../assets/script';
 import { User } from '../../../services/models';
+import { Modal } from '../../Organisms/Modal/Modal2';
+import { OldActivityDelete } from '../Modal';
+import ActivityDelete from '../Modal/ActivityDelete';
 
 interface Props {
   // 表示名
@@ -52,6 +55,7 @@ export const Comment: React.FC<Props> = ({
   }, []);
 
   const [toggleMenu, setToggleMenu] = useState(false);
+
   const arrowClickHandler = (): void => {
     setToggleMenu(!toggleMenu);
   };
