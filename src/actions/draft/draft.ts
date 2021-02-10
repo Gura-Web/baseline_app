@@ -10,6 +10,10 @@ export interface RegistDraftParams {
   contents: string;
 }
 
+export interface DeleteDraftParams {
+  id: number;
+}
+
 export const draft = {
   getStart: () => ({
     type: ActionType.GET_DRAFT_START as typeof ActionType.GET_DRAFT_START,
@@ -37,6 +41,19 @@ export const draft = {
     payload: { error },
     error: true,
   }),
+  deleteStart: (params: DeleteDraftParams) => ({
+    type: ActionType.DELETE_DRAFT_START as typeof ActionType.DELETE_DRAFT_START,
+    payload: { params },
+  }),
+  deleteSucceed: () => ({
+    type: ActionType.DELETE_DRAFT_SUCCEED as typeof ActionType.DELETE_DRAFT_SUCCEED,
+    payload: {},
+  }),
+  deleteFailed: (error: AxiosError) => ({
+    type: ActionType.DELETE_DRAFT_FAILED as typeof ActionType.DELETE_DRAFT_FAILED,
+    payload: { error },
+    error: true,
+  }),
 };
 
 export type DraftAction =
@@ -45,4 +62,7 @@ export type DraftAction =
   | ReturnType<typeof draft.getFailed>
   | ReturnType<typeof draft.registStart>
   | ReturnType<typeof draft.registSucceed>
-  | ReturnType<typeof draft.registFailed>;
+  | ReturnType<typeof draft.registFailed>
+  | ReturnType<typeof draft.deleteStart>
+  | ReturnType<typeof draft.deleteSucceed>
+  | ReturnType<typeof draft.deleteFailed>;
