@@ -1,4 +1,5 @@
 import { AxiosError } from 'axios';
+import { DeleteDraftParams } from '../draft/draft';
 import * as ActionType from './myActivityActionType';
 import { CompanyInformation, User } from '../../services/models';
 
@@ -17,6 +18,10 @@ export interface ShowMyActivityParams {
 export interface EditMyActivityParams {
   id: number;
   content: string;
+}
+
+export interface DeleteMyActivityParams {
+  id: number;
 }
 
 export interface GetMyActivityParams {
@@ -103,9 +108,9 @@ export const myActivity = {
     error: true,
   }),
 
-  deleteStart: () => ({
+  deleteStart: (params: DeleteDraftParams) => ({
     type: ActionType.DELETE_MY_ACTIVITY_START as typeof ActionType.DELETE_MY_ACTIVITY_START,
-    payload: {},
+    payload: { params },
   }),
   deleteSucceed: () => ({
     type: ActionType.DELETE_MY_ACTIVITY_SUCCEED as typeof ActionType.DELETE_MY_ACTIVITY_SUCCEED,
@@ -135,4 +140,7 @@ export type MyActivityAction =
   | ReturnType<typeof myActivity.showFailed>
   | ReturnType<typeof myActivity.editStart>
   | ReturnType<typeof myActivity.editSucceed>
-  | ReturnType<typeof myActivity.editFailed>;
+  | ReturnType<typeof myActivity.editFailed>
+  | ReturnType<typeof myActivity.deleteStart>
+  | ReturnType<typeof myActivity.deleteSucceed>
+  | ReturnType<typeof myActivity.deleteFailed>;

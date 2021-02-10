@@ -3,6 +3,7 @@ import { myActivity } from '../actions/myActivity/myActivity';
 import * as Action from '../actions/myActivity/myActivityActionType';
 import { reload } from '../actions/reload/reload';
 import {
+  deleteMyActivityFactory,
   editMyActivityFactory,
   getMyActivityFactory,
   postMyActivityFactory,
@@ -89,6 +90,22 @@ export function* runEditMyActivity(
   }
 }
 
+export function* runDeleteMyActivity(
+  action: ReturnType<typeof myActivity.deleteStart>,
+) {
+  const { id } = action.payload.params;
+
+  try {
+    const api = deleteMyActivityFactory(id);
+    yield call(api);
+
+    yield put(myActivity.deleteSucceed());
+    yield put(reload.reloadStart());
+  } catch (error) {
+    yield put(myActivity.deleteFailed(error));
+  }
+}
+
 export function* watchRunGetMyActivity() {
   yield takeLatest(Action.GET_MY_ACTIVITY_START, runGetMyActivity);
 }
@@ -109,10 +126,15 @@ export function* watchRunEditMyActivity() {
   yield takeLatest(Action.EDIT_MY_ACTIVITY_START, runEditMyActivity);
 }
 
+export function* watchRunDeleteMyActivity() {
+  yield takeLatest(Action.DELETE_MY_ACTIVITY_START, runDeleteMyActivity);
+}
+
 export default [
   fork(watchRunGetMyActivity),
   fork(watchRunPostMyActivity),
   fork(watchRunReloadMyActivity),
   fork(watchRunShowMyActivity),
   fork(watchRunEditMyActivity),
+  fork(watchRunDeleteMyActivity),
 ];

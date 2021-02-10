@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { bindActionCreators, Dispatch } from 'redux';
 import {
+  DeleteMyActivityParams,
   GetMyActivityParams,
   myActivity,
   ShowMyActivityParams,
@@ -22,6 +23,7 @@ interface DispatchProps {
   showMyActivity: (params: ShowMyActivityParams) => void;
   setReload: (reloadFunctions: SetReloadParams) => void;
   reloadMyActivity: (params: GetMyActivityParams) => void;
+  deleteMyActivity: (params: DeleteMyActivityParams) => void;
 }
 
 type EnhancedMyProfileProps = StateProps & DispatchProps;
@@ -40,6 +42,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
       showMyActivity: params => myActivity.showStart(params),
       reloadMyActivity: params => myActivity.reload(params),
       setReload: params => reload.setReload(params),
+      deleteMyActivity: params => myActivity.deleteStart(params),
     },
     dispatch,
   );
@@ -51,6 +54,7 @@ const MyActivityContainer: FC<EnhancedMyProfileProps> = ({
   isLoading = false,
   setReload,
   reloadMyActivity,
+  deleteMyActivity,
 }) => {
   useEffect(() => {
     getMyActivity({});
@@ -76,6 +80,7 @@ const MyActivityContainer: FC<EnhancedMyProfileProps> = ({
       deleteButtonHandler={id => {
         console.log('削除が押された', id);
         // TODO 消しますか？のモーダルが出る処理
+        deleteMyActivity({ id });
       }}
     />
   );

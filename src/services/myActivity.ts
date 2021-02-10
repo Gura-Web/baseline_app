@@ -107,6 +107,28 @@ export const editMyActivityFactory = (
   return editMyActivity;
 };
 
+export const deleteMyActivityFactory = (
+  id: number,
+  optionConfig?: AxiosRequestConfig,
+) => {
+  const config = {
+    ...DEFAULT_API_CONFIG,
+    ...optionConfig,
+  };
+
+  const instance = axios.create(config);
+
+  const deleteMyActivity = async () => {
+    const response = await instance.post(`/api/post/delete/${id}`);
+
+    if (response.status !== 200) {
+      throw new Error('Server Error');
+    }
+  };
+
+  return deleteMyActivity;
+};
+
 export const getOldMyActivity = (id: number) => {
   return api
     .get(`/api/my_activity/show/1`)
