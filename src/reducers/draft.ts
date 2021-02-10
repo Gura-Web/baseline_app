@@ -51,6 +51,21 @@ export const draftReducer: Reducer<DraftState, DraftAction> = (
         ...state,
         isLoading: false,
       };
+    case ActionType.DELETE_DRAFT_START:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case ActionType.DELETE_DRAFT_SUCCEED:
+      return {
+        ...state,
+        isLoading: false,
+      };
+    case ActionType.DELETE_DRAFT_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+      };
 
     default:
       // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-case-declarations
