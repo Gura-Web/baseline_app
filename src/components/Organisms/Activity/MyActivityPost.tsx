@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import React, { FC } from 'react';
 import { CompanyInformation, User } from '../../../services/models';
 import { Comment } from '../../Molecules/Card';
@@ -30,7 +31,9 @@ export const MyActivityPost: FC<Props> = ({
         postedYear={myActivity.postedYear}
         contents={myActivity.content}
         // TODO 直す
-        updateTime="2020/01/01"
+        updateTime={`${dayjs(companyInformation.createdAt).format(
+          'YYYY.MM.DD',
+        )}`}
         isArrow
         editButtonHandler={editButtonHandler}
         deleteButtonHandler={deleteButtonHandler}

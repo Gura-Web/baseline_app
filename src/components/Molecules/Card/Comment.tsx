@@ -1,6 +1,11 @@
 import { motion } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
-import { ArrowIcon, PencilIcon, rikuma, TrashIcon } from '../../../assets/images/index';
+import {
+  ArrowIcon,
+  PencilIcon,
+  rikuma,
+  TrashIcon,
+} from '../../../assets/images/index';
 import { pageTransitionNormal } from '../../../assets/script';
 import { User } from '../../../services/models';
 
@@ -42,20 +47,6 @@ export const Comment: React.FC<Props> = ({
     }
   };
 
-  const timeTextConversion = () => {
-    const dateTime: string = String(updateTime).slice(0, 10);
-    const timeText: string = dateTime.replace(/-/g, '.');
-    const texts: {
-      dateTime: string;
-      timeText: string;
-    } = {
-      dateTime,
-      timeText,
-    };
-
-    return texts;
-  };
-
   useEffect((): void => {
     setUrlText();
   }, []);
@@ -84,9 +75,7 @@ export const Comment: React.FC<Props> = ({
             <li>{postedYear}年次</li>
             <li>&nbsp;|&nbsp;</li>
             <li>
-              <time dateTime={timeTextConversion().dateTime}>
-                {timeTextConversion().timeText}
-              </time>
+              <time dateTime={updateTime}>{updateTime}</time>
             </li>
           </ul>
           {isArrow && (
@@ -110,7 +99,6 @@ export const Comment: React.FC<Props> = ({
         }}
       >
         {/* 編集ボタン */}
-        {/* TODO 編集機能を追加する */}
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
         <li
           className="activity-item-menu__item"

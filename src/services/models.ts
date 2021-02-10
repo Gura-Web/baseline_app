@@ -20,6 +20,7 @@ export interface DesiredOccupation {
 export interface CompanyInformation {
   id: number;
   companyId: number;
+  createdAt: string;
 
   myActivities?: MyActivity[];
 }
