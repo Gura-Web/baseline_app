@@ -74,13 +74,11 @@ const UserPageContainer: FC<EnhancedMyProfileProps> = ({
       user={user}
       isLoading={isLoading}
       editButtonHandler={id => {
-        console.log('編集が押された', id);
-        // TODO 編集画面が出る処理
+        // 編集画面が出る処理
         showMyActivity({ id });
       }}
       deleteButtonHandler={id => {
-        console.log('削除が押された', id);
-        // TODO 消しますか？のモーダルが出る処理
+        // 消しますか？のモーダルが出る処理
         deleteMyActivity({ id });
       }}
     />
