@@ -38,7 +38,7 @@ export const MyPage: FC<StateProps> = ({
   const [isDeleteModal, setIsDeleteModal] = useState(false);
   const [acceptFunction, setAcceptFunction] = useState({
     func: () => {
-      console.log('nanimonai');
+      console.log('null');
     },
   });
 
@@ -60,7 +60,7 @@ export const MyPage: FC<StateProps> = ({
             アカウント設定へ
           </Link>
           <div className="activity-list">
-            {/* TODO 記事のリスト */}
+            {/* 記事のリスト */}
             {companyInformationList &&
               companyInformationList.map(myActivity => (
                 <MyActivityPost

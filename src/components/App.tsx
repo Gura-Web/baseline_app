@@ -9,6 +9,7 @@ import {
 } from '../containers/MyActivity';
 import { MyActivityPage } from '../containers/MyPage';
 import { AccountSetting, ProfileEdit, SideMenu } from '../containers/MyProfile';
+import { UserPagePage } from '../containers/UserPage';
 import { Header } from './Organisms/Header';
 import * as Page from './Pages';
 
@@ -99,7 +100,8 @@ const App: FC = () => {
                 <Route path="/search-student" component={Page.SearchStudent} />
                 <Route
                   path="/user/:id"
-                  render={props => <Page.UserPage {...props} />}
+                  // render={props => <Page.OldUserPage {...props} />}
+                  component={UserPagePage}
                 />
                 {/* マイページ */}
                 <Route path="/mypage" component={MyActivityPage} />

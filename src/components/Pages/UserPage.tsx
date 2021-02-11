@@ -1,77 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { OldUserData } from '../Molecules/Bar';
-import { OldComment } from '../Molecules/Card';
-import { Modal } from '../Organisms/Modal';
+import React, { FC, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+
 import { motion } from 'framer-motion';
-import { pageTransitionNormal } from '../../assets/script/pageTransition';
-import { getUserData } from '../../assets/script';
-import axios from 'axios';
+import { GearIcon } from '../../assets/images';
+import { User } from '../../services/models';
+import { UserData } from '../Molecules/Bar';
+import ActivityDelete from '../Molecules/Modal/ActivityDelete';
+import { MyActivityPost } from '../Organisms/Activity';
+import { Modal } from '../Organisms/Modal/Modal2';
+import { pageTransitionNormal } from '../../assets/script';
+
 interface Props {
-  match?: any;
+  isLoading: boolean;
+  user: User;
+  editButtonHandler: (id: number) => void;
+  deleteButtonHandler: (id: number) => void;
 }
 
-const UserPage: React.FC<Props> = props => {
+const UserPage: FC<Props> = ({
+  isLoading,
+  user,
+  editButtonHandler,
+  deleteButtonHandler,
+}) => {
+  const companyInformationList = user.companyInformation?.flatMap(data =>
+    data.myActivities === undefined ? [] : data,
+  );
+
   const history = useHistory();
-  const [showModal, setShowModal] = useState<boolean>(false);
-  const [showModal2, setShowModal2] = useState<boolean>(false);
+  const [isDeleteModal, setIsDeleteModal] = useState(false);
+  const [acceptFunction, setAcceptFunction] = useState({
+    func: () => {
+      console.log('null');
+    },
+  });
 
-  const [activity, setActivity] = useState<any>();
-  const [account, setAccount] = useState<any>();
-  const [userData, setUserData] = useState<any>();
-  const [loading, setLoading] = useState<boolean>(false);
-  const userId = props.match.params.id;
-
-  useEffect(() => {
-    const url = './activity.json';
-    axios.get(url).then(res => {
-      const output = res.data;
-      setActivity(output);
-    });
-
-    const url2 = './database/account.json';
-    axios.get(url2).then(res => {
-      const output = res.data;
-      setAccount(output);
-    });
-
-    getUserData(userId).then((userData: any) => {
-      setUserData(userData.data);
-      console.log(userData.data);
-      setLoading(true);
-    });
-  }, []);
-  const renderActivities = () => {
-    const activitiesArrray: any[] = [];
-    if (userData.company_information) {
-      userData.company_information.forEach((data: any) => {
-        if (data.my_activities[0])
-          activitiesArrray.push({
-            id: data.id,
-            activity: data.my_activities[0],
-            updated_at: data.updated_at,
-          });
-      });
-      return activitiesArrray.map((data: any) => (
-        <OldComment
-          id={data.id}
-          name={userData.first_name + ' ' + userData.last_name}
-          year={data.activity.posted_year}
-          txt={data.activity.content}
-          updateTime={data.updated_at}
-          isArrow={false}
-          type={'user'}
-          icon={userData.icon_image_url}
-        />
-      ));
-    }
-  };
-
-  const renderDOM = () => {
-    return (
-      <>
+  return (
+    <>
+      {!isLoading && (
         <motion.section
-          className={`app-main user-page single`}
+          className="app-main mypage single"
           initial="out"
           animate="in"
           exit="out"
@@ -83,59 +51,43 @@ const UserPage: React.FC<Props> = props => {
           >
             <span className="heading4">戻る</span>
           </button>
-          <h2 className="heading1">
-            {/* {isUsrPage
-            ? `${
-                account
-                  ? account[props.match.params.id - 1].last_name +
-                    " " +
-                    account[props.match.params.id - 1].first_name
-                  : ""
-              }さんのページ`
-            : "マイページ"} */}
-          </h2>
-
-          <OldUserData
-            isPage="userpage"
-            userData={userData}
-            userId={userData.id}
-          />
-          {/* <ActivityMeter /> */}
-          {/* <div className="activity-list">
-            {(() => {
-              if (activity) {
-                return activity.map((data: any) => (
-                  <OldComment
-                    name={data.name}
-                    year={data.year}
-                    txt={data.txt}
-                    updateTime={data.updateTime}
-                    isArrow={true}
-                    type={"user"}
-                    clickFunc={setShowModal}
-                    clickFunc2={setShowModal2}
-                  />
-                ));
-              }
-            })()}
-          </div> */}
-          <div className="activity-list">{renderActivities()}</div>
+          {/* 自分の情報 */}
+          <UserData user={user} pageType="userPage" />
+          <div className="activity-list">
+            {/* 記事のリスト */}
+            {companyInformationList &&
+              companyInformationList.map(myActivity => (
+                <MyActivityPost
+                  author={user}
+                  companyInformation={myActivity}
+                  key={myActivity.id}
+                  editButtonHandler={editButtonHandler}
+                  deleteButtonHandler={id => {
+                    setIsDeleteModal(true);
+                    setAcceptFunction({
+                      func: () => {
+                        deleteButtonHandler(id);
+                        setIsDeleteModal(false);
+                      },
+                    });
+                  }}
+                />
+              ))}
+          </div>
         </motion.section>
-        <Modal
-          type="activity-edit"
-          showModal={showModal}
-          setShowModal={setShowModal}
+      )}
+      <Modal visible={isDeleteModal}>
+        <ActivityDelete
+          title="この活動履歴を削除しますか？"
+          text="削除したデータは元に戻せません。"
+          cancelHandler={() => {
+            setIsDeleteModal(false);
+          }}
+          acceptHandler={acceptFunction.func}
         />
-        <Modal
-          type="activity-delete"
-          showModal={showModal2}
-          setShowModal={setShowModal2}
-        />
-      </>
-    );
-  };
-
-  return <>{loading && renderDOM()}</>;
+      </Modal>
+    </>
+  );
 };
 
 export default UserPage;
