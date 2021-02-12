@@ -1,5 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { RouteComponentProps } from 'react-router';
+import { BrowserRouterProps } from 'react-router-dom';
 
 import { bindActionCreators, Dispatch } from 'redux';
 import {
@@ -17,7 +19,14 @@ import { User, userInit } from '../services/models';
 interface StateProps {
   user: User;
   isLoading: boolean;
+  userId: string;
 }
+
+interface MatchParams {
+  id: string;
+}
+
+type OwnProps = RouteComponentProps<MatchParams>;
 
 interface DispatchProps {
   getMyActivity: (params: GetMyActivityParams) => void;
@@ -29,11 +38,15 @@ interface DispatchProps {
 
 type EnhancedMyProfileProps = StateProps & DispatchProps;
 
-const mapStateToProps = (state: {
-  myActivity: MyActivityState;
-}): StateProps => ({
+const mapStateToProps = (
+  state: {
+    myActivity: MyActivityState;
+  },
+  ownProps: OwnProps,
+): StateProps => ({
   user: state.myActivity.user,
   isLoading: state.myActivity.isLoading,
+  userId: ownProps.match.params.id,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
@@ -56,16 +69,23 @@ const UserPageContainer: FC<EnhancedMyProfileProps> = ({
   setReload,
   reloadMyActivity,
   deleteMyActivity,
+  userId,
 }) => {
   useEffect(() => {
-    getMyActivity({});
-    setReload({
-      reloadHandlers: [
-        () => {
-          reloadMyActivity({});
-        },
-      ],
-    });
+    // useridの処理
+    if (parseInt(userId, 10)) {
+      const nUserId: number = parseInt(userId, 10);
+
+      getMyActivity({ userId: nUserId });
+      setReload({
+        reloadHandlers: [
+          () => {
+            reloadMyActivity({ userId: nUserId });
+          },
+        ],
+      });
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

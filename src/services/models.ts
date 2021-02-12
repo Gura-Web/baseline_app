@@ -41,13 +41,13 @@ export interface Draft {
 }
 
 export const userInit: User = {
-  id: 1,
+  id: -1,
   firstName: '＜＞',
   lastName: '＜＞',
   studentNumber: 1,
   yearOfGraduation: 1,
   iconImageUrl: 'a',
-  sex: 1,
+  sex: 2,
   email: '1',
   desiredOccupations: 1,
 };

@@ -1,7 +1,7 @@
 import { Reducer } from 'redux';
 import { MyProfileAction } from '../actions/baseline';
 import * as ActionType from '../actions/myProfile';
-import { User } from '../services/models';
+import { User, userInit } from '../services/models';
 
 export interface MyProfileState {
   user: User;
@@ -10,17 +10,7 @@ export interface MyProfileState {
 }
 
 export const initialState: MyProfileState = {
-  user: {
-    id: 1,
-    firstName: '＜＞',
-    lastName: '＜＞',
-    studentNumber: 1,
-    yearOfGraduation: 1,
-    iconImageUrl: 'a',
-    sex: 1,
-    email: '1',
-    desiredOccupations: 1,
-  },
+  user: userInit,
   isLoading: true,
   isError: false,
 };
