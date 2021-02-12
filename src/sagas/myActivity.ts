@@ -31,10 +31,14 @@ export function* runReloadMyActivity(
 ) {
   const { params } = action.payload;
 
-  const api = getMyActivityFactory(params.userId);
-  const user = yield call(api);
+  try {
+    const api = getMyActivityFactory(params.userId);
+    const user = yield call(api);
 
-  yield put(myActivity.getSucceed({ user }));
+    yield put(myActivity.getSucceed({ user }));
+  } catch (error) {
+    yield put(myActivity.getFailed(params, error));
+  }
 }
 
 // 投稿処理

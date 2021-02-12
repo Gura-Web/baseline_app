@@ -46,7 +46,6 @@ export const myActivityReducer: Reducer<MyActivityState, MyActivityAction> = (
     case ActionType.RELOAD_MY_ACTIVITY_START:
       return {
         ...state,
-        isLoading: false,
       };
 
     // 取得処理
@@ -64,7 +63,7 @@ export const myActivityReducer: Reducer<MyActivityState, MyActivityAction> = (
     case ActionType.GET_MY_ACTIVITY_FAILED:
       return {
         ...state,
-        isLoading: false,
+        isLoading: true,
       };
 
     // 投稿処理

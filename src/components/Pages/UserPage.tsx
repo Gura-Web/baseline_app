@@ -1,8 +1,6 @@
 import React, { FC, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-
+import { useHistory } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { GearIcon } from '../../assets/images';
 import { User } from '../../services/models';
 import { UserData } from '../Molecules/Bar';
 import ActivityDelete from '../Molecules/Modal/ActivityDelete';
@@ -29,10 +27,9 @@ const UserPage: FC<Props> = ({
 
   const history = useHistory();
   const [isDeleteModal, setIsDeleteModal] = useState(false);
-  const [acceptFunction, setAcceptFunction] = useState({
-    func: () => {
-      console.log('null');
-    },
+  const [acceptFunction, setAcceptFunction] = useState<{ func: () => void }>({
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    func: () => {},
   });
 
   return (
@@ -50,8 +47,7 @@ const UserPage: FC<Props> = ({
         </button>
         {/* 自分の情報 */}
         {/* ユーザーが存在しないとき表示しない */}
-        {/* TODO 直す */}
-        {!isLoading && user.id !== -1 && (
+        {!isLoading && (
           <>
             <UserData user={user} pageType="userPage" />
             <div className="activity-list">
