@@ -49,28 +49,34 @@ const UserPage: FC<Props> = ({
           <span className="heading4">戻る</span>
         </button>
         {/* 自分の情報 */}
-        <UserData user={user} pageType="userPage" />
-        <div className="activity-list">
-          {/* 記事のリスト */}
-          {companyInformationList &&
-            companyInformationList.map(myActivity => (
-              <MyActivityPost
-                author={user}
-                companyInformation={myActivity}
-                key={myActivity.id}
-                editButtonHandler={editButtonHandler}
-                deleteButtonHandler={id => {
-                  setIsDeleteModal(true);
-                  setAcceptFunction({
-                    func: () => {
-                      deleteButtonHandler(id);
-                      setIsDeleteModal(false);
-                    },
-                  });
-                }}
-              />
-            ))}
-        </div>
+        {/* ユーザーが存在しないとき表示しない */}
+        {/* TODO 直す */}
+        {!isLoading && user.id !== -1 && (
+          <>
+            <UserData user={user} pageType="userPage" />
+            <div className="activity-list">
+              {/* 記事のリスト */}
+              {companyInformationList &&
+                companyInformationList.map(myActivity => (
+                  <MyActivityPost
+                    author={user}
+                    companyInformation={myActivity}
+                    key={myActivity.id}
+                    editButtonHandler={editButtonHandler}
+                    deleteButtonHandler={id => {
+                      setIsDeleteModal(true);
+                      setAcceptFunction({
+                        func: () => {
+                          deleteButtonHandler(id);
+                          setIsDeleteModal(false);
+                        },
+                      });
+                    }}
+                  />
+                ))}
+            </div>
+          </>
+        )}
       </motion.section>
       <Modal visible={isDeleteModal}>
         <ActivityDelete
