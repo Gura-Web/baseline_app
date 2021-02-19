@@ -13,6 +13,11 @@
         align-items: flex-end;
         justify-content: space-between;
     }
+    &__top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
     .heading4:not(.noCircle) {
         display: flex;
         align-items: center;

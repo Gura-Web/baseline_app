@@ -122,7 +122,7 @@ const Top: React.FC<Props> = props => {
                   'homedata',
                   Object.values(homeData.other_activities),
                 )}
-                <div className="contentBox__wrap">
+                <div className="contentBox__top">
                   {Object.values(homeData.other_activities).map((data: any) => {
                     console.log('data', data[0]);
 
