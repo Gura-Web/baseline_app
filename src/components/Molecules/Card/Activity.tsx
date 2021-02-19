@@ -1,6 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { AccountDefaultIcon, rikuma } from "../../../assets/images/index";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { AccountDefaultIcon, rikuma } from '../../../assets/images/index';
 
 interface Props {
   isSmall: boolean;
@@ -9,11 +9,12 @@ interface Props {
   name?: string;
   content?: string;
   updated_at?: string;
+  icon?: string;
 }
-const Activity: React.FC<Props> = (props) => {
+const Activity: React.FC<Props> = props => {
   const timeTextConversion = () => {
     const dateTime: string = String(props.updated_at).slice(0, 10);
-    const timeText: string = dateTime.replace(/-/g, ".");
+    const timeText: string = dateTime.replace(/-/g, '.');
     const texts: {
       dateTime: string;
       timeText: string;
@@ -58,11 +59,12 @@ const Activity: React.FC<Props> = (props) => {
     }
   };
 
-  let activityName = props.isSmall ? "normal" : "small";
+  let activityName = props.isSmall ? 'normal' : 'small';
+  console.log(props.icon);
   return (
-    <article className={"activity-card " + activityName}>
+    <article className={'activity-card ' + activityName}>
       <Link to={`/user/${String(props.id)}`}>
-        <img className="activity-card__img" src={rikuma} alt="" />
+        <img className="activity-card__img" src={props.icon ?? rikuma} alt="" />
         {viewTime()}
       </Link>
     </article>

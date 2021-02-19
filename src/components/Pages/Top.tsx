@@ -71,6 +71,8 @@ const Top: React.FC<Props> = props => {
   };
 
   const renderDOM = () => {
+    console.log(homeData.my_activities);
+
     return (
       <>
         <motion.section
@@ -117,16 +119,21 @@ const Top: React.FC<Props> = props => {
               <article className="contentBox contentBox--big">
                 <h1 className="heading4">新着の活動情報</h1>
                 <div className="contentBox__wrap">
-                  {homeData.other_activities.map((data: any) => (
-                    <Activity
-                      id={data.user.id}
-                      name={data.user.first_name + ' ' + data.user.last_name}
-                      textLengthCheckFunc={checkTextLength}
-                      content={data.my_activities[0]?.content ?? ''}
-                      updated_at={data.updated_at}
-                      isSmall={true}
-                    />
-                  ))}
+                  {homeData.other_activities.map((data: any) => {
+                    console.log(data.user);
+
+                    return (
+                      <Activity
+                        id={data.user.id}
+                        name={data.user.first_name + ' ' + data.user.last_name}
+                        textLengthCheckFunc={checkTextLength}
+                        content={data.my_activities[0]?.content ?? ''}
+                        updated_at={data.updated_at}
+                        isSmall={true}
+                        icon={data.user.icon_image_url}
+                      />
+                    );
+                  })}
                 </div>
               </article>
             </div>
@@ -145,6 +152,7 @@ const Top: React.FC<Props> = props => {
                   }
                   updated_at={data.updated_at}
                   isSmall={false}
+                  icon={data.user.icon_image_url}
                 />
               ))}
               <Link className="page-link" to="/mypage">
