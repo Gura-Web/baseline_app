@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import StudentSearch from "../Organisms/Window/StudentSearch";
-import { StudentList } from "../Molecules/Card";
-import { Pagenation } from "../Organisms/Header";
-import { motion } from "framer-motion";
-import { pageTransitionNormal } from "../../assets/script/pageTransition";
-import axios from "axios";
-import { searchUser } from "../../assets/script/index";
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import axios from 'axios';
+import StudentSearch from '../Organisms/Window/StudentSearch';
+import { StudentList } from '../Molecules/Card';
+import { Pagenation } from '../Organisms/Header';
+import { pageTransitionNormal } from '../../assets/script/pageTransition';
+import { searchUser } from '../../assets/script/index';
 
 const SearchStudent: React.FC = () => {
   const [students, setStudents] = useState<any>();
@@ -13,9 +13,10 @@ const SearchStudent: React.FC = () => {
   const [query, setQuery] = useState<object>();
 
   const [loading, setLoading] = useState<boolean>(false);
+  const [loading2, setLoading2] = useState<boolean>(false);
   useEffect(() => {
-    const url = "./database/account.json";
-    axios.get(url).then((res) => {
+    const url = './database/account.json';
+    axios.get(url).then(res => {
       const output = res.data;
       setStudents(output);
     });
@@ -27,6 +28,7 @@ const SearchStudent: React.FC = () => {
       });
       console.log(getData.data);
       setLoading(true);
+      setLoading2(false);
     });
   }, []);
 
@@ -86,24 +88,38 @@ const SearchStudent: React.FC = () => {
     >
       <h2 className="heading1">他者の就活を探す</h2>
       <div className="app-main__container">
-        <StudentSearch
-          className={"left-col"}
-          searchFunc={searchUserWithParam}
-        />
-        <div className="right-col">
-          <div className="studentListTable">
-            <div className="studentListTable__head">
-              <ul>
-                <li className="studentListTable__heading">ユーザー</li>
-                <li className="studentListTable__heading">卒業年次</li>
-                <li className="studentListTable__heading">希望職種</li>
-                <li className="studentListTable__heading">更新日時</li>
-              </ul>
+        {loading && (
+          <StudentSearch
+            className="left-col"
+            searchFunc={searchUserWithParam}
+            setLoading={setLoading2}
+            loading={loading2}
+          />
+        )}
+        {loading && loading2 && (
+          <motion.section
+            className="app-main searchCompany"
+            initial="out"
+            animate="in"
+            exit="out"
+            variants={pageTransitionNormal}
+          >
+            <div className="right-col">
+              <div className="studentListTable">
+                <div className="studentListTable__head">
+                  <ul>
+                    <li className="studentListTable__heading">ユーザー</li>
+                    <li className="studentListTable__heading">卒業年次</li>
+                    <li className="studentListTable__heading">希望職種</li>
+                    <li className="studentListTable__heading">更新日時</li>
+                  </ul>
+                </div>
+                {renderStudentList()}
+              </div>
+              {loading && renderPagenation()}
             </div>
-            {loading && renderStudentList()}
-          </div>
-          {loading && renderPagenation()}
-        </div>
+          </motion.section>
+        )}
       </div>
     </motion.section>
   );
