@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface Props {
   ttl: string;
@@ -7,7 +7,7 @@ interface Props {
   defaultValue?: any;
 }
 
-const SelectSecondary: React.FC<Props> = (props) => {
+const SelectSecondary: React.FC<Props> = props => {
   const renderSelectItem = () => {
     return Object.values(props.selectObj).map((data: any, index) => {
       return (
@@ -23,7 +23,7 @@ const SelectSecondary: React.FC<Props> = (props) => {
 
   return (
     <div className="input-dropdown">
-      {props.ttl != "" && (
+      {props.ttl != '' && (
         <p className="input-dropdown__heading">{props.ttl}</p>
       )}
       <div className="input-dropdown__wrap">

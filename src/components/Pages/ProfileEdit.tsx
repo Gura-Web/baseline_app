@@ -150,6 +150,8 @@ const ProfileEdit: React.FC<Props> = ({ user }) => {
   const renderDOM = () => {
     console.log('user', user);
     console.log('user', user.firstName);
+    console.log('jobs', jobs);
+    console.log('yearGraduation', yearGraduation);
 
     return (
       <motion.section
