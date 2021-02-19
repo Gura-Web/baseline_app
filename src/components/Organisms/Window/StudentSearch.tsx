@@ -162,8 +162,6 @@ const StudentSearch: React.FC<Props> = props => {
     );
   };
 
-  console.log('どれ', props.loading);
-
   return <>{props.loading && renderDOM()}</>;
 };
 
