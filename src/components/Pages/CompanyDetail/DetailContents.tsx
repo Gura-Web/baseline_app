@@ -36,7 +36,12 @@ const DetailContents: React.FC<Props> = props => {
       exit="out"
       variants={pageTransitionNormal}
     >
-      <button className="btn pageBack-link" onClick={() => history.goBack()}>
+      <button
+        className="btn pageBack-link"
+        onClick={() =>
+          history.push(`/company-detail/${params.company_id}/about`)
+        }
+      >
         <span className="heading4">企業情報へ</span>
       </button>
       <UnofficialOffer
