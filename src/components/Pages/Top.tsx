@@ -118,9 +118,13 @@ const Top: React.FC<Props> = props => {
               <News />
               <article className="contentBox contentBox--big">
                 <h1 className="heading4">新着の活動情報</h1>
+                {console.log(
+                  'homedata',
+                  Object.values(homeData.other_activities),
+                )}
                 <div className="contentBox__wrap">
-                  {homeData.other_activities.map((data: any) => {
-                    console.log(data.user);
+                  {Object.values(homeData.other_activities).map((data: any) => {
+                    console.log('data', data[0]);
 
                     return (
                       <Activity
@@ -142,7 +146,7 @@ const Top: React.FC<Props> = props => {
               <h1 className="heading5" onClick={() => setShowModal(true)}>
                 あなたのアクティビティ
               </h1>
-              {homeData.my_activities.map((data: any) => (
+              {Object.values(homeData.my_activities).map((data: any) => (
                 <Activity
                   id={data.user.id}
                   name={data.user.first_name + ' ' + data.user.last_name}
