@@ -2,7 +2,12 @@ import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { CameraIcon, rikuma } from '../../assets/images/index';
-import { editProfile, indexJob, indexYearGraduation, mypage } from '../../assets/script';
+import {
+  editProfile,
+  indexJob,
+  indexYearGraduation,
+  mypage,
+} from '../../assets/script';
 import { pageTransitionNormal } from '../../assets/script/pageTransition';
 import { User } from '../../services/models';
 import { RoundedBtn } from '../Atoms/Btn';
@@ -143,6 +148,9 @@ const ProfileEdit: React.FC<Props> = ({ user }) => {
   };
 
   const renderDOM = () => {
+    console.log('user', user);
+    console.log('user', user.firstName);
+
     return (
       <motion.section
         className="app-main profile-edit single"

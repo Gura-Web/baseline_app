@@ -80,10 +80,11 @@ const AccountSettingContainer: FC<EnhancedMyProfileProps> = ({
 
 const ProfileEditContainer: FC<EnhancedMyProfileProps> = ({
   user,
-  getMyProfileStart,
+  // getMyProfileStart,
 }) => {
   useEffect(() => {
-    getMyProfileStart();
+    // TODO ここ修正
+    // getMyProfileStart();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
