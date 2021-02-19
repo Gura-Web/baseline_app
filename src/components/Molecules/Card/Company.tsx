@@ -1,7 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { toue } from "../../../assets/images";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { toue } from '../../../assets/images';
 interface Props {
   companyId: number;
   class: string;
@@ -12,11 +12,11 @@ interface Props {
   img: string;
 }
 
-const CompanyCard: React.FC<Props> = (props) => {
+const CompanyCard: React.FC<Props> = props => {
   const checkTextLength = () => {
     const MAX_LENGTH = 30;
     if (props.business.length > MAX_LENGTH) {
-      return props.business.substr(0, MAX_LENGTH) + "...";
+      return props.business.substr(0, MAX_LENGTH) + '...';
     }
     return props.business;
   };
@@ -26,7 +26,7 @@ const CompanyCard: React.FC<Props> = (props) => {
     props.pref.forEach((value: any) => {
       prefArray.push(value.name);
     });
-    let output = String(prefArray).replace(/,/g, " ");
+    let output = String(prefArray).replace(/,/g, ' ');
     const MAX_LENGTH = 4;
     if (props.pref.length > MAX_LENGTH) {
       const output = props.pref.slice(0, MAX_LENGTH);
@@ -36,14 +36,14 @@ const CompanyCard: React.FC<Props> = (props) => {
       });
 
       // output = array.slice(0, MAX_LENGTH)
-      return String(array).replace(/,/g, " ") + "...";
+      return String(array).replace(/,/g, ' ') + '...';
     }
     return output;
   };
 
   const timeTextConversion = () => {
     const dateTime: string = String(props.registerTime).slice(0, 10);
-    const timeText: string = dateTime.replace(/-/g, ".");
+    const timeText: string = dateTime.replace(/-/g, '.');
     const texts: {
       dateTime: string;
       timeText: string;
