@@ -11,7 +11,7 @@ import { pageTransitionNormal } from '../../assets/script/pageTransition';
 import { getHomeData } from '../../assets/script/index';
 
 interface Props {
-  setFreeWord: any;
+  // setFreeWord: any;
   myData: any;
   setIsLogin: any;
 }
@@ -60,8 +60,8 @@ const Top: React.FC<Props> = props => {
   }, []);
 
   const searchFunc = (word: string) => {
-    props.setFreeWord(word);
-    history.push(`/search-company`);
+    // props.setFreeWord(word);
+    history.push({ pathname: `/search-company`, search: `?free_word=${word}` });
   };
   const checkTextLength = (el: string, MAX_LENGTH: number) => {
     if (el && el.length > MAX_LENGTH) {

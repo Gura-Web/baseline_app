@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import React from 'react';
+import { useLocation } from 'react-router';
 import { searchCompany } from '../../assets/script/index';
 import { pageTransitionNormal } from '../../assets/script/pageTransition';
 import { ActionBtn } from '../Atoms/Btn/index';
@@ -11,17 +12,18 @@ import { Pagenation } from '../Organisms/Header';
 import { CompanySearch } from '../Organisms/Window';
 
 interface Props {
-  homeFreeWord: string | undefined;
+  homeFreeWord: any | undefined;
 }
 
 class SearchCompany extends React.Component<Props, any> {
   constructor(props: any) {
+    // console.log(props.location);
     super(props);
     this.state = {
       companies: [],
       data: [],
       query: {},
-      homeFreeWord: props.homeFreeWord,
+      homeFreeWord: this.props.homeFreeWord,
     };
   }
   renderLength = 5; // １ページあたりのデータ件数

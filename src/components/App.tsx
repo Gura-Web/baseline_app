@@ -2,6 +2,7 @@ import { AnimatePresence } from 'framer-motion';
 import React, { FC, useState } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import '../assets/styles/App.scss';
+import * as qs from 'querystring';
 import Login from '../containers/Login';
 import {
   MyActivityEditWindow,
@@ -15,8 +16,6 @@ import * as Page from './Pages';
 
 const App: FC = () => {
   const [isLogin, setIsLogin] = useState<boolean>(false);
-
-  const [homeFreeWord, setHomeFreeWord] = useState<string>();
   const [myData, setMyData] = useState<any>();
 
   const renderDOM = () => {
@@ -84,17 +83,20 @@ const App: FC = () => {
                   path="/"
                   render={() => (
                     <Page.Top
-                      setFreeWord={setHomeFreeWord}
+                      // setFreeWord={setHomeFreeWord}
                       myData={myData}
                       setIsLogin={setIsLogin}
                     />
                   )}
                 />
-
                 <Route
                   path="/search-company"
                   render={() => (
-                    <Page.SearchCompany homeFreeWord={homeFreeWord} />
+                    <Page.SearchCompany
+                      homeFreeWord={
+                        Object.values(qs.parse(window.location.href))[0] ?? ''
+                      }
+                    />
                   )}
                 />
                 <Route path="/search-student" component={Page.SearchStudent} />
