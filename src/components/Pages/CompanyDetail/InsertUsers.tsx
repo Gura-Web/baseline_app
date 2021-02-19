@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
-import { AboutBar } from "../../Organisms/CompanyDetail";
-import { detailCompany, indexJob } from "../../../assets/script";
-import { rikuma } from "../../../assets/images/index";
-import { UserList } from "../../../components/Organisms/Window";
+import React, { useState, useEffect } from 'react';
+import { useHistory, Link } from 'react-router-dom';
+import { AboutBar } from '../../Organisms/CompanyDetail';
+import { detailCompany, indexJob } from '../../../assets/script';
+import { rikuma } from '../../../assets/images/index';
+import { UserList } from '../../../components/Organisms/Window';
+
 interface Props {
   thisPage: string;
   match?: any;
 }
 
-const InsertUsers: React.FC<Props> = (props) => {
+const InsertUsers: React.FC<Props> = props => {
   const companyId = props.match.params.companyId;
   const [companyData, setCompanyData] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -29,10 +30,10 @@ const InsertUsers: React.FC<Props> = (props) => {
     });
   }, []);
   let pageTtl: string;
-  if (props.thisPage === "insert-users") {
-    pageTtl = "情報提供に協力した方";
-  } else if (props.thisPage === "company-users") {
-    pageTtl = "この会社に就職した方";
+  if (props.thisPage === 'insert-users') {
+    pageTtl = '情報提供に協力した方';
+  } else if (props.thisPage === 'company-users') {
+    pageTtl = 'この会社に就職した方';
   }
   let beforeId: number;
   const renderDOM = () => {
@@ -46,7 +47,7 @@ const InsertUsers: React.FC<Props> = (props) => {
             <AboutBar
               companyData={companyData}
               thisPage="insertUsers"
-              companyId={"1"}
+              companyId={'1'}
               hasActionBtn={true}
             />
 
@@ -70,7 +71,7 @@ const InsertUsers: React.FC<Props> = (props) => {
                           />
                           <div className="user-card__wrapper">
                             <h1 className="user-card__name">
-                              {data.user.first_name + " " + data.user.last_name}
+                              {data.user.first_name + ' ' + data.user.last_name}
                             </h1>
                             <div className="user-card__wrap">
                               <p>
