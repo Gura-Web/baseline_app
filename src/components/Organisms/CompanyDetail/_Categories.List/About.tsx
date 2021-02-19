@@ -35,6 +35,7 @@ const About: React.FC<Props> = props => {
         annual: data.user.annual,
         comments: [] as any,
         updated_at: data.updated_at,
+        iconImageUrl: data.user.icon_image_url,
       };
       data.company_comments.forEach((comment: string) => {
         user.comments.push(comment);
@@ -90,6 +91,8 @@ const About: React.FC<Props> = props => {
             if (companyComments) {
               return companyComments.map((data: any) =>
                 data.comments.map((comment: any) => {
+                  console.log('icon', data);
+
                   return (
                     <OldComment
                       id={data.id}
@@ -100,6 +103,7 @@ const About: React.FC<Props> = props => {
                       isArrow={true}
                       clickFunc={commentEdit}
                       clickFunc2={commentDelete}
+                      icon={data.iconImageUrl}
                     />
                   );
                 }),

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { About, Step, Entry, Interview } from "./_Categories.List/index";
-import { pageTransitionNormal } from "../../../assets/script/pageTransition";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { About, Step, Entry, Interview } from './_Categories.List/index';
+import { pageTransitionNormal } from '../../../assets/script/pageTransition';
+import axios from 'axios';
 
 interface Props {
   thisPage: string;
@@ -12,12 +12,11 @@ interface Props {
   getCompanyData: any;
 }
 
-const Categories: React.FC<Props> = (props) => {
+const Categories: React.FC<Props> = props => {
   let companyId = Number(props.companyId) - 1;
-  useEffect(() => {}, []);
 
   const renderContents = () => {
-    if (props.thisPage === "about") {
+    if (props.thisPage === 'about') {
       return (
         <About
           thisPage={props.thisPage}
@@ -27,7 +26,7 @@ const Categories: React.FC<Props> = (props) => {
         />
       );
     }
-    if (props.thisPage === "step") {
+    if (props.thisPage === 'step') {
       return (
         <Step
           thisPage={props.thisPage}
@@ -36,7 +35,7 @@ const Categories: React.FC<Props> = (props) => {
         />
       );
     }
-    if (props.thisPage === "entry") {
+    if (props.thisPage === 'entry') {
       return (
         <Entry
           thisPage={props.thisPage}
@@ -45,7 +44,7 @@ const Categories: React.FC<Props> = (props) => {
         />
       );
     }
-    if (props.thisPage === "interview") {
+    if (props.thisPage === 'interview') {
       return (
         <Interview
           thisPage={props.thisPage}
@@ -66,22 +65,22 @@ const Categories: React.FC<Props> = (props) => {
     >
       <div className="companyContentsWindow__list">
         <ul>
-          <li className={props.thisPage === "about" ? "current" : ""}>
+          <li className={props.thisPage === 'about' ? 'current' : ''}>
             <Link to={`/company-detail/${props.companyId}/about`}>
               会社概要
             </Link>
           </li>
-          <li className={props.thisPage === "step" ? "current" : ""}>
+          <li className={props.thisPage === 'step' ? 'current' : ''}>
             <Link to={`/company-detail/${props.companyId}/step`}>
               選考ステップ
             </Link>
           </li>
-          <li className={props.thisPage === "entry" ? "current" : ""}>
+          <li className={props.thisPage === 'entry' ? 'current' : ''}>
             <Link to={`/company-detail/${props.companyId}/entry`}>
               エントリーシート
             </Link>
           </li>
-          <li className={props.thisPage === "interview" ? "current" : ""}>
+          <li className={props.thisPage === 'interview' ? 'current' : ''}>
             <Link to={`/company-detail/${props.companyId}/interview`}>
               面接情報
             </Link>

@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { UserList } from "../../Organisms/Window";
-import { Categories, AboutBar } from "../../Organisms/CompanyDetail";
-import { pageTransitionNormal } from "../../../assets/script/pageTransition";
-import { showCompany, detailCompany } from "../../../assets/script";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { UserList } from '../../Organisms/Window';
+import { Categories, AboutBar } from '../../Organisms/CompanyDetail';
+import { pageTransitionNormal } from '../../../assets/script/pageTransition';
+import { showCompany, detailCompany } from '../../../assets/script';
+import { motion } from 'framer-motion';
 
 interface Props {
   match?: any;
 }
 
-const CompanyDetail: React.FC<Props> = (props) => {
+const CompanyDetail: React.FC<Props> = props => {
   const companyId = props.match.params.id;
   const thisPage = props.match.params.category;
   const [companyData, setCompanyData] = useState<any>();
@@ -18,8 +18,8 @@ const CompanyDetail: React.FC<Props> = (props) => {
   const history = useHistory();
   useEffect(() => {
     showCompany(1).then(getData => {
-      console.log(getData)
-    })
+      console.log(getData);
+    });
     getCompanyData();
   }, []);
   const getCompanyData = () => {
@@ -43,7 +43,10 @@ const CompanyDetail: React.FC<Props> = (props) => {
         exit="out"
         variants={pageTransitionNormal}
       >
-        <button className="btn pageBack-link" onClick={() => history.push(`/search-company`)}>
+        <button
+          className="btn pageBack-link"
+          onClick={() => history.push(`/search-company`)}
+        >
           <span className="heading4">戻る</span>
         </button>
         <div className="company-detail">
