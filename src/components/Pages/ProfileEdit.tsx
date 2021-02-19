@@ -246,14 +246,14 @@ const ProfileEdit: React.FC<Props> = ({ user }) => {
             <SelectSecondary
               ttl="希望職種"
               name="job"
-              selectObj={jobs}
+              selectObj={jobs ?? []}
               // TODO 直す user.desiredOccupation?.id
               defaultValue={1}
             />
             <SelectSecondary
               ttl="卒業年次"
               name="graduation_year"
-              selectObj={yearGraduation}
+              selectObj={yearGraduation ?? []}
               defaultValue={user.yearOfGraduation}
             />
             <div className="contentBox__wrap">
