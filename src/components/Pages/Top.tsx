@@ -122,7 +122,7 @@ const Top: React.FC<Props> = props => {
                       id={data.user.id}
                       name={data.user.first_name + ' ' + data.user.last_name}
                       textLengthCheckFunc={checkTextLength}
-                      content={data.my_activities[0].content}
+                      content={data.my_activities[0]?.content ?? ''}
                       updated_at={data.updated_at}
                       isSmall={true}
                     />
