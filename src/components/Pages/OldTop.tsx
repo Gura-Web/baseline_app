@@ -16,7 +16,7 @@ interface Props {
   setIsLogin: any;
 }
 
-const Top: React.FC<Props> = props => {
+const OldTop: React.FC<Props> = props => {
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const [homeData, setHomeData] = useState<any>([]);
@@ -177,4 +177,4 @@ const Top: React.FC<Props> = props => {
   return <>{loading && renderDOM()}</>;
 };
 
-export default Top;
+export default OldTop;

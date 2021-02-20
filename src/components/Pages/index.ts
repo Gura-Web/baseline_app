@@ -1,4 +1,4 @@
-export { default as Top } from './Top';
+export { default as Top } from './OldTop';
 export { default as SearchCompany } from './SearchCompany';
 export { default as SearchStudent } from './SearchStudent';
 export { default as OldUserPage } from './OldUserPage';
