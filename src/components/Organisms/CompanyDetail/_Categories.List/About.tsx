@@ -31,7 +31,7 @@ const About: React.FC<Props> = props => {
     companyData.company_information.forEach((data: any) => {
       const user = {
         id: data.id,
-        name: data.user.last_name + ' ' + data.user.first_name,
+        name: data.user.first_name + ' ' + data.user.last_name,
         annual: data.user.annual,
         comments: [] as any,
         updated_at: data.updated_at,
