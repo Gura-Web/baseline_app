@@ -28,7 +28,7 @@ const OldUserData: React.FC<Props> = props => {
         <div>
           <div className="userDetail-window__wrap">
             <p className="userDetail-window__name">
-              {props.userData.first_name + ' ' + props.userData.last_name}
+              {props.userData.first_name + ' ' + props.userData.first_name}
             </p>
             <p className="userDetail-window__id">
               @{props.userData.student_number}

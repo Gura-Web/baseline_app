@@ -36,7 +36,7 @@ const Entry: React.FC<Props> = props => {
           entryCard = {
             id: entry.company_information_id,
             user_id: data.user.id,
-            userName: data.user.last_name + ' ' + data.user.first_name,
+            userName: data.user.first_name + ' ' + data.user.last_name,
             iconImagePath: data.user.icon_image_path,
             job: data.occupational_category.name,
             icon: data.user.icon_image_path,
