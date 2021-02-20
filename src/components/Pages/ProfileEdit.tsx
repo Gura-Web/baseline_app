@@ -197,8 +197,8 @@ const ProfileEdit: React.FC<Props> = ({ user }) => {
                   labelTxt="苗字"
                   isRequired={false}
                   isRequiredTxt={false}
-                  defaultValue={user.firstName}
-                  placeholderTxt="タロウ"
+                  defaultValue={user.lastName}
+                  placeholderTxt="イーシーシー"
                   isError={isError}
                   isIcon={false}
                 />
@@ -208,8 +208,8 @@ const ProfileEdit: React.FC<Props> = ({ user }) => {
                   labelTxt="名前"
                   isRequired={false}
                   isRequiredTxt={false}
-                  defaultValue={user.lastName}
-                  placeholderTxt="イーシーシー"
+                  defaultValue={user.firstName}
+                  placeholderTxt="タロウ"
                   isError={isError}
                   isIcon={false}
                 />
