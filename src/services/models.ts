@@ -51,3 +51,24 @@ export const userInit: User = {
   email: '1',
   desiredOccupations: 1,
 };
+
+export interface Prefecture {
+  name: string;
+}
+
+export interface Company {
+  id: number;
+  frigana: string;
+  companyName: string;
+  businessDescription: string;
+  numberOfEmployees: number;
+  companyUrl: string;
+  created_at: string;
+  updated_at: string;
+  logo_image_url: string | null;
+  prefectures: Prefecture[] | undefined;
+}
+
+export interface TopInfo {
+  companies: Company[];
+}
