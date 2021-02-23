@@ -1,3 +1,5 @@
+import { Activity } from '../components/Molecules/Card';
+
 export interface User {
   id: number;
   firstName: string;
@@ -71,4 +73,6 @@ export interface Company {
 
 export interface TopInfo {
   companies: Company[];
+  myActivities: Map<number, MyActivity>;
+  otherActivities: Map<number, MyActivity>;
 }
