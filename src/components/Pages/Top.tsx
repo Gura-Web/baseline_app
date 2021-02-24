@@ -146,7 +146,7 @@ const Top: React.FC<Props> = props => {
     );
   };
 
-  return <>{loading && renderDOM()}</>;
+  return <>{loading && !props.isLoading && renderDOM()}</>;
 };
 
 export default Top;
