@@ -14,8 +14,6 @@ export const getDraftFactory = (optionConfig?: AxiosRequestConfig) => {
   const getDraft = async () => {
     const response = await instance.get(`/api/draft`);
 
-    console.log(response);
-
     if (response.status !== 200) {
       throw new Error('Server Error');
     }
