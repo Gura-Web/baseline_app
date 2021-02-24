@@ -1,7 +1,10 @@
 import { AxiosError } from 'axios';
+import { TopInfo } from '../../../services/models';
 import * as ActionType from './actions';
 
-interface GetTopInfoResult {}
+interface GetTopInfoResult {
+  topInfo: TopInfo;
+}
 
 export const topInfo = {
   reload: () => ({

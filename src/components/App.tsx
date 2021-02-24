@@ -10,12 +10,12 @@ import {
 } from '../containers/MyActivity';
 import { MyActivityPage } from '../containers/MyPage';
 import { AccountSetting, ProfileEdit, SideMenu } from '../containers/MyProfile';
+import { TopPage } from '../containers/TopPage';
 import { UserPagePage } from '../containers/UserPage';
 import { Header } from './Organisms/Header';
 import * as Page from './Pages';
 
 const App: FC = () => {
-  const [isLogin, setIsLogin] = useState<boolean>(false);
   const [myData, setMyData] = useState<any>();
 
   const renderDOM = () => {
@@ -78,17 +78,7 @@ const App: FC = () => {
                   path="/password/setting"
                   component={Page.Setting}
                 />
-                <Route
-                  exact
-                  path="/"
-                  render={() => (
-                    <Page.Top
-                      // setFreeWord={setHomeFreeWord}
-                      myData={myData}
-                      setIsLogin={setIsLogin}
-                    />
-                  )}
-                />
+                <Route exact path="/" component={TopPage} />
                 <Route
                   path="/search-company"
                   render={() => (

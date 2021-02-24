@@ -1,3 +1,4 @@
+export { default as OldCompany } from './OldCompany';
 export { default as Company } from './Company';
 export { default as Activity } from './Activity';
 export { default as StudentList } from './StudentList';

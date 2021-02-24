@@ -30,6 +30,7 @@ export const topInfoReducer: Reducer<TopInfoState, TopInfoAction> = (
     case ActionType.GET_TOP_INFO_SUCCEED:
       return {
         ...state,
+        topInfo: action.payload.result.topInfo,
         isLoading: false,
       };
 

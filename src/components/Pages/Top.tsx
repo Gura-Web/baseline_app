@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { TopInfo } from '../../services/models';
 import { Search } from '../Atoms/TextInput';
 import { ActionBtn } from '../Atoms/Btn/index';
 import { Modal } from '../Organisms/Modal';
-import { Company, Activity } from '../Molecules/Card';
+import { OldCompany, Activity, Company } from '../Molecules/Card';
 import { News } from '../Molecules/Bar';
 import { pageTransitionNormal, getHomeData } from '../../assets/script';
 
 interface Props {
-  // setFreeWord: any;
-  myData: any;
-  setIsLogin: any;
+  isLoading: boolean;
+  topInfo: TopInfo;
 }
 
 const Top: React.FC<Props> = props => {
@@ -28,7 +28,7 @@ const Top: React.FC<Props> = props => {
     // TODO これなにやってる
     // const container = document.querySelector('.container');
     // container?.classList.remove('page-login');
-    props.setIsLogin(true);
+    // props.setIsLogin(true);
 
     getHomeData(notLoginFunc).then((getData: any) => {
       if (getData?.data) {
@@ -80,16 +80,8 @@ const Top: React.FC<Props> = props => {
           </div>
 
           <div className="company-list">
-            {homeData.companies.map((data: any) => (
-              <Company
-                companyId={data.id}
-                class={'item'}
-                name={data.company_name}
-                business={data.business_description}
-                pref={data.prefectures}
-                registerTime={data.updated_at}
-                img={data.logo_image_url}
-              />
+            {props.topInfo.companies.map(company => (
+              <Company company={company} />
             ))}
           </div>
 

@@ -5,7 +5,7 @@ import { Search } from '../Atoms/TextInput';
 import { ActionBtn } from '../Atoms/Btn/index';
 import { Modal } from '../Organisms/Modal';
 import { motion } from 'framer-motion';
-import { Company, Activity } from '../Molecules/Card';
+import { OldCompany, Activity } from '../Molecules/Card';
 import { News } from '../Molecules/Bar';
 import { pageTransitionNormal } from '../../assets/script/pageTransition';
 import { getHomeData } from '../../assets/script/index';
@@ -101,7 +101,7 @@ const OldTop: React.FC<Props> = props => {
 
           <div className="company-list">
             {homeData.companies.map((data: any) => (
-              <Company
+              <OldCompany
                 companyId={data.id}
                 class={'item'}
                 name={data.company_name}

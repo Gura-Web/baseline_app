@@ -6,7 +6,7 @@ import { searchCompany } from '../../assets/script/index';
 import { pageTransitionNormal } from '../../assets/script/pageTransition';
 import { ActionBtn } from '../Atoms/Btn/index';
 import { Sort } from '../Atoms/Input';
-import { Company } from '../Molecules/Card';
+import { OldCompany } from '../Molecules/Card';
 import { Pagenation } from '../Organisms/Header';
 
 import { CompanySearch } from '../Organisms/Window';
@@ -97,7 +97,7 @@ class SearchCompany extends React.Component<Props, any> {
             </div>
             <div className="company-list">
               {this.state.companies.map((data: any) => (
-                <Company
+                <OldCompany
                   companyId={data.id}
                   class={'item'}
                   name={data.company_name}
