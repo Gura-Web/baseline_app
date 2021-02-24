@@ -65,9 +65,9 @@ export interface Company {
   businessDescription: string;
   numberOfEmployees: number;
   companyUrl: string;
-  created_at: string;
-  updated_at: string;
-  logo_image_url: string | null;
+  createdAt: string;
+  updatedAt: string;
+  logoImageUrl: string | null;
   prefectures: Prefecture[] | undefined;
 }
 
