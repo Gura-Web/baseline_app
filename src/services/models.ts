@@ -73,6 +73,6 @@ export interface Company {
 
 export interface TopInfo {
   companies: Company[];
-  myActivities: Map<number, MyActivity>;
-  otherActivities: Map<number, MyActivity>;
+  myActivities: Map<number, MyActivity> | null;
+  otherActivities: Map<number, MyActivity> | null;
 }

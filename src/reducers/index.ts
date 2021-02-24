@@ -4,6 +4,7 @@ import { loginReducer } from './login';
 import { myActivityReducer } from './myActivity';
 import { myProfileReducer } from './myProfile';
 import { reloadReducer } from './reload';
+import { topInfoReducer } from './topInfo';
 
 export default combineReducers({
   myProfile: myProfileReducer,
@@ -11,4 +12,5 @@ export default combineReducers({
   myActivity: myActivityReducer,
   draft: draftReducer,
   reload: reloadReducer,
+  topInfo: topInfoReducer,
 });
