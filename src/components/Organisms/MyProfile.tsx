@@ -42,7 +42,7 @@ export const MyProfile: FC<StateProps> = ({
         iconPath={user.iconImageUrl}
         // 10文字まで表示
         // eslint-disable-next-line no-irregular-whitespace
-        name={`${user.firstName}　${user.lastName}`}
+        name={`${user.lastName}　${user.firstName}`}
         student_number={`${user.studentNumber}`}
         ml=""
         isArrow
